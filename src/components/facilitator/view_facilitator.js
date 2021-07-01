@@ -20,7 +20,7 @@ class ViewFacilitator extends React.Component {
         console.log(id);
         // https://trw-backend-api.herokuapp.com/
         axios
-            .get(`http://localhost:5000/facilitator/fetch/${id}`)
+            .get(`https://trw-backend-api.herokuapp.com/facilitator/fetch/${id}`)
             .then((res) => {
                 console.log(res.data);
                 const post = {

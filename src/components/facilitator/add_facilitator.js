@@ -107,24 +107,6 @@ class AddFacilitator extends React.Component {
         });
     }
 
-    // componentDidMount() {
-    //     // https://trw-backend-api.herokuapp.com
-    //     axios
-    //         .get(`https://trw-backend-api.herokuapp.com/blog/get_event_cat`)
-    //         .then((res) => {
-    //             const eventCategories = res.data;
-    //             console.log(eventCategories);
-    //             this.setState({ eventCategories });
-    //         });
-    //     // https://trw-backend-api.herokuapp.com
-    //     axios
-    //         .get(`https://trw-backend-api.herokuapp.com/blog/get_event_type`)
-    //         .then((res) => {
-    //             const eventTypes = res.data;
-    //             console.log(eventTypes);
-    //             this.setState({ eventTypes });
-    //         });
-    // }
 
     handleChange(html) {
         this.setState({ profile: html });
@@ -144,29 +126,6 @@ class AddFacilitator extends React.Component {
     onFileChange(e) {
         this.setState({ photo: e.target.files[0] });
     }
-    //   handleSubmit(event) {
-    //     event.preventDefault();
-    //     if (this.validator.allValid()) {
-    //       const post = {
-    //         title: this.state.title,
-    //         category: this.state.category,
-    //         description: this.state.description,
-    //       };
-
-    //       console.log(post);
-    //       axios
-    //         .post(`https://trw-backend-api.herokuapp.com/blog/AddEvent`, post)
-    //         .then((res) => {
-    //           console.log(res);
-    //           console.log(res.data);
-    //         });
-
-    //       this.props.history.push("/article");
-    //     } else {
-    //       this.validator.showMessages();
-    //       this.forceUpdate();
-    //     }
-    //   }
 
     handleSubmit(e) {
         e.preventDefault();
@@ -179,7 +138,7 @@ class AddFacilitator extends React.Component {
             formdata.append("photo", this.state.photo);
             axios
                 .post(
-                    "http://localhost:5000/facilitator/save",
+                    "https://trw-backend-api.herokuapp.com/facilitator/save",
                     formdata
                 )
                 .then(function (response) {

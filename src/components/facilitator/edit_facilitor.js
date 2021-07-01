@@ -113,7 +113,7 @@ class EditFacilitator extends React.Component {
         const _id  = this.props.match.params.id;
         console.log(_id);
         axios
-            .get(`http://localhost:5000/facilitator/fetch/${_id}`)
+            .get(`https://trw-backend-api.herokuapp.com/facilitator/fetch/${_id}`)
             .then((res) => {
                 const data = res.data;
                 console.log(data);
@@ -139,29 +139,6 @@ class EditFacilitator extends React.Component {
     onFileChange(e) {
         this.setState({ photo: e.target.files[0] });
     }
-    //   handleSubmit(event) {
-    //     event.preventDefault();
-    //     if (this.validator.allValid()) {
-    //       const post = {
-    //         title: this.state.title,
-    //         category: this.state.category,
-    //         description: this.state.description,
-    //       };
-
-    //       console.log(post);
-    //       axios
-    //         .post(`https://trw-backend-api.herokuapp.com/blog/AddEvent`, post)
-    //         .then((res) => {
-    //           console.log(res);
-    //           console.log(res.data);
-    //         });
-
-    //       this.props.history.push("/article");
-    //     } else {
-    //       this.validator.showMessages();
-    //       this.forceUpdate();
-    //     }
-    //   }
 
     handleSubmit(e) {
         e.preventDefault();
@@ -175,7 +152,7 @@ class EditFacilitator extends React.Component {
             formdata.append("photo", this.state.photo);
             axios
                 .put(
-                    `http://localhost:5000/facilitator/save/${_id}`,
+                    `https://trw-backend-api.herokuapp.com/facilitator/save/${_id}`,
                     formdata
                 )
                 .then(function (response) {

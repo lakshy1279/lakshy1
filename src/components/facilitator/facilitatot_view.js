@@ -21,14 +21,14 @@ class Facilitator extends React.Component {
 
     componentDidMount() {
         axios
-            .get(`http://localhost:5000/facilitator/fetch`)
+            .get(`https://trw-backend-api.herokuapp.com/facilitator/fetch`)
             .then((res) => {
                 const fetchedData = res.data;
                 console.log(fetchedData);
                 this.setState({ fetchedData, loading: true });
             });
         this.unsubscribe = axios
-            .get(`http://localhost:5000/facilitator/fetch`)
+            .get(`https://trw-backend-api.herokuapp.com/facilitator/fetch`)
             .then((res) => {
                 const fetchedData = res.data;
                 console.log(fetchedData);
@@ -49,7 +49,7 @@ class Facilitator extends React.Component {
                 // https://trw-backend-api.herokuapp.com/
                 axios
                     .delete(
-                        `http://localhost:5000/facilitator/delete/${_id}`
+                        `https://trw-backend-api.herokuapp.com/facilitator/delete/${_id}`
                     )
                     .then((res) => {
                         console.log(res);
