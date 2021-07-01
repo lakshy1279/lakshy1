@@ -255,7 +255,27 @@ function Sidebar() {
                       </Link>
                     </li> */}
                     {/* post*/}
-
+                    <li>
+                      {" "}
+                      <a href="/facilitator">
+                        <span>
+                          <i
+                            className="fa fa-rss-square"
+                            aria-hidden="true"
+                          ></i>{" "}
+                          Facilitator
+                        </span>
+                        <b className="gw-arrow" />
+                      </a>
+                      {/* <ul className="gw-submenu" style={{ display: "block" }}>
+                        <li>
+                          {" "}
+                          <a href="/facilitator" style={{ color: "white" }}>
+                            Lists
+                          </a>{" "}
+                        </li>
+                        </ul> */}
+                      </li>
                     <li>
                       <Link to="/post">
                         <i className="fa fa-upload" aria-hidden="true" /> Posts

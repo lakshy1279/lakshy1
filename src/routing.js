@@ -89,6 +89,12 @@ import Events from "./components/events/eventsdetail";
 import EventTypes from "./components/events/event_types";
 import AddEvent from "./components/events/add_new_event";
 
+//Facilitatotr
+import Facilitator from "./components/facilitator/facilitatot_view";
+import Add_facilitator from "./components/facilitator/add_facilitator";
+import EditFacilitator from "./components/facilitator/edit_facilitor";
+import ViewFacilitator from "./components/facilitator/view_facilitator";
+
 //testimonials
 import Testimonial from "./components/testimonial/view_testimonial";
 import AddTestimonial from "./components/testimonial/add_testimonial";
@@ -237,6 +243,11 @@ function Routing() {
         <Route exact path="/upcomming_events" component={EventUpcoming}></Route>
         <Route exact path="/events" component={Events}></Route>
         <Route exact path="/events" component={Events}></Route>
+        {/* Facilitator */}
+        <Route exact path="/facilitator" component={Facilitator}></Route>
+        <Route exact path="/add_facilitator" component={Add_facilitator}></Route>
+        <Route exact path="/edit_facilitator/:id" component={EditFacilitator}></Route>
+        <Route exact path="/view_facilitator/:id" component={ViewFacilitator}></Route>
         {/* Site Preferences */}
         <Route exact path="/add_logos" component={AddLogos}></Route>
         <Route exact path="/add_address" component={AddAddress}></Route>
