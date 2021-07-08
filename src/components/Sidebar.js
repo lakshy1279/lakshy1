@@ -40,101 +40,19 @@ function Sidebar() {
                         Menu
                       </Link>
                     </li>
-                    {/* <li className="init-arrow-down"> */}
-                    {/* <li>
+                    <li>
                       {" "}
-                      <a href="#">
+                      <a href="/about">
                         <span>
-                          <i className="fa fa-home" aria-hidden="true"></i>
-                          Home Page
+                          <i
+                            className="fa fa-rss-square"
+                            aria-hidden="true"
+                          ></i>{" "}
+                          About Us
                         </span>
                         <b className="gw-arrow" />
                       </a>
-                      <ul
-                        className="gw-submenu sidebarUl"
-                        style={{ display: "block", listStyleType: "inherit" }}
-                      >
-                        {/* <li>
-                          {" "}
-                          <a href="home_section_1" style={{ color: "white" }}>
-                            Slider
-                          </a>{" "}
-                        </li> */}
-                    {/* <li>
-                          {" "}
-                          <a
-                            href="/home1/608b912efcc7860015dce5b1"
-                            style={{ color: "white" }}
-                          >
-                            <i className="fa fa-dot-circle-o dotIcon"></i>
-                            Section 1 Text
-                          </a>{" "}
-                        </li>
-                        <li>
-                          {" "}
-                          <a href="/testimonials" style={{ color: "white" }}>
-                            <i className="fa fa-dot-circle-o dotIcon"></i>
-                            Testimonials
-                          </a>{" "}
-                        </li>
-
-                        <li>
-                          {" "}
-                          <a
-                            href="/home_section_1_1"
-                            style={{ color: "white" }}
-                          >
-                            <i className="fa fa-dot-circle-o dotIcon"></i>
-                            Section 1 Videos
-                          </a>{" "}
-                        </li>
-                        <li>
-                          {" "}
-                          <a href="/home_section_2" style={{ color: "white" }}>
-                            <i className="fa fa-dot-circle-o dotIcon"></i>
-                            Section 2
-                          </a>{" "}
-                        </li>
-                        <li>
-                          {" "}
-                          <a href="/home_section_3" style={{ color: "white" }}>
-                            <i className="fa fa-dot-circle-o dotIcon"></i>
-                            Section 3
-                          </a>{" "}
-                        </li> */}
-                    {/* <li>
-                          {" "}
-                          <a href="/home_section_4" style={{ color: "white" }}>
-                            <i className="fa fa-dot-circle-o dotIcon"></i>
-                            Media Presence
-                          </a>{" "}
-                        </li>
-                      </ul>
-                    </li>   */}
-                    {/* <li>
-                      {" "}
-                      <a href="#">
-                        <span>
-                          <i class="fa fa-info-circle" aria-hidden="true"></i>{" "}
-                          About Us Page
-                        </span>
-                        <b className="gw-arrow" />
-                      </a>
-                      <ul className="gw-submenu" style={{ display: "block" }}>
-                        <li>
-                          {" "}
-                          <a href="/about_section_2" style={{ color: "white" }}>
-                            Values
-                          </a>{" "}
-                        </li>
-                        <li>
-                          {" "}
-                          <a href="/about_section_3" style={{ color: "white" }}>
-                            Leadership
-                          </a>{" "}
-                        </li>
-                      </ul>
-                    </li> */}
+                      </li>
                     <li>
                       {" "}
                       <a href="#">

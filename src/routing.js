@@ -69,6 +69,12 @@ import AddAbout3 from "./components/about3/add_about3";
 import EditAbout3 from "./components/about3/edit_about3";
 import ViewAbout3 from "./components/about3/view_about3";
 
+//About us
+import About from "./components/About us/about";
+import AddAbout from "./components/About us/add_about";
+import EditAbout from "./components/About us/edit_about";
+import ViewAbout from "./components/About us/view_about";
+
 //Bloog
 import Blog from "./components/blog/edit_blog";
 
@@ -248,6 +254,11 @@ function Routing() {
         <Route exact path="/add_facilitator" component={Add_facilitator}></Route>
         <Route exact path="/edit_facilitator/:id" component={EditFacilitator}></Route>
         <Route exact path="/view_facilitator/:id" component={ViewFacilitator}></Route>
+        {/* About us */}
+        <Route exact path="/about" component={About}></Route>
+        <Route exact path="/add_about" component={AddAbout}></Route>
+        <Route exact path="/edit_about" component={EditAbout}></Route>
+        <Route exact path="/view_about" component={ViewAbout}></Route>
         {/* Site Preferences */}
         <Route exact path="/add_logos" component={AddLogos}></Route>
         <Route exact path="/add_address" component={AddAddress}></Route>
