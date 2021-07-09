@@ -1,9 +1,26 @@
 import React from 'react'
-
-function Contactview() {
+import { useEffect } from 'react'
+import { useState } from 'react/cjs/react.development';
+import axios from 'axios';
+import Sidebar from './Sidebar';
+const Contactview=({match})=> {
+  const [contact,setContact]=useState({});
+  useEffect(()=>{
+    console.log(match.params);
+    const { id } = match.params;
+    console.log(id);
+    axios
+      .get(
+        `http://localhost:5000/contact/fetch/${id}`
+      )
+      .then((res) => {
+        console.log(res.data);
+        setContact(res.data);
+      });
+  },[]);
     return (
         <div>
-
+  <Sidebar/>
   <div className="admin-wrapper col-12">
     <div className="admin-content">
       <div className="admin-head">Contact Us View</div>
@@ -12,24 +29,24 @@ function Contactview() {
           <table>
             <tbody>
               <tr>
-                <td width="15%"><b>First Name</b></td>
-                <td>Krishna</td>
-              </tr>
-              <tr>
-                <td><b>Last Name</b></td>
-                <td>Kola</td>
+                <td width="15%"><b>Name</b></td>
+                <td>{contact.name}</td>
               </tr>
               <tr>
                 <td><b>Email ID</b></td>
-                <td>krishna.kola@gmail.com</td>
+                <td>{contact.email}</td>
               </tr>
               <tr>
                 <td><b>Mobile Number</b></td>
-                <td>9703371194</td>
+                <td>{contact.phone}</td>
+              </tr>
+              <tr>
+                <td><b>Added On</b></td>
+                <td>{new Date(contact.createdAt).toDateString()}</td>
               </tr>
               <tr>
                 <td valign="top"><b>Message</b></td>
-                <td>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                <td>{contact.message}
                 </td>
               </tr>
             </tbody>

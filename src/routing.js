@@ -8,6 +8,7 @@ import Medialibrary from "./components/Medialibrary";
 import Settings from "./components/Settings";
 import Profilesetting from "./components/Profilesetting";
 import Changepassword from "./components/Changepassword";
+import Contactview from "./components/Contactview";
 
 //Menu
 import Menu from "./components/menu/menu";
@@ -259,6 +260,9 @@ function Routing() {
         <Route exact path="/add_about" component={AddAbout}></Route>
         <Route exact path="/edit_about" component={EditAbout}></Route>
         <Route exact path="/view_about" component={ViewAbout}></Route>
+        {/* contact */}
+        <Route exact path="/contact" component={Contact}></Route>
+        <Route exact path="/view_contact/:id" component={Contactview}></Route>
         {/* Site Preferences */}
         <Route exact path="/add_logos" component={AddLogos}></Route>
         <Route exact path="/add_address" component={AddAddress}></Route>

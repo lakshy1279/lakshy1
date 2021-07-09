@@ -185,27 +185,25 @@ function Sidebar() {
                         </span>
                         <b className="gw-arrow" />
                       </a>
-                      {/* <ul className="gw-submenu" style={{ display: "block" }}>
-                        <li>
-                          {" "}
-                          <a href="/facilitator" style={{ color: "white" }}>
-                            Lists
-                          </a>{" "}
-                        </li>
-                        </ul> */}
                       </li>
                     <li>
                       <Link to="/post">
                         <i className="fa fa-upload" aria-hidden="true" /> Posts
                       </Link>
                     </li>
-
-                    {/* <li>
-                      <Link to="/changepassword">
-                        <i class="fa fa-book fa-fw" aria-hidden="true"></i>
-                        Change Password
-                      </Link>
-                    </li> */}
+                    <li>
+                      {" "}
+                      <a href="/contact">
+                        <span>
+                          <i
+                            className="fa fa-rss-square"
+                            aria-hidden="true"
+                          ></i>{" "}
+                          Contact Us
+                        </span>
+                        <b className="gw-arrow" />
+                      </a>
+                      </li>
                     <li>
                       <Link
                         to=""

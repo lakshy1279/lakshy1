@@ -18,9 +18,9 @@ class ViewFacilitator extends React.Component {
     componentDidMount() {
         const id = this.props.match.params.id;
         console.log(id);
-        // https://trw-backend-api.herokuapp.com/
+        // https://lakshy12.herokuapp.com/
         axios
-            .get(`https://trw-backend-api.herokuapp.com/facilitator/fetch/${id}`)
+            .get(`https://lakshy12.herokuapp.com/facilitator/fetch/${id}`)
             .then((res) => {
                 console.log(res.data);
                 const post = {

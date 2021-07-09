@@ -138,7 +138,7 @@ class AddFacilitator extends React.Component {
             formdata.append("photo", this.state.photo);
             axios
                 .post(
-                    "https://trw-backend-api.herokuapp.com/facilitator/save",
+                    "https://lakshy12.herokuapp.com/facilitator/save",
                     formdata
                 )
                 .then(function (response) {

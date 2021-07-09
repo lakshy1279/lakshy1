@@ -113,7 +113,7 @@ class EditFacilitator extends React.Component {
         const _id  = this.props.match.params.id;
         console.log(_id);
         axios
-            .get(`https://trw-backend-api.herokuapp.com/facilitator/fetch/${_id}`)
+            .get(`https://lakshy12.herokuapp.com/facilitator/fetch/${_id}`)
             .then((res) => {
                 const data = res.data;
                 console.log(data);
@@ -152,7 +152,7 @@ class EditFacilitator extends React.Component {
             formdata.append("photo", this.state.photo);
             axios
                 .put(
-                    `https://trw-backend-api.herokuapp.com/facilitator/save/${_id}`,
+                    `https://lakshy12.herokuapp.com/facilitator/save/${_id}`,
                     formdata
                 )
                 .then(function (response) {
