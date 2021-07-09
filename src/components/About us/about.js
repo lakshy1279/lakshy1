@@ -110,7 +110,7 @@ class About extends React.Component {
         });
     }
     async componentDidMount() {
-        let res = await axios.get("http://localhost:5000/about1/fetch_about");
+        let res = await axios.get("https://lakshy12.herokuapp.com/about1/fetch_about");
         // const fetchedData = res.data;
         console.log(res.data);
         this.setState({
@@ -140,7 +140,7 @@ class About extends React.Component {
         };
         axios
             .post(
-                "http://localhost:5000/about1/add_about",
+                "https://lakshy12.herokuapp.com/about1/add_about",
                 data
             )
             .then(function (response) {
@@ -181,9 +181,9 @@ class About extends React.Component {
                                                 <div className="col-lg-12 p-0"></div>
                                                 <div className="col-lg-12 p-0">
                                                     <div className="form-group tags-field row m-0">
-                                                        <label className="col-lg-2 p-0 mt-1">Heading</label>
+                                                        <label className="col-lg-2 p-0">Heading</label>
                                                         <textarea
-                                                            className="form-control col-lg-5"
+                                                            className="form-control col-lg-8"
                                                             name="heading"
                                                             onChange={this.handleChange}
                                                             value={this.state.heading}
@@ -193,17 +193,12 @@ class About extends React.Component {
                                                             placeholder=""
                                                             
                                                         />
-                                                        {this.validator.message(
-                                                            "Heading",
-                                                            this.state.heading,
-                                                            "required|whitespace|min:1|max:20"
-                                                        )}
                                                     </div>
                                                     <div className="form-group tags-field row m-0">
-                        <label className="col-lg-2 p-0 mt-1">Our Objective</label>
+                        <label className="col-lg-2 p-0">Our Objective</label>
 
                         <ReactQuill
-                          className=" col-lg-8 height"
+                          className=" col-lg-8"
                           theme={this.state.theme}
                           onChange={this.onChange}
                           value={this.state.ourObjective}
@@ -212,17 +207,11 @@ class About extends React.Component {
                           bounds={".app"}
                           placeholder={this.props.placeholder}
                         />
-
-                        {this.validator.message(
-                          "Description",
-                          this.state.description,
-                          "required"
-                        )}
                       </div>
                                                     <div className="form-group tags-field row m-0 ">
-                                                        <label className="col-lg-2 p-0 mt-1">Mission</label>
+                                                        <label className="col-lg-2 p-0">Mission</label>
                                                         <textarea
-                                                            className="form-control col-lg-5"
+                                                            className="form-control col-lg-8"
                                                             name="Mission"
                                                             onChange={this.handleChange}
                                                             value={this.state.Mission}
@@ -239,9 +228,9 @@ class About extends React.Component {
                                                         )}
                                                     </div>
                                                     <div className="form-group tags-field row m-0 ">
-                                                        <label className="col-lg-2 p-0 mt-1">Vision</label>
+                                                        <label className="col-lg-2 p-0">Vision</label>
                                                         <textarea
-                                                            className="form-control col-lg-5"
+                                                            className="form-control col-lg-8"
                                                             name="Vision"
                                                             onChange={this.handleChange}
                                                             value={this.state.Vision}

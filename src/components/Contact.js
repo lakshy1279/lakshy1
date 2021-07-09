@@ -11,7 +11,7 @@ function Contact() {
 const [contact,setContact]=useState([]);
 const [flag,setFlag]=useState();
 useEffect(()=>{
-  axios.get('http://localhost:5000/contact/fetch_contact').then((res)=>{
+  axios.get('https://lakshy12.herokuapp.com/contact/fetch_contact').then((res)=>{
      console.log(res.data);
      setContact(res.data);
      setFlag(0);
@@ -29,7 +29,7 @@ function deleteItem(_id){
       console.log(_id);
       axios
         .delete(
-          `http://localhost:5000/contact/delete/${_id}`
+          `https://lakshy12.herokuapp.com/contact/delete/${_id}`
         )
         .then((res) => {
           console.log(res);

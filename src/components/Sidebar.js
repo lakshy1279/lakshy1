@@ -193,6 +193,19 @@ function Sidebar() {
                     </li>
                     <li>
                       {" "}
+                      <a href="/subscriber">
+                        <span>
+                          <i
+                            className="fa fa-rss-square"
+                            aria-hidden="true"
+                          ></i>{" "}
+                          Newsletter Subscribers
+                        </span>
+                        <b className="gw-arrow" />
+                      </a>
+                      </li>
+                    <li>
+                      {" "}
                       <a href="/contact">
                         <span>
                           <i

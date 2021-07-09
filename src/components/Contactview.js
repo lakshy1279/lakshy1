@@ -11,7 +11,7 @@ const Contactview=({match})=> {
     console.log(id);
     axios
       .get(
-        `http://localhost:5000/contact/fetch/${id}`
+        `https://lakshy12.herokuapp.com/contact/fetch/${id}`
       )
       .then((res) => {
         console.log(res.data);

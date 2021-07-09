@@ -72,9 +72,6 @@ import ViewAbout3 from "./components/about3/view_about3";
 
 //About us
 import About from "./components/About us/about";
-import AddAbout from "./components/About us/add_about";
-import EditAbout from "./components/About us/edit_about";
-import ViewAbout from "./components/About us/view_about";
 
 //Bloog
 import Blog from "./components/blog/edit_blog";
@@ -102,6 +99,9 @@ import Add_facilitator from "./components/facilitator/add_facilitator";
 import EditFacilitator from "./components/facilitator/edit_facilitor";
 import ViewFacilitator from "./components/facilitator/view_facilitator";
 
+// Subscriber
+import Subscriber1 from "./components/subscriber";
+
 //testimonials
 import Testimonial from "./components/testimonial/view_testimonial";
 import AddTestimonial from "./components/testimonial/add_testimonial";
@@ -123,6 +123,7 @@ import AddSocialMedia from "./components/site_preferences/add_socialmedia";
 import AddCompliances from "./components/site_preferences/add_compliances";
 import AddNewCompliance from "./components/site_preferences/add_new_compliance";
 import EditCompliance from "./components/site_preferences/edit_compliance";
+import Subscriber from "./components/subscriber";
 
 function Routing() {
   return (
@@ -257,12 +258,11 @@ function Routing() {
         <Route exact path="/view_facilitator/:id" component={ViewFacilitator}></Route>
         {/* About us */}
         <Route exact path="/about" component={About}></Route>
-        <Route exact path="/add_about" component={AddAbout}></Route>
-        <Route exact path="/edit_about" component={EditAbout}></Route>
-        <Route exact path="/view_about" component={ViewAbout}></Route>
         {/* contact */}
         <Route exact path="/contact" component={Contact}></Route>
         <Route exact path="/view_contact/:id" component={Contactview}></Route>
+        {/* Subscriber */}
+        <Route exact path="/subscriber" component={Subscriber1}></Route>
         {/* Site Preferences */}
         <Route exact path="/add_logos" component={AddLogos}></Route>
         <Route exact path="/add_address" component={AddAddress}></Route>
