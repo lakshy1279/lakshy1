@@ -14,6 +14,7 @@ class AddFacilitator extends React.Component {
             lastname: "",
             photo: "",
             profile:"",
+            country:"",
             date: Date.now(),
         };
         this.handleChange = this.handleChange.bind(this);
@@ -126,7 +127,7 @@ class AddFacilitator extends React.Component {
     onFileChange(e) {
         this.setState({ photo: e.target.files[0] });
     }
-
+    // https://lakshy12.herokuapp.com
     handleSubmit(e) {
         e.preventDefault();
         if (this.validator.allValid()) {
@@ -136,9 +137,10 @@ class AddFacilitator extends React.Component {
             formdata.append("lastname", this.state.lastname);
             formdata.append("profile", this.state.profile);
             formdata.append("photo", this.state.photo);
+            formdata.append("country",this.state.country);
             axios
                 .post(
-                    "https://lakshy12.herokuapp.com/facilitator/save",
+                    "http://localhost:5000/facilitator/save",
                     formdata
                 )
                 .then(function (response) {
@@ -210,6 +212,25 @@ class AddFacilitator extends React.Component {
                                                 {this.validator.message(
                                                     "lastname",
                                                     this.state.lastname,
+                                                    "required|whitespace|min:1|max:150"
+                                                )}
+                                                {/* {this.state.mobile_message} */}
+                                            </div>
+                                            <div className="form-group tags-field row m-0">
+                                                <label className="col-lg-2 p-0">Country</label>
+                                                <input
+                                                    className="form-control col-lg-10"
+                                                    name="country"
+                                                    onChange={this.onChange}
+                                                    value={this.state.country}
+                                                    type="text"
+                                                    onfocus="this.placeholder = 'Menu Name'"
+                                                    onblur="this.placeholder = ''"
+                                                    placeholder="Country"
+                                                />
+                                                {this.validator.message(
+                                                    "country",
+                                                    this.state.country,
                                                     "required|whitespace|min:1|max:150"
                                                 )}
                                                 {/* {this.state.mobile_message} */}

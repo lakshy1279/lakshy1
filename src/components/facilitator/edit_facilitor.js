@@ -16,6 +16,7 @@ class EditFacilitator extends React.Component {
             photo: "",
             profile:"",
             data:"",
+            country:"",
             date: Date.now(),
         };
         this.handleChange = this.handleChange.bind(this);
@@ -117,7 +118,7 @@ class EditFacilitator extends React.Component {
             .then((res) => {
                 const data = res.data;
                 console.log(data);
-                this.setState({ data:data });
+                this.setState({ firstname:data.firstname,lastname:data.lastname,country:data.country,photo:data.photo,profile:data.profile });
             });
     }
 
@@ -150,6 +151,7 @@ class EditFacilitator extends React.Component {
             formdata.append("lastname", this.state.lastname);
             formdata.append("profile", this.state.profile);
             formdata.append("photo", this.state.photo);
+            formdata.append("country",this.state.country);
             axios
                 .put(
                     `https://lakshy12.herokuapp.com/facilitator/save/${_id}`,
@@ -220,6 +222,25 @@ class EditFacilitator extends React.Component {
                                                     onfocus="this.placeholder = 'Menu Name'"
                                                     onblur="this.placeholder = ''"
                                                     placeholder="Last Name"
+                                                />
+                                                {this.validator.message(
+                                                    "lastname",
+                                                    this.state.lastname,
+                                                    "required|whitespace|min:1|max:150"
+                                                )}
+                                                {/* {this.state.mobile_message} */}
+                                            </div>
+                                            <div className="form-group tags-field row m-0">
+                                                <label className="col-lg-2 p-0">Country</label>
+                                                <input
+                                                    className="form-control col-lg-10"
+                                                    name="country"
+                                                    onChange={this.onChange}
+                                                    value={this.state.country}
+                                                    type="text"
+                                                    onfocus="this.placeholder = 'Menu Name'"
+                                                    onblur="this.placeholder = ''"
+                                                    placeholder="Country"
                                                 />
                                                 {this.validator.message(
                                                     "lastname",

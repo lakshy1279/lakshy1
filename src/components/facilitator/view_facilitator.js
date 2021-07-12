@@ -12,6 +12,7 @@ class ViewFacilitator extends React.Component {
             lastname: "",
             profile: "",
             photo:"",
+            country:"",
             loading: false,
         };
     }
@@ -28,6 +29,7 @@ class ViewFacilitator extends React.Component {
                     lastname: res.data.lastname,
                     profile: res.data.profile,
                     photo: res.data.photo,
+                    country:res.data.country
                 };
                 console.log(post);
                 this.setState({
@@ -35,6 +37,7 @@ class ViewFacilitator extends React.Component {
                     lastname: post.lastname,
                     profile: post.profile,
                     photo: post.photo,
+                    country:post.country,
                     loading:true
                 });
             });
@@ -72,6 +75,12 @@ class ViewFacilitator extends React.Component {
                                                         <b>Last Name</b>
                                                     </td>
                                                     <td>{this.state.lastname}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td valign="top" width="150px;">
+                                                        <b>Country</b>
+                                                    </td>
+                                                    <td>{this.state.country}</td>
                                                 </tr>
                                                 <tr>
                                                     <td valign="top" width="150px;">
