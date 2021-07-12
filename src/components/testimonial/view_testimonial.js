@@ -22,7 +22,7 @@ class Testimonial extends React.Component {
 
     componentDidMount() {
         axios
-            .get(`http://localhost:5000/testimonial/fetch
+            .get(`https://lakshy12.herokuapp.com/testimonial/fetch
 `)
             .then((res) => {
                 const testimonialData = res.data;
@@ -30,7 +30,7 @@ class Testimonial extends React.Component {
                 this.setState({ testimonialData, loading: true });
             });
         this.unsubscribe = axios
-            .get(`http://localhost:5000/testimonial/fetch
+            .get(`https://lakshy12.herokuapp.com/testimonial/fetch
 `)
             .then((res) => {
                 const testimonialData = res.data;
@@ -52,7 +52,7 @@ class Testimonial extends React.Component {
 
                 axios
                     .delete(
-                        `http://localhost:5000/testimonial/delete/${_id}`
+                        `https://lakshy12.herokuapp.com/testimonial/delete/${_id}`
                     )
                     .then((res) => {
                         console.log(res);

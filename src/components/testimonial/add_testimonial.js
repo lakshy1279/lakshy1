@@ -124,7 +124,7 @@ class AddTestimonial extends React.Component {
             console.log(this.state);
             axios
                 .post(
-                    "http://localhost:5000/testimonial/save",
+                    "https://lakshy12.herokuapp.com/testimonial/save",
                     formdata
                 )
                 .then((response)=> {

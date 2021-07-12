@@ -21,18 +21,18 @@ class EventUpcoming extends React.Component {
     componentDidMount() {
         // https://trw-backend-api.herokuapp.com/
         axios
-            .get(`https://trw-backend-api.herokuapp.com/blog/get_all_events`)
+            .get(`https://lakshy12.herokuapp.com/blog/get_all_events`)
             .then((res) => {
                 const events = res.data.map(item => {
                     // console.log(moment(new Date(item.date).toLocaleString()))
-                    if (new Date(item.date).getMonth() >= new Date(Date.now()).getMonth()) {
-                        if (new Date(item.date).getDate() === new Date(Date.now()).getDate()) {
-                            if (new Date(item.date).getHours() > new Date(Date.now()).getHours()) {
+                    if (new Date(item.fromdate).getMonth() >= new Date(Date.now()).getMonth()) {
+                        if (new Date(item.fromdate).getDate() === new Date(Date.now()).getDate()) {
+                            if (new Date(item.fromdate).getHours() > new Date(Date.now()).getHours()) {
                                 return item;
                             } else {
                                 return false;
                             }
-                        } else if (new Date(item.date).getDate() > new Date(Date.now()).getDate()) {
+                        } else if (new Date(item.fromdate).getDate() > new Date(Date.now()).getDate()) {
                             return item;
                         } else {
                             return false;
@@ -41,24 +41,25 @@ class EventUpcoming extends React.Component {
                         return false
                     }
                 });
-                const eventRes = res.data;
+                const data=res.data;
+                console.log("data",data);
                 console.log(events);
-                console.log(eventRes);
+                // console.log(eventRes);
                 this.setState({ events, loading: true });
             });
         this.unsubscribe = axios
-            .get(`https://trw-backend-api.herokuapp.com/blog/get_all_events`)
+            .get(`https://lakshy12.herokuapp.com/blog/get_all_events`)
             .then((res) => {
                 const events = res.data.map(item => {
                     // console.log(moment(new Date(item.date).toLocaleString()))
-                    if (new Date(item.date).getMonth() >= new Date(Date.now()).getMonth()) {
-                        if (new Date(item.date).getDate() === new Date(Date.now()).getDate()) {
-                            if (new Date(item.date).getHours() > new Date(Date.now()).getHours()) {
+                    if (new Date(item.fromdate).getMonth() >= new Date(Date.now()).getMonth()) {
+                        if (new Date(item.fromdate).getDate() === new Date(Date.now()).getDate()) {
+                            if (new Date(item.fromdate).getHours() > new Date(Date.now()).getHours()) {
                                 return item;
                             } else {
                                 return false;
                             }
-                        } else if (new Date(item.date).getDate() > new Date(Date.now()).getDate()) {
+                        } else if (new Date(item.fromdate).getDate() > new Date(Date.now()).getDate()) {
                             return item;
                         } else {
                             return false;
@@ -69,10 +70,10 @@ class EventUpcoming extends React.Component {
                 });
                 // const events = res.data;
                 console.log(events);
-                this.setState({ events, loading: true });
+                // const data=res.data;
+                this.setState({events, loading: true });
             });
     }
-
     deleteItem(_id) {
         swal({
             title: "Are you sure?",
@@ -86,7 +87,7 @@ class EventUpcoming extends React.Component {
                 // https://trw-backend-api.herokuapp.com/
                 axios
                     .delete(
-                        `https://trw-backend-api.herokuapp.com/blog/delete_event/${_id}`
+                        `https://lakshy12.herokuapp.com/blog/delete_event/${_id}`
                     )
                     .then((res) => {
                         console.log(res);
@@ -103,6 +104,7 @@ class EventUpcoming extends React.Component {
         });
     }
     render() {
+        console.log("events",this.state.events);
         const offset = this.state.currentPage * PER_PAGE;
         let count = 0;
         const currentPageData =
@@ -120,7 +122,7 @@ class EventUpcoming extends React.Component {
                             <td>{blog.category}</td>
                             <td>{blog.type}</td>
                             {/* <td>{ }</td> */}
-                            <td>{new Date(blog.date).toDateString() + "," + new Date(blog.date).toLocaleTimeString()}</td>
+                            <td>{new Date(blog.fromdate).toDateString() + "," + new Date(blog.fromdate).toLocaleTimeString()}</td>
                             <td>
                                 <Link to={`/view_events/${blog._id}`}>
                                     <span className="btn">View</span>

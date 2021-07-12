@@ -15,7 +15,9 @@ class AddEvent extends React.Component {
             eventCategories: [],
             eventTypes: [],
             type: "",
-            DateTime: "",
+            FromDate: "",
+            EndDate:"",
+            eventby:"",
             description: "",
             image: "",
             theme: "snow",
@@ -114,24 +116,24 @@ class AddEvent extends React.Component {
         });
     }
 
-    componentDidMount() {
-        // https://trw-backend-api.herokuapp.com
-        axios
-            .get(`https://trw-backend-api.herokuapp.com/blog/get_event_cat`)
-            .then((res) => {
-                const eventCategories = res.data;
-                console.log(eventCategories);
-                this.setState({ eventCategories });
-            });
-        // https://trw-backend-api.herokuapp.com
-        axios
-            .get(`https://trw-backend-api.herokuapp.com/blog/get_event_type`)
-            .then((res) => {
-                const eventTypes = res.data;
-                console.log(eventTypes);
-                this.setState({ eventTypes });
-            });
-    }
+    // componentDidMount() {
+    //     // https://trw-backend-api.herokuapp.com
+    //     axios
+    //         .get(`https://trw-backend-api.herokuapp.com/blog/get_event_cat`)
+    //         .then((res) => {
+    //             const eventCategories = res.data;
+    //             console.log(eventCategories);
+    //             this.setState({ eventCategories });
+    //         });
+    //     // https://trw-backend-api.herokuapp.com
+    //     axios
+    //         .get(`https://trw-backend-api.herokuapp.com/blog/get_event_type`)
+    //         .then((res) => {
+    //             const eventTypes = res.data;
+    //             console.log(eventTypes);
+    //             this.setState({ eventTypes });
+    //         });
+    // }
 
     handleChange(html) {
         this.setState({ description: html });
@@ -184,10 +186,12 @@ class AddEvent extends React.Component {
             formdata.append("type", this.state.type);
             formdata.append("description", this.state.description);
             formdata.append("file", this.state.image);
-            formdata.append("date", this.state.DateTime);
+            formdata.append("fromdate", this.state.FromDate);
+            formdata.append("enddate",this.state.EndDate);
+            formdata.append("eventby",this.state.eventby);
             axios
                 .post(
-                    "https://trw-backend-api.herokuapp.com/blog/AddEvent",
+                    "https://lakshy12.herokuapp.com/blog/AddEvent",
                     formdata
                 )
                 .then(function (response) {
@@ -300,20 +304,52 @@ class AddEvent extends React.Component {
                                                 )}
                                             </div>
                                             <div className="form-group tags-field row m-0">
-                                                <label className="col-lg-2 p-0">Select Date and Time</label>
+                                                <label className="col-lg-2 p-0">From Date and Time</label>
                                                 <input
                                                     type="datetime-local"
-                                                    name="DateTime"
+                                                    name="FromDate"
                                                     onChange={this.onChange}
                                                     className="form-control col-lg-10"
                                                 />
                                                 {this.validator.message(
-                                                    "Date",
-                                                    this.state.image,
+                                                    "FromDate",
+                                                    this.state.FromDate,
                                                     "required"
                                                 )}
                                             </div>
-
+                                            <div className="form-group tags-field row m-0">
+                                                <label className="col-lg-2 p-0">End Date and Time</label>
+                                                <input
+                                                    type="datetime-local"
+                                                    name="EndDate"
+                                                    onChange={this.onChange}
+                                                    className="form-control col-lg-10"
+                                                />
+                                                {this.validator.message(
+                                                    "EndDate",
+                                                    this.state.EndDate,
+                                                    "required"
+                                                )}
+                                            </div>
+                                            <div className="form-group tags-field row m-0">
+                                                <label className="col-lg-2 p-0">Event By</label>
+                                                <input
+                                                    className="form-control col-lg-10"
+                                                    name="eventby"
+                                                    onChange={this.onChange}
+                                                    value={this.state.eventby}
+                                                    type="text"
+                                                    onfocus="this.placeholder = 'Menu Name'"
+                                                    onblur="this.placeholder = ''"
+                                                    placeholder=""
+                                                />
+                                                {this.validator.message(
+                                                    "eventby",
+                                                    this.state.eventby,
+                                                    "required|whitespace|min:1|max:15"
+                                                )}
+                                                {this.state.mobile_message}
+                                            </div>
                                             <div className="form-group tags-field row m-0">
                                                 <label className="col-lg-2 p-0">Description</label>
 

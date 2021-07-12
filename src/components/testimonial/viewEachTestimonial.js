@@ -17,7 +17,7 @@ class ViewTestimonial extends React.Component {
         const { _id } = this.props.match.params;
         console.log(_id);
         axios
-            .get(`http://localhost:5000/testimonial/fetch/${_id}`)
+            .get(`https://lakshy12.herokuapp.com/testimonial/fetch/${_id}`)
             .then((res) => {
                 console.log(res.data);
                 const temp=res.data;
