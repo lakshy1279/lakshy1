@@ -175,6 +175,20 @@ function Sidebar() {
                     {/* post*/}
                     <li>
                       {" "}
+                      <a href="/testimonials">
+                        <span>
+                          <i
+                            className="fa fa-rss-square"
+                            aria-hidden="true"
+                          ></i>{" "}
+                          Testimonials
+                        </span>
+                        <b className="gw-arrow" />
+                      </a>
+                      </li>
+                    <li></li>
+                    <li>
+                      {" "}
                       <a href="/facilitator">
                         <span>
                           <i

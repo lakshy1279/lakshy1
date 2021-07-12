@@ -6,10 +6,10 @@ class AddTestimonial extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            title: "",
-            subtitle: "",
-            description: "",
-            image: "",
+            name: "",
+            location: "",
+            content: "",
+            photo: "",
             mobile_message: "",
             validError: false,
         };
@@ -105,7 +105,7 @@ class AddTestimonial extends React.Component {
         });
     }
     onFileChange(e) {
-        this.setState({ image: e.target.files[0] });
+        this.setState({ photo: e.target.files[0] });
     }
     handleChange(event) {
         this.setState({
@@ -116,71 +116,40 @@ class AddTestimonial extends React.Component {
         e.preventDefault();
         if (this.validator.allValid()) {
             const formdata = new FormData();
-            formdata.append("title", this.state.title);
-            formdata.append("subtitle", this.state.subtitle);
-            formdata.append("description", this.state.description);
-            formdata.append("file", this.state.image);
+            formdata.append("name", this.state.name);
+            formdata.append("content", this.state.content);
+            formdata.append("location", this.state.location);
+            formdata.append("photo", this.state.photo);
 
             console.log(this.state);
             axios
                 .post(
-                    "https://trw-backend-api.herokuapp.com/home/AddTestimonial",
-
+                    "http://localhost:5000/testimonial/save",
                     formdata
                 )
-                .then(function (response) {
+                .then((response)=> {
                     // handle success
                     console.log(response.data);
-                    this.setState({ formdata });
+                    this.props.history.push("/testimonials");
+                    // this.setState({ formdata });
                 })
                 .catch(function (error) {
                     // handle error
                     console.log(error);
                 });
-            this.props.history.push("/testimonials");
+            
         } else {
             this.validator.showMessages();
             this.forceUpdate();
         }
     }
-    //   handleSubmit(event) {
-    //     event.preventDefault();
-    //     if (this.validator.allValid()) {
-    //       console.log(this.state.image);
-
-    //       const submenu = {
-    //         submenu: this.state.submenu,
-    //         description: this.state.description,
-    //         description1: this.state.description1,
-
-    //         menu: this.state.menu,
-    //         date: Date.now(),
-    //       };
-    //       console.log(submenu);
-    //       axios
-    //         .post(
-    //           `https://trw-backend-api.herokuapp.com/admin/add_sub_menu`,
-    //           submenu
-    //         )
-    //         .then((res) => {
-    //           console.log(res);
-    //           console.log(res.data);
-    //         });
-
-    //       this.props.history.push("/sub_menu");
-    //     } else {
-    //       this.validator.showMessages();
-    //       this.forceUpdate();
-    //     }
-    //   }
-
     render() {
         return (
             <div>
                 <Sidebar></Sidebar>
                 <div className="admin-wrapper col-12">
                     <div className="admin-content">
-                        <div className="admin-head">Home Testimonials - Add New</div>
+                        <div className="admin-head">Testimonials - Add New</div>
                         <div className="admin-data">
                             <div className="container-fluid p-0">
                                 <form
@@ -194,59 +163,59 @@ class AddTestimonial extends React.Component {
                                                 <label className="col-lg-2 p-0">Name</label>
                                                 <input
                                                     className="form-control col-lg-10"
-                                                    name="title"
+                                                    name="name"
                                                     onChange={this.handleChange}
-                                                    value={this.state.title}
+                                                    value={this.state.name}
                                                     type="text"
                                                     onfocus="this.placeholder = 'Menu Name'"
                                                     onblur="this.placeholder = ''"
                                                     placeholder=""
                                                 />
                                                 {this.validator.message(
-                                                    "Title",
-                                                    this.state.title,
+                                                    "Name",
+                                                    this.state.name,
                                                     "required|whitespace|min:1|max:40"
                                                 )}
                                             </div>
                                             <div className="form-group tags-field row m-0">
-                                                <label className="col-lg-2 p-0">Company/Designation</label>
+                                                <label className="col-lg-2 p-0">Location</label>
                                                 <input
                                                     className="form-control col-lg-10"
-                                                    name="subtitle"
+                                                    name="location"
                                                     onChange={this.handleChange}
-                                                    value={this.state.subtitle}
+                                                    value={this.state.location}
                                                     type="text"
                                                     onfocus="this.placeholder = 'Menu Name'"
                                                     onblur="this.placeholder = ''"
                                                     placeholder=""
                                                 />
                                                 {this.validator.message(
-                                                    "Sub Title",
-                                                    this.state.subtitle,
+                                                    "Location",
+                                                    this.state.location,
                                                     "required|whitespace|min:1|max:100"
                                                 )}
                                             </div>
 
                                             <div className="form-group tags-field row m-0">
-                                                <label className="col-lg-2 p-0">Description</label>
+                                                <label className="col-lg-2 p-0">Content</label>
                                                 <textarea
                                                     className="form-control col-lg-10"
-                                                    name="description"
+                                                    name="content"
                                                     onChange={this.handleChange}
-                                                    value={this.state.description}
+                                                    value={this.state.content}
                                                     type="text"
                                                     onfocus="this.placeholder = 'Menu Name'"
                                                     onblur="this.placeholder = ''"
                                                     placeholder=""
                                                 />
                                                 {this.validator.message(
-                                                    "Description",
-                                                    this.state.description,
+                                                    "Content",
+                                                    this.state.content,
                                                     "required|whitespace|min:40|max:400"
                                                 )}
                                             </div>
                                             <div className="form-group tags-field row m-0">
-                                                <label className="col-lg-2 p-0">Upload Image</label>
+                                                <label className="col-lg-2 p-0">Photo</label>
                                                 <input
                                                     type="file"
                                                     onChange={this.onFileChange}
@@ -255,8 +224,8 @@ class AddTestimonial extends React.Component {
                                                 />
 
                                                 {this.validator.message(
-                                                    "Image",
-                                                    this.state.image,
+                                                    "Photo",
+                                                    this.state.photo,
                                                     "required"
                                                 )}
                                             </div>

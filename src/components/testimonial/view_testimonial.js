@@ -22,14 +22,16 @@ class Testimonial extends React.Component {
 
     componentDidMount() {
         axios
-            .get(`https://trw-backend-api.herokuapp.com/home/getTestimonials`)
+            .get(`http://localhost:5000/testimonial/fetch
+`)
             .then((res) => {
                 const testimonialData = res.data;
                 console.log("testimonialData", testimonialData);
                 this.setState({ testimonialData, loading: true });
             });
         this.unsubscribe = axios
-            .get(`https://trw-backend-api.herokuapp.com/home/getTestimonials`)
+            .get(`http://localhost:5000/testimonial/fetch
+`)
             .then((res) => {
                 const testimonialData = res.data;
                 console.log(testimonialData);
@@ -50,7 +52,7 @@ class Testimonial extends React.Component {
 
                 axios
                     .delete(
-                        `https://trw-backend-api.herokuapp.com/home/delete_testimonial/${_id}`
+                        `http://localhost:5000/testimonial/delete/${_id}`
                     )
                     .then((res) => {
                         console.log(res);
@@ -77,7 +79,11 @@ class Testimonial extends React.Component {
                 return (
                     <tr key={index}>
                         <td>{index + 1}</td>
-                        <td>{home.title}</td>
+                        <td>{home.name}</td>
+                        <td>{home.location}</td>
+                        <td>
+                           {new Date(Date.now(home.createdAt)).toDateString()}
+                        </td>
                         {/* <td>{home.subtitle}</td> */}
 
                         <td>
@@ -107,7 +113,7 @@ class Testimonial extends React.Component {
                 <Sidebar></Sidebar>
                 <div className="admin-wrapper col-12">
                     <div className="admin-content">
-                        <div className="admin-head">Home Testimonials</div>
+                        <div className="admin-head">Testimonials</div>
                         {this.state.loading ? (
                             <div className="admin-data">
                                 <div className="col-lg-12 p-0 text-right mb-30">
@@ -122,9 +128,9 @@ class Testimonial extends React.Component {
                                         <thead>
                                             <tr>
                                                 <th>S.No</th>
-                                                <th>Title</th>
-                                                {/* <th>Sub Title</th> */}
-
+                                                <th>Name</th>
+                                                <th>Location</th>
+                                                <th>Added On</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>

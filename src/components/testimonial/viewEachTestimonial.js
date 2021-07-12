@@ -6,10 +6,10 @@ class ViewTestimonial extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            title: "",
-            subtitle: "",
-            description: "",
-            image: "",
+            name:"",
+            location:"",
+            content:"",
+            photo:"",
             loading: false,
         };
     }
@@ -17,23 +17,23 @@ class ViewTestimonial extends React.Component {
         const { _id } = this.props.match.params;
         console.log(_id);
         axios
-            .get(`https://trw-backend-api.herokuapp.com/home/update_testimonial/${_id}`)
+            .get(`http://localhost:5000/testimonial/fetch/${_id}`)
             .then((res) => {
                 console.log(res.data);
+                const temp=res.data;
                 const testimonialData = {
-                    title: res.data.title,
-                    subtitle: res.data.subtitle,
-                    description: res.data.description,
-                    image: res.data.image,
+                  name:temp.name,
+                  location:temp.location,
+                  content:temp.content,
+                  photo:temp.photo
                 };
-                console.log(testimonialData.title);
+                console.log(testimonialData);
                 this.setState({
-                    title: testimonialData.title,
-                    subtitle: testimonialData.subtitle,
-                    description: testimonialData.description,
-
-                    image: testimonialData.image,
-                    loading: true,
+                    name:testimonialData.name,
+                    location:testimonialData.location,
+                    content:testimonialData.content,
+                    photo:testimonialData.photo,
+                    loading:true
                 });
             });
     }
@@ -44,7 +44,7 @@ class ViewTestimonial extends React.Component {
                 <Sidebar></Sidebar>
                 <div className="admin-wrapper col-12">
                     <div className="admin-content">
-                        <div className="admin-head">Home Testimonials - View</div>
+                        <div className="admin-head">Testimonials - View</div>
                         {this.state.loading ? (
                             <div className="admin-data">
                                 <div className="col-lg-12 p-0 text-right mb-30">
@@ -61,28 +61,32 @@ class ViewTestimonial extends React.Component {
                                                 <td valign="top" width="150px;">
                                                     <b>Name</b>
                                                 </td>
-                                                <td>{this.state.title}</td>
+                                                <td>{this.state.name}</td>
                                             </tr>
                                             <tr>
                                                 <td valign="top" width="150px;">
-                                                    <b>Company/Designation</b>
+                                                    <b>Location</b>
                                                 </td>
-                                                <td>{this.state.subtitle}</td>
+                                                <td>{this.state.location}</td>
                                             </tr>
                                             <tr>
                                                 <td valign="top" width="150px;">
-                                                    <b>Description</b>
+                                                    <b>Content</b>
                                                 </td>
-                                                <td>{this.state.description}</td>
+                                                <td>{this.state.content}</td>
                                             </tr>
 
                                             <tr>
-                                                <td valign="top" width="150px;">
-                                                    <b>image</b>
+                                                <td>
+                                                    <b>Photo</b>
                                                 </td>
                                                 <td>
-                                                    <img src={this.state.image} />
-                                                </td>
+                                                        <img
+                                                            src={this.state.photo}
+                                                            width="150px"
+                                                            height="100px"
+                                                        />
+                                                    </td>
                                             </tr>
                                         </tbody>
                                     </table>
