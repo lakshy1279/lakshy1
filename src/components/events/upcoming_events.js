@@ -25,14 +25,14 @@ class EventUpcoming extends React.Component {
             .then((res) => {
                 const events = res.data.map(item => {
                     // console.log(moment(new Date(item.date).toLocaleString()))
-                    if (new Date(item.fromdate).getMonth() >= new Date(Date.now()).getMonth()) {
-                        if (new Date(item.fromdate).getDate() === new Date(Date.now()).getDate()) {
-                            if (new Date(item.fromdate).getHours() > new Date(Date.now()).getHours()) {
+                    if (new Date(item.enddate).getMonth() >= new Date(Date.now()).getMonth()) {
+                        if (new Date(item.enddate).getDate() === new Date(Date.now()).getDate()) {
+                            if (new Date(item.enddate).getHours() > new Date(Date.now()).getHours()) {
                                 return item;
                             } else {
                                 return false;
                             }
-                        } else if (new Date(item.fromdate).getDate() > new Date(Date.now()).getDate()) {
+                        } else if (new Date(item.enddate).getDate() > new Date(Date.now()).getDate()) {
                             return item;
                         } else {
                             return false;
@@ -52,14 +52,14 @@ class EventUpcoming extends React.Component {
             .then((res) => {
                 const events = res.data.map(item => {
                     // console.log(moment(new Date(item.date).toLocaleString()))
-                    if (new Date(item.fromdate).getMonth() >= new Date(Date.now()).getMonth()) {
-                        if (new Date(item.fromdate).getDate() === new Date(Date.now()).getDate()) {
-                            if (new Date(item.fromdate).getHours() > new Date(Date.now()).getHours()) {
+                    if (new Date(item.enddate).getMonth() >= new Date(Date.now()).getMonth()) {
+                        if (new Date(item.enddate).getDate() === new Date(Date.now()).getDate()) {
+                            if (new Date(item.enddate).getHours() > new Date(Date.now()).getHours()) {
                                 return item;
                             } else {
                                 return false;
                             }
-                        } else if (new Date(item.fromdate).getDate() > new Date(Date.now()).getDate()) {
+                        } else if (new Date(item.enddate).getDate() > new Date(Date.now()).getDate()) {
                             return item;
                         } else {
                             return false;

@@ -21,18 +21,19 @@ class EventPast extends React.Component {
     componentDidMount() {
         // https://trw-backend-api.herokuapp.com/
         axios
-            .get(`https://trw-backend-api.herokuapp.com/blog/get_all_events`)
+            .get(`https://lakshy12.herokuapp.com/blog/get_all_events`)
             .then((res) => {
+                console.log(res);
                 const events = res.data.map(item => {
                     // console.log(moment(new Date(item.date).toLocaleString()))
-                    if (new Date(item.date).getMonth() <= new Date(Date.now()).getMonth()) {
-                        if (new Date(item.date).getDate() <= new Date(Date.now()).getDate()) {
-                            if (new Date(item.date).getHours() <= new Date(Date.now()).getHours()) {
+                    if (new Date(item.enddate).getMonth() <= new Date(Date.now()).getMonth()) {
+                        if (new Date(item.enddate).getDate() <= new Date(Date.now()).getDate()) {
+                            if (new Date(item.enddate).getHours() <= new Date(Date.now()).getHours()) {
                                 return item;
                             } else {
                                 return false;
                             }
-                        } else if (new Date(item.date).getDate() < new Date(Date.now()).getDate()) {
+                        } else if (new Date(item.enddate).getDate() < new Date(Date.now()).getDate()) {
                             return item;
                         } else {
                             return false;
@@ -46,19 +47,19 @@ class EventPast extends React.Component {
                 this.setState({ events, loading: true });
             });
         this.unsubscribe = axios
-            .get(`https://trw-backend-api.herokuapp.com/blog/get_all_events`)
+            .get(`https://lakshy12.herokuapp.com/blog/get_all_events`)
             .then((res) => {
                 const events = res.data.map(item => {
                     // console.log(moment(new Date(item.date).toLocaleString()))
                     // console.log(moment(new Date(item.date).toLocaleString()))
-                    if (new Date(item.date).getMonth() <= new Date(Date.now()).getMonth()) {
-                        if (new Date(item.date).getDate() === new Date(Date.now()).getDate()) {
-                            if (new Date(item.date).getHours() <= new Date(Date.now()).getHours()) {
+                    if (new Date(item.enddate).getMonth() <= new Date(Date.now()).getMonth()) {
+                        if (new Date(item.enddate).getDate() === new Date(Date.now()).getDate()) {
+                            if (new Date(item.enddate).getHours() <= new Date(Date.now()).getHours()) {
                                 return item;
                             } else {
                                 return false;
                             }
-                        } else if (new Date(item.date).getDate() < new Date(Date.now()).getDate()) {
+                        } else if (new Date(item.enddate).getDate() < new Date(Date.now()).getDate()) {
                             return item;
                         } else {
                             return false;
@@ -85,7 +86,7 @@ class EventPast extends React.Component {
                 console.log(_id);
                 axios
                     .delete(
-                        `https://trw-backend-api.herokuapp.com/blog/delete_event/${_id}`
+                        `https://lakshy12.herokuapp.com/blog/delete_event/${_id}`
                     )
                     .then((res) => {
                         console.log(res);
@@ -117,7 +118,6 @@ class EventPast extends React.Component {
                             </td>
                             <td>{blog.category}</td>
                             <td>{blog.type}</td>
-                            {/* <td>{new Date(blog.date).getMonth()}</td> */}
                             <td>{new Date(blog.date).toDateString() + "," + new Date(blog.date).toLocaleTimeString()}</td>
                             <td>
                                 <Link to={`/view_events/${blog._id}`}>
