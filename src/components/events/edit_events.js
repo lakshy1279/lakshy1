@@ -15,8 +15,8 @@ class EditEvent extends React.Component {
             eventCategories: [],
             eventTypes: [],
             type: "",
-            FromDate: "",
-            EndDate:"",
+            Fromdate: "",
+            Enddate:"",
             eventby:"",
             description: "",
             image: "",
@@ -123,35 +123,35 @@ class EditEvent extends React.Component {
         let res = await axios.get(`https://lakshy12.herokuapp.com/blog/get_event_ById/${_id}`);
         console.log(res.data);
         const post = {
+             title: res.data.title,
+                    description: res.data.description,
+                    category: res.data.category,
+                    type: res.data.type,
+                    image: res.data.image,
+                    Fromdate: res.data.fromdate,
+                    Enddate:res.data.enddate,
+                    eventby:res.data.eventby
+        };
+        console.log(post);
+        this.setState({
             title: res.data.title,
             description: res.data.description,
             category: res.data.category,
             type: res.data.type,
             image: res.data.image,
-            fromdate: res.data.fromdate,
-            enddate:res.data.enddate,
-            eventby:res.data.eventby
-        };
-        console.log(post);
-        this.setState({
-            title: res.data.title,
-                    description: res.data.description,
-                    category: res.data.category,
-                    type: res.data.type,
-                    image: res.data.image,
-                    fromdate: res.data.fromdate,
-                    enddate:res.data.enddate,
-                    eventby:res.data.eventby,
-                    loading:true
+            Fromdate: res.data.fromdate,
+            Enddate:res.data.enddate,
+            eventby:res.data.eventby,
+            loading: true,
         });
         let resCat = await axios.get(`https://lakshy12.herokuapp.com/blog/get_event_cat`)
         const eventCategories = resCat.data;
         console.log(eventCategories);
         this.setState({ eventCategories });
         let resType = await axios.get(`https://lakshy12.herokuapp.com/blog/get_event_type`)
-        const eventtypes = resType.data;
-        console.log(eventtypes);
-        this.setState({ eventtypes });
+        const eventTypes = resType.data;
+        console.log(eventTypes);
+        this.setState({ eventTypes });
     }
     handleChange(html) {
         this.setState({ description: html });
@@ -324,11 +324,11 @@ class EditEvent extends React.Component {
                                                     onChange={this.onChange}
                                                     className="form-control col-lg-10"
                                                 />
-                                                {this.validator.message(
+                                                {/* {this.validator.message(
                                                     "FromDate",
                                                     this.state.FromDate,
                                                     "required"
-                                                )}
+                                                )} */}
                                             </div>
                                             <div className="form-group tags-field row m-0">
                                                 <label className="col-lg-2 p-0">End Date and Time</label>
@@ -338,11 +338,11 @@ class EditEvent extends React.Component {
                                                     onChange={this.onChange}
                                                     className="form-control col-lg-10"
                                                 />
-                                                {this.validator.message(
+                                                {/* {this.validator.message(
                                                     "EndDate",
                                                     this.state.EndDate,
                                                     "required"
-                                                )}
+                                                )} */}
                                             </div>
                                             <div className="form-group tags-field row m-0">
                                                 <label className="col-lg-2 p-0">Event By</label>
@@ -371,8 +371,8 @@ class EditEvent extends React.Component {
                                                     theme={this.state.theme}
                                                     onChange={this.handleChange}
                                                     value={this.state.description}
-                                                    modules={AddEvent.modules}
-                                                    formats={AddEvent.formats}
+                                                    modules={EditEvent.modules}
+                                                    formats={EditEvent.formats}
                                                     bounds={".app"}
                                                     placeholder={this.props.placeholder}
                                                 />
