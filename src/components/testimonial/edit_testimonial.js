@@ -219,7 +219,7 @@ class EditTestimonial extends React.Component {
                                                     {this.validator.message(
                                                         "Content",
                                                         this.state.content,
-                                                        "required|whitespace|min:40|max:100"
+                                                        "required|whitespace|min:40|max:10000"
                                                     )}
                                                 </div>
 

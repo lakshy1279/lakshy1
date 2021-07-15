@@ -117,17 +117,17 @@ class AddEvent extends React.Component {
     }
 
     componentDidMount() {
-        // https://trw-backend-api.herokuapp.com
+        // https://lakshy12.herokuapp.com
         axios
-            .get(`https://trw-backend-api.herokuapp.com/blog/get_event_cat`)
+            .get(`https://lakshy12.herokuapp.com/blog/get_event_cat`)
             .then((res) => {
                 const eventCategories = res.data;
                 console.log(eventCategories);
                 this.setState({ eventCategories });
             });
-        // https://trw-backend-api.herokuapp.com
+        // https://lakshy12.herokuapp.com
         axios
-            .get(`https://trw-backend-api.herokuapp.com/blog/get_event_type`)
+            .get(`https://lakshy12.herokuapp.com/blog/get_event_type`)
             .then((res) => {
                 const eventTypes = res.data;
                 console.log(eventTypes);
@@ -163,7 +163,7 @@ class AddEvent extends React.Component {
 
     //       console.log(post);
     //       axios
-    //         .post(`https://trw-backend-api.herokuapp.com/blog/AddEvent`, post)
+    //         .post(`https://lakshy12.herokuapp.com/blog/AddEvent`, post)
     //         .then((res) => {
     //           console.log(res);
     //           console.log(res.data);

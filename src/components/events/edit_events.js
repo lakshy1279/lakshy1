@@ -12,12 +12,14 @@ class EditEvent extends React.Component {
         this.state = {
             title: "",
             category: "",
-            description: "",
-            type: "",
-            image: "",
-            date: "",
             eventCategories: [],
-            eventtypes: [],
+            eventTypes: [],
+            type: "",
+            FromDate: "",
+            EndDate:"",
+            eventby:"",
+            description: "",
+            image: "",
             theme: "snow",
             mobile_message: "",
             validError: false,
@@ -117,32 +119,36 @@ class EditEvent extends React.Component {
     async componentDidMount() {
         const { _id } = this.props.match.params;
         console.log(_id);
-        // https://trw-backend-api.herokuapp.com/
-        let res = await axios.get(`https://trw-backend-api.herokuapp.com/blog/get_event_ById/${_id}`);
+        // https://lakshy12.herokuapp.com/
+        let res = await axios.get(`https://lakshy12.herokuapp.com/blog/get_event_ById/${_id}`);
         console.log(res.data);
         const post = {
             title: res.data.title,
+            description: res.data.description,
             category: res.data.category,
             type: res.data.type,
             image: res.data.image,
-            description: res.data.description,
-            date: res.data.date,
+            fromdate: res.data.fromdate,
+            enddate:res.data.enddate,
+            eventby:res.data.eventby
         };
         console.log(post);
         this.setState({
-            title: post.title,
-            category: post.category,
-            type: post.type,
-            image: post.image,
-            description: post.description,
-            date: post.date,
-            loading: true,
+            title: res.data.title,
+                    description: res.data.description,
+                    category: res.data.category,
+                    type: res.data.type,
+                    image: res.data.image,
+                    fromdate: res.data.fromdate,
+                    enddate:res.data.enddate,
+                    eventby:res.data.eventby,
+                    loading:true
         });
-        let resCat = await axios.get(`https://trw-backend-api.herokuapp.com/blog/get_event_cat`)
+        let resCat = await axios.get(`https://lakshy12.herokuapp.com/blog/get_event_cat`)
         const eventCategories = resCat.data;
         console.log(eventCategories);
         this.setState({ eventCategories });
-        let resType = await axios.get(`https://trw-backend-api.herokuapp.com/blog/get_event_type`)
+        let resType = await axios.get(`https://lakshy12.herokuapp.com/blog/get_event_type`)
         const eventtypes = resType.data;
         console.log(eventtypes);
         this.setState({ eventtypes });
@@ -174,7 +180,7 @@ class EditEvent extends React.Component {
     //       };
     //       axios
     //         .put(
-    //           `https://trw-backend-api.herokuapp.com/blog/update_blog1_patch/${_id}`,
+    //           `https://lakshy12.herokuapp.com/blog/update_blog1_patch/${_id}`,
     //           post
     //         )
     //         .then((res) => console.log(res.data));
@@ -197,12 +203,14 @@ class EditEvent extends React.Component {
             formdata.append("type", this.state.type);
             formdata.append("description", this.state.description);
             formdata.append("file", this.state.image);
-            formdata.append("date", this.state.date);
+            formdata.append("fromdate", this.state.FromDate);
+            formdata.append("enddate",this.state.EndDate);
+            formdata.append("eventby",this.state.eventby);
 
-            // https://trw-backend-api.herokuapp.com/
+            // https://lakshy12.herokuapp.com/
             axios
                 .put(
-                    `https://trw-backend-api.herokuapp.com/blog/update_event/${_id}`,
+                    `https://lakshy12.herokuapp.com/blog/update_event/${_id}`,
                     formdata
                 )
                 .then((res) => {
@@ -266,7 +274,7 @@ class EditEvent extends React.Component {
                                                         })}
                                                 </div>
                                                 {this.validator.message(
-                                                    "category",
+                                                    "category Name",
                                                     this.state.category,
                                                     "required"
                                                 )}
@@ -274,8 +282,8 @@ class EditEvent extends React.Component {
                                             <div className="form-group tags-field row m-0 ">
                                                 <label className="col-lg-2 p-0">Select Type</label>
                                                 <div className="radioBtn">
-                                                    {this.state.eventtypes &&
-                                                        this.state.eventtypes.map((data, index) => {
+                                                    {this.state.eventTypes &&
+                                                        this.state.eventTypes.map((data, index) => {
                                                             return (
                                                                 <div className="radioContent">
                                                                     <input type="checkbox" className="radio" id={data._id} name="type" onChange={this.onChange} value={data.event_type} />
@@ -286,8 +294,8 @@ class EditEvent extends React.Component {
                                                 </div>
                                                 {
                                                     this.validator.message(
-                                                        "type",
-                                                        this.state.type,
+                                                        "category Name",
+                                                        this.state.category,
                                                         "required"
                                                     )
                                                 }
@@ -309,21 +317,52 @@ class EditEvent extends React.Component {
                                                 )}
                                             </div>
                                             <div className="form-group tags-field row m-0">
-                                                <label className="col-lg-2 p-0">Select Date and Time</label>
+                                                <label className="col-lg-2 p-0">From Date and Time</label>
                                                 <input
                                                     type="datetime-local"
-                                                    name="date"
+                                                    name="FromDate"
                                                     onChange={this.onChange}
                                                     className="form-control col-lg-10"
-                                                    value={this.state.date}
                                                 />
                                                 {this.validator.message(
-                                                    "Date",
-                                                    this.state.date,
+                                                    "FromDate",
+                                                    this.state.FromDate,
                                                     "required"
                                                 )}
                                             </div>
-
+                                            <div className="form-group tags-field row m-0">
+                                                <label className="col-lg-2 p-0">End Date and Time</label>
+                                                <input
+                                                    type="datetime-local"
+                                                    name="EndDate"
+                                                    onChange={this.onChange}
+                                                    className="form-control col-lg-10"
+                                                />
+                                                {this.validator.message(
+                                                    "EndDate",
+                                                    this.state.EndDate,
+                                                    "required"
+                                                )}
+                                            </div>
+                                            <div className="form-group tags-field row m-0">
+                                                <label className="col-lg-2 p-0">Event By</label>
+                                                <input
+                                                    className="form-control col-lg-10"
+                                                    name="eventby"
+                                                    onChange={this.onChange}
+                                                    value={this.state.eventby}
+                                                    type="text"
+                                                    onfocus="this.placeholder = 'Menu Name'"
+                                                    onblur="this.placeholder = ''"
+                                                    placeholder=""
+                                                />
+                                                {this.validator.message(
+                                                    "eventby",
+                                                    this.state.eventby,
+                                                    "required|whitespace|min:1|max:15"
+                                                )}
+                                                {this.state.mobile_message}
+                                            </div>
                                             <div className="form-group tags-field row m-0">
                                                 <label className="col-lg-2 p-0">Description</label>
 
@@ -332,8 +371,8 @@ class EditEvent extends React.Component {
                                                     theme={this.state.theme}
                                                     onChange={this.handleChange}
                                                     value={this.state.description}
-                                                    modules={EditEvent.modules}
-                                                    formats={EditEvent.formats}
+                                                    modules={AddEvent.modules}
+                                                    formats={AddEvent.formats}
                                                     bounds={".app"}
                                                     placeholder={this.props.placeholder}
                                                 />
