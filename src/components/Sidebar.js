@@ -200,6 +200,20 @@ function Sidebar() {
                         <b className="gw-arrow" />
                       </a>
                       </li>
+                      {/* organisation */}
+                      <li>
+                      {" "}
+                      <a href="/organisation">
+                        <span>
+                          <i
+                            className="fa fa-rss-square"
+                            aria-hidden="true"
+                          ></i>{" "}
+                          Organisation
+                        </span>
+                        <b className="gw-arrow" />
+                      </a>
+                      </li>
                     <li>
                       <Link to="/post">
                         <i className="fa fa-upload" aria-hidden="true" /> Posts

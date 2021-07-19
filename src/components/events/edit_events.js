@@ -120,7 +120,7 @@ class EditEvent extends React.Component {
         const { _id } = this.props.match.params;
         console.log(_id);
         // https://lakshy12.herokuapp.com/
-        let res = await axios.get(`https://lakshy12.herokuapp.com/blog/get_event_ById/${_id}`);
+        let res = await axios.get(`https://trw-backend-api.herokuapp.com/blog/get_event_ById/${_id}`);
         console.log(res.data);
         const post = {
              title: res.data.title,
@@ -210,7 +210,7 @@ class EditEvent extends React.Component {
             // https://lakshy12.herokuapp.com/
             axios
                 .put(
-                    `https://lakshy12.herokuapp.com/blog/update_event/${_id}`,
+                    `https://trw-backend-api.herokuapp.com/blog/update_event/${_id}`,
                     formdata
                 )
                 .then((res) => {
@@ -320,7 +320,7 @@ class EditEvent extends React.Component {
                                                 <label className="col-lg-2 p-0">From Date and Time</label>
                                                 <input
                                                     type="datetime-local"
-                                                    name="FromDate"
+                                                    name="Fromdate"
                                                     onChange={this.onChange}
                                                     className="form-control col-lg-10"
                                                 />
@@ -334,7 +334,7 @@ class EditEvent extends React.Component {
                                                 <label className="col-lg-2 p-0">End Date and Time</label>
                                                 <input
                                                     type="datetime-local"
-                                                    name="EndDate"
+                                                    name="Enddate"
                                                     onChange={this.onChange}
                                                     className="form-control col-lg-10"
                                                 />

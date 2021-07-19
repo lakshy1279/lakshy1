@@ -102,6 +102,11 @@ import ViewFacilitator from "./components/facilitator/view_facilitator";
 // Subscriber
 import Subscriber1 from "./components/subscriber";
 
+// organisation
+import Organisation from "./components/organisation/organisation";
+import AddOrg from "./components/organisation/add_organisation";
+import EditOrg from "./components/organisation/edit_org";
+
 //testimonials
 import Testimonial from "./components/testimonial/view_testimonial";
 import AddTestimonial from "./components/testimonial/add_testimonial";
@@ -263,6 +268,10 @@ function Routing() {
         <Route exact path="/view_contact/:id" component={Contactview}></Route>
         {/* Subscriber */}
         <Route exact path="/subscriber" component={Subscriber1}></Route>
+        {/* organisation */}
+        <Route exact path="/organisation" component={Organisation}></Route>
+        <Route exact path="/add_organisation" component={AddOrg}></Route>
+        <Route exact path="/edit_organisation/:id" component={EditOrg}></Route>
         {/* Site Preferences */}
         <Route exact path="/add_logos" component={AddLogos}></Route>
         <Route exact path="/add_address" component={AddAddress}></Route>
