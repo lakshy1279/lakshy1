@@ -13,6 +13,7 @@ class AddBlog1 extends React.Component {
       category: "",
       description: "",
       image: "",
+      author:"",
       theme: "snow",
       mobile_message: "",
       validError: false,
@@ -136,30 +137,6 @@ class AddBlog1 extends React.Component {
   onFileChange(e) {
     this.setState({ image: e.target.files[0] });
   }
-  //   handleSubmit(event) {
-  //     event.preventDefault();
-  //     if (this.validator.allValid()) {
-  //       const post = {
-  //         title: this.state.title,
-  //         category: this.state.category,
-  //         description: this.state.description,
-  //       };
-
-  //       console.log(post);
-  //       axios
-  //         .post(`https://trw-backend-api.herokuapp.com/blog/AddBlog1`, post)
-  //         .then((res) => {
-  //           console.log(res);
-  //           console.log(res.data);
-  //         });
-
-  //       this.props.history.push("/article");
-  //     } else {
-  //       this.validator.showMessages();
-  //       this.forceUpdate();
-  //     }
-  //   }
-
   handleSubmit(e) {
     e.preventDefault();
     if (this.validator.allValid()) {
@@ -170,21 +147,22 @@ class AddBlog1 extends React.Component {
       formdata.append("description", this.state.description);
       formdata.append("file", this.state.image);
       formdata.append("date", this.state.date);
+      formdata.append("author",this.state.author);
       axios
         .post(
-          "https://trw-backend-api.herokuapp.com/blog/AddBlog1",
+          "https://lakshy12.herokuapp.com/blog/AddBlog1",
           formdata
         )
-        .then(function (response) {
+        .then((response)=> {
           // handle success
-
+          this.props.history.push("/article");
           console.log(response.data);
         })
         .catch(function (error) {
           // handle error
           console.log(error);
         });
-      this.props.history.push("/article");
+     
     } else {
       this.validator.showMessages();
       this.forceUpdate();
@@ -223,6 +201,25 @@ class AddBlog1 extends React.Component {
                           "Title",
                           this.state.title,
                           "required|whitespace|min:1|max:150"
+                        )}
+                        {this.state.mobile_message}
+                      </div>
+                      <div className="form-group tags-field row m-0">
+                        <label className="col-lg-2 p-0">Author</label>
+                        <input
+                          className="form-control col-lg-10"
+                          name="author"
+                          onChange={this.onChange}
+                          value={this.state.author}
+                          type="text"
+                          onfocus="this.placeholder = 'Menu Name'"
+                          onblur="this.placeholder = ''"
+                          placeholder=""
+                        />
+                        {this.validator.message(
+                          "author",
+                          this.state.author,
+                          "required|whitespace|min:1|max:50"
                         )}
                         {this.state.mobile_message}
                       </div>

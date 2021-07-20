@@ -20,7 +20,7 @@ class ViewBlog1 extends React.Component {
     const { _id } = this.props.match.params;
     console.log(_id);
     axios
-      .get(`https://trw-backend-api.herokuapp.com/blog/update_blog1/${_id}`)
+      .get(`https://lakshy12.herokuapp.com/blog/update_blog1/${_id}`)
       .then((res) => {
         console.log(res.data);
         const post = {
@@ -29,6 +29,7 @@ class ViewBlog1 extends React.Component {
           category: res.data.category,
           image: res.data.image,
           date: res.data.date,
+          author:res.data.author
         };
         console.log(post.title);
         this.setState({
@@ -37,6 +38,7 @@ class ViewBlog1 extends React.Component {
           category: post.category,
           image: post.image,
           date: post.date,
+          author:post.author,
           loading: true,
         });
       });
@@ -70,6 +72,12 @@ class ViewBlog1 extends React.Component {
                             <b>Title</b>
                           </td>
                           <td>{this.state.title}</td>
+                        </tr>
+                        <tr>
+                          <td valign="top" width="150px;">
+                            <b>Author</b>
+                          </td>
+                          <td>{this.state.author}</td>
                         </tr>
                         <tr>
                           <td valign="top" width="150px;">

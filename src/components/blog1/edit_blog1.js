@@ -14,6 +14,7 @@ class EditBlog1 extends React.Component {
       category: "",
       description: "",
       image: "",
+      author:"",
       date: Date.now(),
       theme: "snow",
       mobile_message: "",
@@ -115,7 +116,7 @@ class EditBlog1 extends React.Component {
     const { _id } = this.props.match.params;
     console.log(_id);
     axios
-      .get(`https://trw-backend-api.herokuapp.com/blog/update_blog1/${_id}`)
+      .get(`https://lakshy12.herokuapp.com/blog/update_blog1/${_id}`)
       .then((res) => {
         console.log(res.data);
         const post = {
@@ -124,6 +125,7 @@ class EditBlog1 extends React.Component {
           image: res.data.image,
           description: res.data.description,
           date: res.data.date,
+          author:res.data.author
         };
         console.log(post.title);
         this.setState({
@@ -132,12 +134,13 @@ class EditBlog1 extends React.Component {
           image: post.image,
           description: post.description,
           date: post.date,
+          author:post.author,
           loading: true,
         });
       });
 
     axios
-      .get(`https://trw-backend-api.herokuapp.com/blog/blogcategorys`)
+      .get(`https://lakshy12.herokuapp.com/blog/blogcategorys`)
       .then((res) => {
         const blogcategories = res.data;
         console.log(blogcategories);
@@ -172,7 +175,7 @@ class EditBlog1 extends React.Component {
   //       };
   //       axios
   //         .put(
-  //           `https://trw-backend-api.herokuapp.com/blog/update_blog1_patch/${_id}`,
+  //           `https://lakshy12.herokuapp.com/blog/update_blog1_patch/${_id}`,
   //           post
   //         )
   //         .then((res) => console.log(res.data));
@@ -195,10 +198,10 @@ class EditBlog1 extends React.Component {
       formdata.append("description", this.state.description);
       formdata.append("file", this.state.image);
       formdata.append("date", Date.now());
-
+      formdata.append("author",this.state.author);
       axios
         .put(
-          `https://trw-backend-api.herokuapp.com/blog/update_blog1_patch/${_id}`,
+          `https://lakshy12.herokuapp.com/blog/update_blog1_patch/${_id}`,
           formdata
         )
         .then((res) => console.log(res.data));
@@ -249,6 +252,25 @@ class EditBlog1 extends React.Component {
                           {this.validator.message(
                             "Title",
                             this.state.title,
+                            "required|whitespace|min:1|max:150"
+                          )}
+                          {this.state.mobile_message}
+                        </div>
+                        <div className="form-group tags-field row m-0">
+                          <label className="col-lg-2 p-0">Author</label>
+                          <input
+                            className="form-control col-lg-10"
+                            name="author"
+                            onChange={this.onChange}
+                            value={this.state.author}
+                            type="text"
+                            onfocus="this.placeholder = 'Menu Name'"
+                            onblur="this.placeholder = ''"
+                            placeholder=""
+                          />
+                          {this.validator.message(
+                            "author",
+                            this.state.author,
                             "required|whitespace|min:1|max:150"
                           )}
                           {this.state.mobile_message}
