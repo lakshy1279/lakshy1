@@ -14,11 +14,12 @@ class EditBlog1 extends React.Component {
       category: "",
       description: "",
       image: "",
-      author:"",
+      author: "",
       date: Date.now(),
       theme: "snow",
       mobile_message: "",
       validError: false,
+      featured: false,
       loading: false,
     };
     this.handleChange = this.handleChange.bind(this);
@@ -125,7 +126,8 @@ class EditBlog1 extends React.Component {
           image: res.data.image,
           description: res.data.description,
           date: res.data.date,
-          author:res.data.author
+          author: res.data.author,
+          featured: res.data.featured,
         };
         console.log(post.title);
         this.setState({
@@ -134,7 +136,8 @@ class EditBlog1 extends React.Component {
           image: post.image,
           description: post.description,
           date: post.date,
-          author:post.author,
+          author: post.author,
+          featured: post.featured,
           loading: true,
         });
       });
@@ -155,6 +158,9 @@ class EditBlog1 extends React.Component {
     this.setState({
       [event.target.name]: event.target.value,
     });
+  }
+  selectFeatured(e) {
+    this.setState({ featured: e.target.checked });
   }
   onFileChange(e) {
     this.setState({ image: e.target.files[0] });
@@ -191,19 +197,17 @@ class EditBlog1 extends React.Component {
     const { _id } = this.props.match.params;
     e.preventDefault();
     if (this.validator.allValid()) {
-      console.log(this.state)
+      console.log(this.state);
       const formdata = new FormData();
       formdata.append("title", this.state.title);
       formdata.append("category", this.state.category);
       formdata.append("description", this.state.description);
       formdata.append("file", this.state.image);
       formdata.append("date", Date.now());
-      formdata.append("author",this.state.author);
+      formdata.append("author", this.state.author);
+      formdata.append("featured", this.state.featured);
       axios
-        .put(
-          `https://lakshy12.herokuapp.com/blog/update_blog1_patch/${_id}`,
-          formdata
-        )
+        .put(`http://localhost:5000/blog/update_blog1_patch/${_id}`, formdata)
         .then((res) => console.log(res.data));
 
       // this.props.history.push("/article");
@@ -301,7 +305,20 @@ class EditBlog1 extends React.Component {
                             "required"
                           )}
                         </div>
-
+                        <div className="col-lg-12 p-0">
+                          <div
+                            className="form-group tags-field row m-0"
+                            style={{ display: "flex", alignItems: "center" }}
+                          >
+                            <label className="col-lg-2 p-0">Featured</label>
+                            <input
+                              name="featured"
+                              onChange={this.selectFeatured.bind(this)}
+                              value={this.state.featured}
+                              type="checkbox"
+                            />
+                          </div>
+                        </div>
                         <div className="form-group tags-field row m-0">
                           <label className="col-lg-2 p-0">Upload Image</label>
                           <input
@@ -359,6 +376,7 @@ class EditBlog1 extends React.Component {
                             <button
                               className="button button-contactForm boxed-btn margin"
                               type="submit"
+                              style={{ marginTop: "5rem" }}
                             >
                               Save
                             </button>

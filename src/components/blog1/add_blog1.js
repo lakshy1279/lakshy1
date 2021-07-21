@@ -3,6 +3,7 @@ import React from "react";
 import Sidebar from "../../components/Sidebar";
 import PropTypes from "prop-types";
 import ReactQuill from "react-quill";
+import swal from "sweetalert"
 import "react-quill/dist/quill.snow.css";
 import SimpleReactValidator from "simple-react-validator";
 class AddBlog1 extends React.Component {
@@ -13,8 +14,9 @@ class AddBlog1 extends React.Component {
       category: "",
       description: "",
       image: "",
-      author:"",
+      author: "",
       theme: "snow",
+      featured: false,
       mobile_message: "",
       validError: false,
       date: Date.now(),
@@ -137,6 +139,10 @@ class AddBlog1 extends React.Component {
   onFileChange(e) {
     this.setState({ image: e.target.files[0] });
   }
+  selectFeatured(e) {
+    this.setState({ featured: e.target.checked });
+  }
+
   handleSubmit(e) {
     e.preventDefault();
     if (this.validator.allValid()) {
@@ -147,22 +153,19 @@ class AddBlog1 extends React.Component {
       formdata.append("description", this.state.description);
       formdata.append("file", this.state.image);
       formdata.append("date", this.state.date);
-      formdata.append("author",this.state.author);
+      formdata.append("author", this.state.author);
+      formdata.append("featured", this.state.featured);
       axios
-        .post(
-          "https://lakshy12.herokuapp.com/blog/AddBlog1",
-          formdata
-        )
-        .then((response)=> {
+        .post("http://localhost:5000/blog/AddBlog1", formdata)
+        .then((response) => {
           // handle success
           this.props.history.push("/article");
           console.log(response.data);
         })
         .catch(function (error) {
           // handle error
-          console.log(error);
+          swal("Oops!", "9 Featured Posts Are Allowed Remove Any One To Add One", "error");
         });
-     
     } else {
       this.validator.showMessages();
       this.forceUpdate();
@@ -249,6 +252,21 @@ class AddBlog1 extends React.Component {
                         )}
                       </div>
 
+                      <div className="col-lg-12 p-0">
+                        <div
+                          className="form-group tags-field row m-0"
+                          style={{ display: "flex", alignItems: "center" }}
+                        >
+                          <label className="col-lg-2 p-0">Featured</label>
+                          <input
+                            name="featured"
+                            onChange={this.selectFeatured.bind(this)}
+                            value={this.state.featured}
+                            type="checkbox"
+                          />
+                        </div>
+                      </div>
+
                       <div className="form-group tags-field row m-0">
                         <label className="col-lg-2 p-0">Upload Image</label>
                         <input
@@ -286,6 +304,7 @@ class AddBlog1 extends React.Component {
                         )}
                       </div>
                     </div>
+                    <br />
 
                     <div className="col-lg-12 p-0">
                       <div className="form-group tags-field  row m-0">
@@ -294,6 +313,7 @@ class AddBlog1 extends React.Component {
                           <button
                             className="button button-contactForm boxed-btn margin"
                             type="submit"
+                            style={{ marginTop: "5rem" }}
                           >
                             Save
                           </button>

@@ -13,6 +13,7 @@ class ViewBlog1 extends React.Component {
       category: "",
       image: "",
       date: "",
+      featured: false,
       loading: false,
     };
   }
@@ -29,17 +30,19 @@ class ViewBlog1 extends React.Component {
           category: res.data.category,
           image: res.data.image,
           date: res.data.date,
-          author:res.data.author
+          author: res.data.author,
+          featured: res.data.featured,
         };
-        console.log(post.title);
+        console.log(post.featured);
         this.setState({
           title: post.title,
           description: post.description,
           category: post.category,
           image: post.image,
           date: post.date,
-          author:post.author,
+          author: post.author,
           loading: true,
+          featured: post.featured,
         });
       });
   }
@@ -103,6 +106,13 @@ class ViewBlog1 extends React.Component {
                             <b>category</b>
                           </td>
                           <td>{this.state.category}</td>
+                        </tr>
+                        {console.log(this.state.featured)}
+                        <tr>
+                          <td valign="top" width="150px;">
+                            <b>Featured</b>
+                          </td>
+                          <td>{this.state.featured?"True":"False"}</td>
                         </tr>
                         <tr>
                           <td valign="top" width="150px;">
