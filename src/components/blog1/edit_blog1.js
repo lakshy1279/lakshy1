@@ -197,7 +197,7 @@ class EditBlog1 extends React.Component {
     const { _id } = this.props.match.params;
     e.preventDefault();
     if (this.validator.allValid()) {
-      console.log(this.state);
+      console.log(this.state.featured);
       const formdata = new FormData();
       formdata.append("title", this.state.title);
       formdata.append("category", this.state.category);
@@ -315,6 +315,7 @@ class EditBlog1 extends React.Component {
                               name="featured"
                               onChange={this.selectFeatured.bind(this)}
                               value={this.state.featured}
+                              checked={this.state.featured}
                               type="checkbox"
                             />
                           </div>
