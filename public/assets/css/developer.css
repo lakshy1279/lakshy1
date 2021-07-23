@@ -56,6 +56,18 @@
   border: 1px solid rgb(198, 197, 202);
 }
 
+/* autosuggestion add event page */
+.autoSuggestionList {
+  list-style-type: none;
+  margin: 1rem auto;
+}
+.autoSuggestionList>li{
+  margin:1rem;
+  cursor: pointer;
+  border:1px solid lightgray;
+  padding: 0.5rem;
+}
+
 .threedots:after {
   content: "\2807";
   font-size: 30px;

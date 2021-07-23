@@ -52,7 +52,7 @@ function Sidebar() {
                         </span>
                         <b className="gw-arrow" />
                       </a>
-                      </li>
+                    </li>
                     <li>
                       {" "}
                       <a href="#">
@@ -65,7 +65,7 @@ function Sidebar() {
                         </span>
                         <b className="gw-arrow" />
                       </a>
-                      <ul className="gw-submenu" style={{ display: "block" }}>
+                      <ul className="gw-submenu" style={{ display: "hidden" }}>
                         <li>
                           {" "}
                           <a href="/article" style={{ color: "white" }}>
@@ -94,7 +94,7 @@ function Sidebar() {
                         </span>
                         <b className="gw-arrow" />
                       </a>
-                      <ul className="gw-submenu" style={{ display: "block" }}>
+                      <ul className="gw-submenu" style={{ display: "hidden" }}>
                         <li>
                           {" "}
                           <a href="/add_new_event" style={{ color: "white" }}>
@@ -103,7 +103,10 @@ function Sidebar() {
                         </li>
                         <li>
                           {" "}
-                          <a href="/upcomming_events" style={{ color: "white" }}>
+                          <a
+                            href="/upcomming_events"
+                            style={{ color: "white" }}
+                          >
                             Upcoming Events
                           </a>{" "}
                         </li>
@@ -139,7 +142,7 @@ function Sidebar() {
                         </span>
                         <b className="gw-arrow" />
                       </a>
-                      <ul className="gw-submenu" style={{ display: "block" }}>
+                      <ul className="gw-submenu" style={{ display: "hidden" }}>
                         <li>
                           {" "}
                           <a href="/add_logos" style={{ color: "white" }}>
@@ -164,7 +167,6 @@ function Sidebar() {
                             Compliance
                           </a>{" "}
                         </li>
-
                       </ul>
                     </li>
                     {/* <li>
@@ -185,7 +187,7 @@ function Sidebar() {
                         </span>
                         <b className="gw-arrow" />
                       </a>
-                      </li>
+                    </li>
                     <li></li>
                     <li>
                       {" "}
@@ -199,9 +201,23 @@ function Sidebar() {
                         </span>
                         <b className="gw-arrow" />
                       </a>
-                      </li>
-                      {/* organisation */}
-                      <li>
+                    </li>
+                    {/* speakers */}
+                    <li>
+                      {" "}
+                      <a href="/speakers">
+                        <span>
+                          <i
+                            className="fa fa-rss-square"
+                            aria-hidden="true"
+                          ></i>{" "}
+                          Speakers
+                        </span>
+                        <b className="gw-arrow" />
+                      </a>
+                    </li>
+                    {/* organisation */}
+                    <li>
                       {" "}
                       <a href="/organisation">
                         <span>
@@ -213,7 +229,7 @@ function Sidebar() {
                         </span>
                         <b className="gw-arrow" />
                       </a>
-                      </li>
+                    </li>
                     <li>
                       <Link to="/post">
                         <i className="fa fa-upload" aria-hidden="true" /> Posts
@@ -231,7 +247,7 @@ function Sidebar() {
                         </span>
                         <b className="gw-arrow" />
                       </a>
-                      </li>
+                    </li>
                     <li>
                       {" "}
                       <a href="/contact">
@@ -244,7 +260,7 @@ function Sidebar() {
                         </span>
                         <b className="gw-arrow" />
                       </a>
-                      </li>
+                    </li>
                     <li>
                       <Link
                         to=""

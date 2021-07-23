@@ -246,11 +246,31 @@ function Routing() {
         <Route exact path="/edit_event/:_id" component={EditEvent}></Route>
         <Route exact path="/event_types" component={EventTypes}></Route>
         <Route exact path="/event_category" component={EventCategory}></Route>
-        <Route exact path="/add_new_event_type" component={AddEventType}></Route>
-        <Route exact path="/edit_event_type/:_id" component={EditEventType}></Route>
-        <Route exact path="/view_event_type/:_id" component={ViewEventType}></Route>
-        <Route exact path="/edit_event_cat/:_id" component={EditEventCat}></Route>
-        <Route exact path="/view_event_cat/:_id" component={ViewEventCat}></Route>
+        <Route
+          exact
+          path="/add_new_event_type"
+          component={AddEventType}
+        ></Route>
+        <Route
+          exact
+          path="/edit_event_type/:_id"
+          component={EditEventType}
+        ></Route>
+        <Route
+          exact
+          path="/view_event_type/:_id"
+          component={ViewEventType}
+        ></Route>
+        <Route
+          exact
+          path="/edit_event_cat/:_id"
+          component={EditEventCat}
+        ></Route>
+        <Route
+          exact
+          path="/view_event_cat/:_id"
+          component={ViewEventCat}
+        ></Route>
         <Route exact path="/add_new_event_cat" component={AddEventCat}></Route>
         <Route exact path="/past_events" component={EventPast}></Route>
         <Route exact path="/upcomming_events" component={EventUpcoming}></Route>
@@ -258,9 +278,21 @@ function Routing() {
         <Route exact path="/events" component={Events}></Route>
         {/* Facilitator */}
         <Route exact path="/facilitator" component={Facilitator}></Route>
-        <Route exact path="/add_facilitator" component={Add_facilitator}></Route>
-        <Route exact path="/edit_facilitator/:id" component={EditFacilitator}></Route>
-        <Route exact path="/view_facilitator/:id" component={ViewFacilitator}></Route>
+        <Route
+          exact
+          path="/add_facilitator"
+          component={Add_facilitator}
+        ></Route>
+        <Route
+          exact
+          path="/edit_facilitator/:id"
+          component={EditFacilitator}
+        ></Route>
+        <Route
+          exact
+          path="/view_facilitator/:id"
+          component={ViewFacilitator}
+        ></Route>
         {/* About us */}
         <Route exact path="/about" component={About}></Route>
         {/* contact */}
@@ -277,9 +309,16 @@ function Routing() {
         <Route exact path="/add_address" component={AddAddress}></Route>
         <Route exact path="/add_socialmedia" component={AddSocialMedia}></Route>
         <Route exact path="/add_compliance" component={AddCompliances}></Route>
-        <Route exact path="/add_new_compliance" component={AddNewCompliance}></Route>
-        <Route exact path="/edit_compliance/:_id" component={EditCompliance}></Route>
-
+        <Route
+          exact
+          path="/add_new_compliance"
+          component={AddNewCompliance}
+        ></Route>
+        <Route
+          exact
+          path="/edit_compliance/:_id"
+          component={EditCompliance}
+        ></Route>
       </Switch>
     </Router>
   );
