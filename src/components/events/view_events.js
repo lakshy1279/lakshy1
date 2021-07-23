@@ -26,7 +26,7 @@ class ViewEvents extends React.Component {
     console.log(_id);
     // https://trw-backend-api.herokuapp.com/
     axios
-      .get(`http://localhost:5000/blog/get_event_ById/${_id}`)
+      .get(`https://lakshy12.herokuapp.com/blog/get_event_ById/${_id}`)
       .then((res) => {
         console.log(res.data);
         const post = {

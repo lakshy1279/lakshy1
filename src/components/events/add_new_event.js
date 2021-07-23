@@ -244,7 +244,7 @@ class AddEvent extends React.Component {
       formdata.append("enddate", this.state.EndDate);
 
       axios
-        .post("http://localhost:5000/blog/AddEvent", formdata)
+        .post("https://lakshy12.herokuapp.com/blog/AddEvent", formdata)
         .then(function (response) {
           // handle success
 
