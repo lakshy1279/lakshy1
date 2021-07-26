@@ -88,7 +88,7 @@ function Sidebar() {
                         <span>
                           <i
                             className="fa fa-rss-square"
-                            aria-hidden="true"
+                            aria-hidden="false"
                           ></i>{" "}
                           Event
                         </span>
