@@ -205,7 +205,7 @@ class EditOrg extends React.Component {
       }
       axios
         .put(
-          `https://lakshy12.herokuapp.com//organisation/save/${id}`,
+          `https://lakshy12.herokuapp.com/organisation/save/${id}`,
           formdata
         )
         .then((response) => {
