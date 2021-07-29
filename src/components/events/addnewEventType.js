@@ -138,7 +138,7 @@ class AddEventType extends React.Component {
                 <Sidebar></Sidebar>
                 <div className="admin-wrapper col-12">
                     <div className="admin-content">
-                        <div className="admin-head">Add New Event Type</div>
+                        <div className="admin-head">Add New Event Theme</div>
                         <div className="admin-data">
                             <div className="container-fluid p-0">
                                 <form
@@ -149,7 +149,7 @@ class AddEventType extends React.Component {
                                         <div className="col-lg-12 p-0"></div>
                                         <div className="col-lg-12 p-0">
                                             <div className="form-group tags-field row m-0">
-                                                <label className="col-lg-2 p-0">Type</label>
+                                                <label className="col-lg-2 p-0">Theme</label>
                                                 <input
                                                     className="form-control col-lg-10"
                                                     name="event_type"

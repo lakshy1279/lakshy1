@@ -48,7 +48,7 @@ class Organisation extends React.Component {
         console.log(_id);
         axios
           .delete(
-            `https://lakshy12.herokuapp.com/organisation/delete/${_id}`
+            `https://lakshy12.herokuapp.com//organisation/delete/${_id}`
           )
           .then((res) => {
             console.log(res);
@@ -82,6 +82,9 @@ class Organisation extends React.Component {
               <img src={blog.logo} width="100px" height="70px" />
             </td>
             <td>
+            <Link to={`/view_organisation/${blog._id}`}>
+                <span className="btn">View</span>
+              </Link>
               <Link to={`/edit_organisation/${blog._id}`}>
                 <span className="btn">Edit</span>
               </Link>

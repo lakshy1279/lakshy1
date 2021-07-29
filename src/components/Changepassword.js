@@ -8,7 +8,8 @@ function Changepassword() {
   const {
     user: { name, _id, email },
   } = isAutheticated();
-
+const token=JSON.parse(localStorage.getItem('user')).token;
+console.log(token);
   const [Password, setPassword] = useState({
     password: "",
     passwordnew: "",
@@ -21,19 +22,26 @@ function Changepassword() {
   const handleChang = (e) => {
     setPassword({ passwordnew: e.target.value });
   };
-
+  axios.interceptors.request.use(
+    config=>{
+      config.headers.authorization=`Bearer ${token}`;
+      return config;
+    },
+    error=>{
+      return Promise.reject(error);
+    }
+  )
   const updatepassword = (e) => {
     e.preventDefault();
 
     axios
-      .post("https://trw-backend-api.herokuapp.com/admin/changepassword", {
+      .post("http://localhost:5000/admin/changepassword", {
         userid: _id,
         password: Password.password,
         passwordnew: Password.passwordnew,
       })
       .then(function (response) {
         // handle success
-
         console.log(response.data);
         alert(response.data.Error);
         setPassword(response.data);

@@ -12,7 +12,6 @@ class EditEventType extends React.Component {
             validError: false,
         };
         this.handleChange = this.handleChange.bind(this);
-
         this.handleSubmit = this.handleSubmit.bind(this);
         this.validator = new SimpleReactValidator({
             className: "text-danger",
@@ -133,7 +132,6 @@ class EditEventType extends React.Component {
             const blogcategory = {
                 event_type: this.state.event_type,
             };
-            // https://trw-backend-api.herokuapp.com/
             axios
                 .put(
                     `https://trw-backend-api.herokuapp.com/blog/update_event_type/${_id}`,
@@ -154,7 +152,7 @@ class EditEventType extends React.Component {
                 <Sidebar></Sidebar>
                 <div className="admin-wrapper col-12">
                     <div className="admin-content">
-                        <div className="admin-head">Edit Event Type</div>
+                        <div className="admin-head">Edit Event Theme</div>
                         {this.state.loading ? (
                             <div className="admin-data">
                                 <div className="col-lg-12 p-0 text-right mb-30">
@@ -173,7 +171,7 @@ class EditEventType extends React.Component {
                                             <div className="col-lg-12 p-0"></div>
                                             <div className="col-lg-12 p-0">
                                                 <div className="form-group tags-field row m-0">
-                                                    <label className="col-lg-2 p-0"> Type</label>
+                                                    <label className="col-lg-2 p-0"> Theme</label>
                                                     <input
                                                         className="form-control col-lg-10"
                                                         name="event_type"

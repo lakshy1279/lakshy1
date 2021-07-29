@@ -11,7 +11,7 @@ function Login() {
   const history = useHistory();
 
   const { email, password } = User;
-
+  
   const handleChange = (email) => (event) => {
     setUser({ ...User, [email]: event.target.value });
   };
@@ -30,16 +30,6 @@ function Login() {
 
         history.push("/dashboard");
       });
-
-    // setUser({
-    //   isLoggedin : true,
-    //   googleID : response.googleId,
-    //   name : response.profileObj.name,
-    //   email : response.profileObj.email,
-    //   accesstoken : response.accessToken,
-    //   picture : response.profileObj.imageUrl,
-    //   didredirect : true
-    // })
   };
 
   return (

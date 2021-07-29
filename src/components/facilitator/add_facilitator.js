@@ -9,10 +9,16 @@ import '../../App.css'
 class AddFacilitator extends React.Component {
     constructor(props) {
         super(props);
+        this.organisation=React.createRef();
+        this.organisationList=[];
         this.state = {
+            organisation:[],
+            organisationName:[],
+            suggestions:[],
             firstname: "",
             lastname: "",
             photo: "",
+            text:"",
             profile:"",
             country:"",
             date: Date.now(),
@@ -127,6 +133,53 @@ class AddFacilitator extends React.Component {
     onFileChange(e) {
         this.setState({ photo: e.target.files[0] });
     }
+    onTextChanged(e)
+  {
+    this.setState({text:e.target.value});
+    let suggestions=[];
+    if(this.state.text.length>0)
+    {
+      const regex=new RegExp(`^${this.state.text}`, "i");
+      suggestions=this.state.organisationName.sort().filter((v)=>regex.test(v));
+    }
+    this.setState({
+      suggestions:suggestions
+    })
+  }
+  //set Faciliatator
+  setOrganisation(organisation)
+  {
+    this.organisation.current.value="";
+    if(!this.organisationList.includes(organisation))
+    {
+      this.organisationList.push(organisation);
+    }
+    this.setState({
+      organisation:this.organisationList,
+      suggestions:[],
+      text:"",
+    })
+  }
+  // focus facilitator input
+  focusInput()
+  {
+    this.organisation.current.focus();
+  }
+  componentDidMount()
+  {
+    axios
+      .get(`https://lakshy12.herokuapp.com/organisation/fetch`)
+      .then((res) => {
+        res?.data.map((name) => {
+          this.setState({
+            organisationName: [
+              ...this.state.organisationName,
+              `${name.name}`,
+            ]
+          });
+        });
+      });
+  }
     // https://lakshy12.herokuapp.com
     handleSubmit(e) {
         e.preventDefault();
@@ -138,9 +191,13 @@ class AddFacilitator extends React.Component {
             formdata.append("profile", this.state.profile);
             formdata.append("photo", this.state.photo);
             formdata.append("country",this.state.country);
+            for(let i=0;i<this.state.organisation.length;i++)
+            {
+                formdata.append("organisation",this.state.organisation[i]);
+            }
             axios
                 .post(
-                    "https://lakshy12.herokuapp.com/facilitator/save",
+                    "https://lakshy12.herokuapp.com//facilitator/save",
                     formdata
                 )
                 .then(function (response) {
@@ -235,6 +292,53 @@ class AddFacilitator extends React.Component {
                                                 )}
                                                 {/* {this.state.mobile_message} */}
                                             </div>
+                                            <div className="form-group tags-field row m-0">
+                        <label className="col-lg-2 p-0">Add Organisation</label>
+                        <input
+                          className="form-control col-lg-7"
+                          name="organisation"
+                          ref={this.organisation}
+                          onChange={this.onTextChanged.bind(this)}
+                          autocomplete="off"
+                          value={this.state.text}
+                          type="text"
+                          onfocus="this.placeholder = 'Menu Name'"
+                          onblur="this.placeholder = ''"
+                          placeholder=""
+                        />
+                        <button
+                          onClick={this.focusInput.bind(this)}
+                          className=" col-lg-2"
+                          style={{ marginLeft: "1rem" }}
+                        >
+                          Add More +
+                        </button>
+                        <ul className="autoSuggestionList col-lg-5">
+                          {this.state.suggestions.map((item) => {
+                            return (
+                              <li
+                                onClick={this.setOrganisation.bind(this, item)}
+                              >
+                                {item}
+                              </li>
+                            );
+                          })}
+                        </ul>
+
+                        {this.state.mobile_message}
+                      </div>
+                      {this.state.organisation.length > 0 ? (
+                        <div className="form-group tags-field row m-0">
+                          <label className="col-lg-2 p-0">
+                            Added Organisation
+                          </label>
+                          <ul>
+                            {this.state.organisation.map((items) => {
+                              return <li>{items}</li>;
+                            })}
+                          </ul>
+                        </div>
+                      ) : null}
                                             <div className="form-group tags-field row m-0">
                                                 <label className="col-lg-2 p-0">Photo</label>
                                                 <input

@@ -104,7 +104,7 @@ class EventTypes extends React.Component {
         <Sidebar></Sidebar>
         <div className="admin-wrapper col-12">
           <div className="admin-content">
-            <div className="admin-head">Event - Types</div>
+            <div className="admin-head">Event - Themes</div>
             <div className="admin-data">
               {this.state.loading ? (
                 <>
@@ -121,7 +121,7 @@ class EventTypes extends React.Component {
                       <thead>
                         <tr>
                           <th>S.No</th>
-                          <th>Type</th>
+                          <th>Theme</th>
                           <th>Action</th>
                         </tr>
                       </thead>

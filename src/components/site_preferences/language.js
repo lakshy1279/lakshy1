@@ -5,9 +5,8 @@ import { Link } from "react-router-dom";
 import swal from "sweetalert";
 import ReactPaginate from "react-paginate";
 import Loader from "react-loader-spinner";
-
 const PER_PAGE = 10;
-class Facilitator extends React.Component {
+class Language extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -18,17 +17,17 @@ class Facilitator extends React.Component {
         this.deleteItem = this.deleteItem.bind(this);
         this.handlePageClick = this.handlePageClick.bind(this);
     }
-
     componentDidMount() {
+        // https://trw-backend-api.herokuapp.com/
         axios
-            .get(`https://lakshy12.herokuapp.com/facilitator/fetch`)
+            .get(`http://localhost:5000/language/fetch`)
             .then((res) => {
                 const fetchedData = res.data;
                 console.log(fetchedData);
                 this.setState({ fetchedData, loading: true });
             });
         this.unsubscribe = axios
-            .get(`https://lakshy12.herokuapp.com/facilitator/fetch`)
+            .get(`http://localhost:5000/language/fetch`)
             .then((res) => {
                 const fetchedData = res.data;
                 console.log(fetchedData);
@@ -49,7 +48,7 @@ class Facilitator extends React.Component {
                 // https://trw-backend-api.herokuapp.com/
                 axios
                     .delete(
-                        `https://lakshy12.herokuapp.com/facilitator/delete/${_id}`
+                        `http://localhost:5000/language/delete/${_id}`
                     )
                     .then((res) => {
                         console.log(res);
@@ -67,39 +66,30 @@ class Facilitator extends React.Component {
     }
     render() {
         const offset = this.state.currentPage * PER_PAGE;
-
+        let count = 0;
         const currentPageData =
             this.state.fetchedData &&
-            this.state.fetchedData.slice(offset, offset + PER_PAGE).map((item, index) => {
+            this.state.fetchedData.reverse().slice(offset, offset + PER_PAGE).map((item, index) => {
                 return (
-                    <tr key={index}>
-                        <td>{index + 1}</td>
-                        <td>
-                           {item.firstname}
-                        </td>
-                        <td>
-                           {item.lastname}
-                        </td>
-                        <td>
-                           {new Date(item.createdAt).toDateString()}
-                        </td>
-                        <td>
-                            <Link to={`/view_facilitator/${item._id}`}>
-                                <span className="btn">View</span>
-                            </Link>
 
-                            <Link to={`/edit_facilitator/${item._id}`}>
-                                <span className="btn">Edit</span>
-                            </Link>
-                            <span
-                                className="btn"
-                                onClick={this.deleteItem.bind(this, item._id)}
-                            >
-                                Delete
-                            </span>
-                        </td>
-                    </tr>
+                    item && (
+                        < tr key={index} >
+                            <td>{++count}</td>
+                            <td>
+                                <div className="limited-text">{item.language}</div>
+                            </td>
+                            <td>
+                                <span
+                                    className="btn"
+                                    onClick={this.deleteItem.bind(this, item._id)}
+                                >
+                                    Delete
+                                </span>
+                            </td>
+                        </tr >
+                    )
                 );
+
             });
 
         const pageCount = Math.ceil(
@@ -110,26 +100,23 @@ class Facilitator extends React.Component {
                 <Sidebar></Sidebar>
                 <div className="admin-wrapper col-12">
                     <div className="admin-content">
-                        <div className="admin-head">Facilitator</div>
+                        <div className="admin-head">Language</div>
                         <div className="admin-data">
                             {this.state.loading ? (
                                 <>
                                     <div className="col-lg-12 p-0 text-right mb-30">
-                                        <a href="add_facilitator">
+                                        <a href="add_new_language">
                                             <button className="button button-contactForm boxed-btn">
-                                                + Add New
+                                                Add New
                                             </button>
                                         </a>
                                     </div>
-
                                     <div className="table-responsive admin-table">
                                         <table>
                                             <thead>
                                                 <tr>
                                                     <th>S.No</th>
-                                                    <th>First name</th>
-                                                    <th>Last name</th>
-                                                    <th>Added On</th>
+                                                    <th>Language</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -166,9 +153,9 @@ class Facilitator extends React.Component {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div >
         );
     }
 }
 
-export default Facilitator;
+export default Language;

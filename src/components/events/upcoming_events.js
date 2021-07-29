@@ -25,7 +25,12 @@ class EventUpcoming extends React.Component {
             .then((res) => {
                 const events = res.data.map(item => {
                     // console.log(moment(new Date(item.date).toLocaleString()))
-                    if (new Date(item.enddate).getMonth() >= new Date(Date.now()).getMonth()) {
+                    if (new Date(item.enddate).getMonth() > new Date(Date.now()).getMonth())
+                    {
+                      return item;
+                    }
+                    else
+                    { 
                         if (new Date(item.enddate).getDate() === new Date(Date.now()).getDate()) {
                             if (new Date(item.enddate).getHours() > new Date(Date.now()).getHours()) {
                                 return item;
@@ -37,8 +42,6 @@ class EventUpcoming extends React.Component {
                         } else {
                             return false;
                         }
-                    } else {
-                        return false
                     }
                 });
                 const data=res.data;
@@ -52,7 +55,12 @@ class EventUpcoming extends React.Component {
             .then((res) => {
                 const events = res.data.map(item => {
                     // console.log(moment(new Date(item.date).toLocaleString()))
-                    if (new Date(item.enddate).getMonth() >= new Date(Date.now()).getMonth()) {
+                    if (new Date(item.enddate).getMonth() > new Date(Date.now()).getMonth())
+                    {
+                      return item;
+                    }
+                    else
+                    { 
                         if (new Date(item.enddate).getDate() === new Date(Date.now()).getDate()) {
                             if (new Date(item.enddate).getHours() > new Date(Date.now()).getHours()) {
                                 return item;
@@ -64,8 +72,6 @@ class EventUpcoming extends React.Component {
                         } else {
                             return false;
                         }
-                    } else {
-                        return false
                     }
                 });
                 // const events = res.data;

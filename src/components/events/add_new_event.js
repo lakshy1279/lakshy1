@@ -6,15 +6,18 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import SimpleReactValidator from "simple-react-validator";
 import "../../App.css";
+import { createRef } from "react/cjs/react.production.min";
 class AddEvent extends React.Component {
   constructor(props) {
     super(props);
     this.facilitator = React.createRef();
     this.organisation = React.createRef();
     this.speaker = React.createRef();
+    this.language=React.createRef();
     this.facilitatorList = [];
     this.organisationList = [];
     this.speakersList = [];
+    this.languageList=[];
     this.state = {
       title: "",
       category: "",
@@ -27,14 +30,18 @@ class AddEvent extends React.Component {
       facilitator: [],
       organisation: [],
       speaker: [],
+      language:[],
+      languageName:[],
       facilitatorName: [],
       organisationName: [],
       speakerName: [],
       suggestions: [],
       organisationSuggestions: [],
       speakerSuggestion: [],
+      languageSuggestion:[],
       text: "",
       organisationText: "",
+      languageText:"",
       speakerText: "",
       description: "",
       image: "",
@@ -170,6 +177,17 @@ class AddEvent extends React.Component {
           });
         });
       });
+      //languagename
+      axios
+      .get(`https://lakshy12.herokuapp.com/language/fetch`)
+      .then((res) => {
+        console.log("language",res.data)
+        res?.data.map((org) => {
+          this.setState({
+            languageName: [...this.state.languageName, org.language],
+          });
+        });
+      });
     // https://lakshy12.herokuapp.com
     axios
       .get(`https://lakshy12.herokuapp.com/blog/get_event_type`)
@@ -197,30 +215,6 @@ class AddEvent extends React.Component {
   onFileChange(e) {
     this.setState({ image: e.target.files[0] });
   }
-  //   handleSubmit(event) {
-  //     event.preventDefault();
-  //     if (this.validator.allValid()) {
-  //       const post = {
-  //         title: this.state.title,
-  //         category: this.state.category,
-  //         description: this.state.description,
-  //       };
-
-  //       console.log(post);
-  //       axios
-  //         .post(`https://lakshy12.herokuapp.com/blog/AddEvent`, post)
-  //         .then((res) => {
-  //           console.log(res);
-  //           console.log(res.data);
-  //         });
-
-  //       this.props.history.push("/article");
-  //     } else {
-  //       this.validator.showMessages();
-  //       this.forceUpdate();
-  //     }
-  //   }
-
   handleSubmit(e) {
     e.preventDefault();
     if (this.validator.allValid()) {
@@ -235,6 +229,9 @@ class AddEvent extends React.Component {
       for (let i = 0; i < this.state.organisation.length; i++) {
         formdata.append("organisation", this.state.organisation[i]);
       }
+      for (let i = 0; i < this.state.language.length; i++) {
+        formdata.append("language", this.state.language[i]);
+      }
       formdata.append("title", this.state.title);
       formdata.append("category", this.state.category);
       formdata.append("type", this.state.type);
@@ -245,16 +242,15 @@ class AddEvent extends React.Component {
 
       axios
         .post("https://lakshy12.herokuapp.com/blog/AddEvent", formdata)
-        .then(function (response) {
+        .then((response)=> {
           // handle success
-
+          this.props.history.push("/upcomming_events");
           console.log(response.data);
         })
         .catch(function (error) {
           // handle error
           console.log(error);
         });
-      this.props.history.push("/upcomming_events");
     } else {
       this.validator.showMessages();
       this.forceUpdate();
@@ -310,6 +306,22 @@ class AddEvent extends React.Component {
       speakerSuggestion: speakerSuggestion,
     });
   }
+  //handle language change
+  onLanguageChange(e) {
+    this.setState({ languageText: e.target.value });
+
+    let languageSuggestion = [];
+    if (this.state.languageText.length > 0) {
+      const regex = new RegExp(`^${this.state.languageText}`, "i");
+
+      languageSuggestion = this.state.languageName
+        .sort()
+        .filter((v) => regex.test(v));
+    }
+    this.setState({
+      languageSuggestion: languageSuggestion,
+    });
+  }
   // set speaker
   setSpeaker(speaker) {
     this.speaker.current.value = "";
@@ -323,11 +335,27 @@ class AddEvent extends React.Component {
       speakerText: "",
     });
   }
+  //set Language
+  setLanguage(language) {
+    this.language.current.value = "";
+    if (!this.languageList.includes(language)) {
+      this.languageList.push(language);
+    }
+
+    this.setState({
+      language: this.languageList,
+      languageSuggestion: [],
+      languageText: "",
+    });
+  }
   // focus speaker input
   focusSpeakerInput() {
     this.speaker.current.focus();
   }
-
+  focusLanguageInput()
+  {
+    this.language.current.focus();
+  }
   // handel organisation input
   onOrganisationChange(e) {
     this.setState({ organisationText: e.target.value });
@@ -398,6 +426,56 @@ class AddEvent extends React.Component {
                         )}
                         {this.state.mobile_message}
                       </div>
+                      <div className="form-group tags-field row m-0">
+                        <label className="col-lg-2 p-0">Language</label>
+                        <input
+                          className="form-control col-lg-6"
+                          name="title"
+                          onChange={this.onLanguageChange.bind(this)}
+                          value={this.state.languageText}
+                          ref={this.language}
+                          type="text"
+                          onfocus="this.placeholder = 'Menu Name'"
+                          onblur="this.placeholder = ''"
+                          placeholder=""
+                        />
+                        {this.validator.message(
+                          "language",
+                          this.state.language,
+                          "required|whitespace|min:1|max:150"
+                        )}
+                          <button
+                          onClick={this.focusLanguageInput.bind(this)}
+                          className=" col-lg-2"
+                          style={{ marginLeft: "1rem" }}
+                        >
+                          Add More +
+                        </button>
+                        <ul className="autoSuggestionList col-lg-5">
+                          {this.state.languageSuggestion.map((item) => {
+                            return (
+                              <li
+                                onClick={this.setLanguage.bind(this, item)}
+                              >
+                                {item}
+                              </li>
+                            );
+                          })}
+                        </ul>
+                        {this.state.mobile_message}
+                      </div>
+                      {this.state.language.length > 0 ? (
+                        <div className="form-group tags-field row m-0">
+                          <label className="col-lg-2 p-0">
+                            Added Language
+                          </label>
+                          <ul>
+                            {this.state.language.map((items) => {
+                              return <li>{items}</li>;
+                            })}
+                          </ul>
+                        </div>
+                      ) : null}
                       <div className="form-group tags-field row m-0 ">
                         <label className="col-lg-2 p-0">Select Category</label>
                         <div className="radioBtn">
@@ -427,7 +505,7 @@ class AddEvent extends React.Component {
                         )}
                       </div>
                       <div className="form-group tags-field row m-0 ">
-                        <label className="col-lg-2 p-0">Select Type</label>
+                        <label className="col-lg-2 p-0">Select Theme</label>
                         <div className="radioBtn">
                           {this.state.eventTypes &&
                             this.state.eventTypes.map((data, index) => {

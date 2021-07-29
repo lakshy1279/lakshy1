@@ -106,6 +106,7 @@ import Subscriber1 from "./components/subscriber";
 import Organisation from "./components/organisation/organisation";
 import AddOrg from "./components/organisation/add_organisation";
 import EditOrg from "./components/organisation/edit_org";
+import ViewOrganisation from "./components/organisation/view_organisation";
 
 //testimonials
 import Testimonial from "./components/testimonial/view_testimonial";
@@ -129,7 +130,8 @@ import AddCompliances from "./components/site_preferences/add_compliances";
 import AddNewCompliance from "./components/site_preferences/add_new_compliance";
 import EditCompliance from "./components/site_preferences/edit_compliance";
 import Subscriber from "./components/subscriber";
-
+import Language from "./components/site_preferences/language";
+import AddLanguage from "./components/site_preferences/addlanguage";
 function Routing() {
   return (
     <Router>
@@ -304,6 +306,7 @@ function Routing() {
         <Route exact path="/organisation" component={Organisation}></Route>
         <Route exact path="/add_organisation" component={AddOrg}></Route>
         <Route exact path="/edit_organisation/:id" component={EditOrg}></Route>
+        <Route exact path="/view_organisation/:id" component={ViewOrganisation}></Route>
         {/* Site Preferences */}
         <Route exact path="/add_logos" component={AddLogos}></Route>
         <Route exact path="/add_address" component={AddAddress}></Route>
@@ -318,6 +321,14 @@ function Routing() {
           exact
           path="/edit_compliance/:_id"
           component={EditCompliance}
+        ></Route>
+            <Route exact path="/language" component={Language}></Route>
+            <Route exact path="/add_new_language" component={AddLanguage}></Route>
+        {/* change password */}
+        <Route
+          exact
+          path="/password"
+          component={Changepassword}
         ></Route>
       </Switch>
     </Router>

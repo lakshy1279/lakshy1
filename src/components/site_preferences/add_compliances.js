@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import swal from "sweetalert";
 import ReactPaginate from "react-paginate";
 import Loader from "react-loader-spinner";
-import moment from "moment";
 const PER_PAGE = 10;
 class AddCompliances extends React.Component {
     constructor(props) {

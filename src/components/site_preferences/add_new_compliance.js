@@ -115,39 +115,6 @@ class AddNewCompliance extends React.Component {
             [event.target.name]: event.target.value,
         });
     }
-
-    // handleThemeChange(newTheme) {
-    //     if (newTheme === "core") newTheme = null;
-    //     this.setState({ theme: newTheme });
-    // }
-
-    // onFileChange(e) {
-    //     this.setState({ image: e.target.files[0] });
-    // }
-    //   handleSubmit(event) {
-    //     event.preventDefault();
-    //     if (this.validator.allValid()) {
-    //       const post = {
-    //         title: this.state.title,
-    //         category: this.state.category,
-    //         description: this.state.description,
-    //       };
-
-    //       console.log(post);
-    //       axios
-    //         .post(`https://trw-backend-api.herokuapp.com/blog/AddEvent`, post)
-    //         .then((res) => {
-    //           console.log(res);
-    //           console.log(res.data);
-    //         });
-
-    //       this.props.history.push("/article");
-    //     } else {
-    //       this.validator.showMessages();
-    //       this.forceUpdate();
-    //     }
-    //   }
-
     handleSubmit(e) {
         e.preventDefault();
         const data = {
@@ -159,15 +126,16 @@ class AddNewCompliance extends React.Component {
                 "https://trw-backend-api.herokuapp.com/compliance/add_compliance",
                 data
             )
-            .then(function (response) {
+            .then((response)=> {
                 // handle success
+                this.props.history.push("/add_compliance");
                 console.log(response.data);
             })
             .catch(function (error) {
                 // handle error
                 console.log(error);
             });
-        this.props.history.push("/add_compliance");
+      
     }
 
     render() {

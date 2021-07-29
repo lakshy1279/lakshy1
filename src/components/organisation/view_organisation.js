@@ -4,16 +4,15 @@ import Sidebar from "../../components/Sidebar";
 import renderHTML from "react-render-html";
 import Loader from "react-loader-spinner";
 import * as moment from "moment";
-class ViewFacilitator extends React.Component {
+class ViewOrganisation extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            firstname: "",
-            lastname: "",
-            profile: "",
-            photo:"",
-            country:"",
-            organisation:[],
+            name: "",
+            logo: "",
+            url:"",
+            facilitator:[],
+            profile:"",
             loading: false,
         };
     }
@@ -22,25 +21,16 @@ class ViewFacilitator extends React.Component {
         console.log(id);
         // https://lakshy12.herokuapp.com/
         axios
-            .get(`https://lakshy12.herokuapp.com/facilitator/fetch/${id}`)
+            .get(`https://lakshy12.herokuapp.com/organisation/fetch/${id}`)
             .then((res) => {
-                console.log(res.data);
-                const post = {
-                    firstname: res.data.firstname,
-                    lastname: res.data.lastname,
-                    profile: res.data.profile,
-                    photo: res.data.photo,
-                    country:res.data.country,
-                    organisation:res.data.organisation
-                };
-                console.log(post);
+               const data=res.data;
+               console.log(data)
                 this.setState({
-                    firstname: post.firstname,
-                    lastname: post.lastname,
-                    profile: post.profile,
-                    photo: post.photo,
-                    country:post.country,
-                    organisation:post.organisation,
+                    name:data.name,
+                    logo:data.logo,
+                    profile:data.profile,
+                    facilitator:data.facilitator,
+                    url:data.url,
                     loading:true
                 });
             });
@@ -52,7 +42,7 @@ class ViewFacilitator extends React.Component {
                 <Sidebar></Sidebar>
                 <div className="admin-wrapper col-12">
                     <div className="admin-content">
-                        <div className="admin-head">Facilitator - View</div>
+                        <div className="admin-head">Organisation - View</div>
                         <div className="admin-data">
                             {this.state.loading ? (
                                 <>
@@ -69,35 +59,29 @@ class ViewFacilitator extends React.Component {
                                             <tbody>
                                                 <tr>
                                                     <td valign="top" width="150px;">
-                                                        <b>First Name</b>
+                                                        <b>Name</b>
                                                     </td>
-                                                    <td>{this.state.firstname}</td>
+                                                    <td>{this.state.name}</td>
                                                 </tr>
                                                 <tr>
                                                     <td valign="top" width="150px;">
-                                                        <b>Last Name</b>
+                                                        <b>U.R.L</b>
                                                     </td>
-                                                    <td>{this.state.lastname}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td valign="top" width="150px;">
-                                                        <b>Country</b>
-                                                    </td>
-                                                    <td>{this.state.country}</td>
+                                                    <td>{this.state.url}</td>
                                                 </tr>
                                                 <tr>
                                                     <td valign="top" width="150px;">
                                                         <b>Faciliatator</b>
                                                     </td>
-                                                    <td>{this.state.organisation.toString()}</td>
+                                                    <td>{this.state.facilitator.toString()}</td>
                                                 </tr>
                                                 <tr>
                                                     <td valign="top" width="150px;">
-                                                        <b>Photo</b>
+                                                        <b>logo</b>
                                                     </td>
                                                     <td>
                                                         <img
-                                                            src={this.state.photo}
+                                                            src={this.state.logo}
                                                             width="100px"
                                                             height="70px"
                                                         />
@@ -106,7 +90,7 @@ class ViewFacilitator extends React.Component {
 
                                                 <tr>
                                                     <td valign="top" width="150px;">
-                                                        <b>Description</b>
+                                                        <b>Profile</b>
                                                     </td>
                                                     <td>{renderHTML(this.state.profile)}</td>
                                                 </tr>
@@ -134,4 +118,4 @@ class ViewFacilitator extends React.Component {
     }
 }
 
-export default ViewFacilitator;
+export default ViewOrganisation;

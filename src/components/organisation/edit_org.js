@@ -8,9 +8,17 @@ import SimpleReactValidator from "simple-react-validator";
 class EditOrg extends React.Component {
   constructor(props) {
     super(props);
+    this.facilitator=React.createRef();
+    this.facilitatorList=[];
     this.state = {
       name: "",
       logo: "",
+      url:"",
+      facilitator:[],
+      facilitatorName:[],
+      suggestions:[],
+      profile:"",
+      text:"",
       theme: "snow",
       mobile_message: "",
       validError: false,
@@ -115,12 +123,25 @@ class EditOrg extends React.Component {
       .then((res) => {
         const data = res.data;
         console.log(data);
-        this.setState({ name: data.name,logo: data.logo });
+        this.facilitatorList=data.facilitator;
+        this.setState({ name: data.name,logo: data.logo,profile:data.profile,url:data.url,facilitator:data.facilitator });
+      });
+      axios
+      .get(`https://lakshy12.herokuapp.com/facilitator/fetch`)
+      .then((res) => {
+        res?.data.map((name) => {
+          this.setState({
+            facilitatorName: [
+              ...this.state.facilitatorName,
+              `${name.firstname} ${name.lastname}`,
+            ]
+          });
+        });
       });
   }
 
   handleChange(html) {
-    this.setState({ description: html });
+    this.setState({ profile: html });
   }
   onChange(event) {
     this.setState({
@@ -136,30 +157,38 @@ class EditOrg extends React.Component {
   onFileChange(e) {
     this.setState({ logo: e.target.files[0] });
   }
-  //   handleSubmit(event) {
-  //     event.preventDefault();
-  //     if (this.validator.allValid()) {
-  //       const post = {
-  //         title: this.state.title,
-  //         category: this.state.category,
-  //         description: this.state.description,
-  //       };
-
-  //       console.log(post);
-  //       axios
-  //         .post(`https://cie-backend-api.herokuapp.com/blog/AddBlog1`, post)
-  //         .then((res) => {
-  //           console.log(res);
-  //           console.log(res.data);
-  //         });
-
-  //       this.props.history.push("/article");
-  //     } else {
-  //       this.validator.showMessages();
-  //       this.forceUpdate();
-  //     }
-  //   }
-
+  onTextChanged(e)
+  {
+    this.setState({text:e.target.value});
+    let suggestions=[];
+    if(this.state.text.length>0)
+    {
+      const regex=new RegExp(`^${this.state.text}`, "i");
+      suggestions=this.state.facilitatorName.sort().filter((v)=>regex.test(v));
+    }
+    this.setState({
+      suggestions:suggestions
+    })
+  }
+  //set Faciliatator
+  setFacilitator(facilitator)
+  {
+    this.facilitator.current.value="";
+    if(!this.facilitatorList.includes(facilitator))
+    {
+      this.facilitatorList.push(facilitator);
+    }
+    this.setState({
+      facilitator:this.facilitatorList,
+      suggestions:[],
+      text:"",
+    })
+  }
+  // focus facilitator input
+  focusInput()
+  {
+    this.facilitator.current.focus();
+  }
   handleSubmit(e) {
     e.preventDefault();
     const id = this.props.match.params.id;
@@ -168,10 +197,15 @@ class EditOrg extends React.Component {
       const formdata = new FormData();
       formdata.append("name", this.state.name);
       formdata.append("logo", this.state.logo);
-      formdata.append("url", this.state.url);
+      formdata.append("profile",this.state.profile);
+      formdata.append("url",this.state.url);
+      for(let i=0;i<this.state.facilitator.length;i++)
+      {
+        formdata.append("facilitator",this.state.facilitator[i]);
+      }
       axios
         .put(
-          `https://lakshy12.herokuapp.com/organisation/save/${id}`,
+          `https://lakshy12.herokuapp.com//organisation/save/${id}`,
           formdata
         )
         .then((response) => {
@@ -244,6 +278,92 @@ class EditOrg extends React.Component {
                         src={this.state.logo}
                         alt="Frontend Img"
                       ></img>
+                          <div className="form-group tags-field row m-0">
+                        <label className="col-lg-2 p-0">Url</label>
+                        <input
+                          className="form-control col-lg-10"
+                          name="url"
+                          onChange={this.onChange}
+                          value={this.state.url}
+                          type="url"
+                          onfocus="this.placeholder = 'Menu Name'"
+                          onblur="this.placeholder = ''"
+                          placeholder=""
+                        />
+                        {this.validator.message(
+                          "url",
+                          this.state.url,
+                          "required|whitespace|min:1|max:150"
+                        )}
+                        {this.state.mobile_message}
+                      </div>
+                      <div className="form-group tags-field row m-0">
+                        <label className="col-lg-2 p-0">Add Facilitator</label>
+                        <input
+                          className="form-control col-lg-7"
+                          name="facilitator"
+                          ref={this.facilitator}
+                          onChange={this.onTextChanged.bind(this)}
+                          autocomplete="off"
+                          value={this.state.text}
+                          type="text"
+                          onfocus="this.placeholder = 'Menu Name'"
+                          onblur="this.placeholder = ''"
+                          placeholder=""
+                        />
+                        <button
+                          onClick={this.focusInput.bind(this)}
+                          className=" col-lg-2"
+                          style={{ marginLeft: "1rem" }}
+                        >
+                          Add More +
+                        </button>
+                        <ul className="autoSuggestionList col-lg-5">
+                          {this.state.suggestions.map((item) => {
+                            return (
+                              <li
+                                onClick={this.setFacilitator.bind(this, item)}
+                              >
+                                {item}
+                              </li>
+                            );
+                          })}
+                        </ul>
+
+                        {this.state.mobile_message}
+                      </div>
+                      {this.state.facilitator.length > 0 ? (
+                        <div className="form-group tags-field row m-0">
+                          <label className="col-lg-2 p-0">
+                            Added Facilitator
+                          </label>
+                          <ul>
+                            {this.state.facilitator.map((items) => {
+                              return <li>{items}</li>;
+                            })}
+                          </ul>
+                        </div>
+                      ) : null}
+                        <div className="form-group tags-field row m-0">
+                        <label className="col-lg-2 p-0">Profile</label>
+
+                        <ReactQuill
+                          className=" col-lg-10 height"
+                          theme={this.state.theme}
+                          onChange={this.handleChange}
+                          value={this.state.profile}
+                          modules={EditOrg.modules}
+                          formats={EditOrg.formats}
+                          bounds={".app"}
+                          placeholder={this.props.placeholder}
+                        />
+
+                        {this.validator.message(
+                          "profile",
+                          this.state.profile,
+                          "required"
+                        )}
+                      </div>
                     </div>
 
                     <div className="col-lg-12 p-0">
@@ -269,5 +389,43 @@ class EditOrg extends React.Component {
     );
   }
 }
+EditOrg.modules = {
+  toolbar: [
+    [{ header: "1" }, { header: "2" }, { font: [] }],
+    [{ size: [] }],
+    ["bold", "italic", "underline", "strike", "blockquote"],
+    [
+      { list: "ordered" },
+      { list: "bullet" },
+      { indent: "-1" },
+      { indent: "+1" },
+    ],
+    ["link", "image", "video"],
+    ["clean"],
+  ],
+  clipboard: {
+    matchVisual: false,
+  },
+};
 
+EditOrg.formats = [
+  "header",
+  "font",
+  "size",
+  "bold",
+  "italic",
+  "underline",
+  "strike",
+  "blockquote",
+  "list",
+  "bullet",
+  "indent",
+  "link",
+  "image",
+  "video",
+];
+
+EditOrg.propTypes = {
+  placeholder: PropTypes.string,
+};
 export default EditOrg;
