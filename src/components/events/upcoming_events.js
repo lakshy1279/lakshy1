@@ -93,7 +93,7 @@ class EventUpcoming extends React.Component {
                 // https://trw-backend-api.herokuapp.com/
                 axios
                     .delete(
-                        `https://lakshy12.herokuapp.com/blog/delete_event/${_id}`
+                        `http://localhost:5000/blog/delete_event/${_id}`
                     )
                     .then((res) => {
                         console.log(res);

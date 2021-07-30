@@ -17,6 +17,8 @@ class EditFacilitator extends React.Component {
             organisationName:[],
             suggestions:[],
             firstname: "",
+            contactno:"",
+            email:"",
             lastname: "",
             photo: "",
             profile:"",
@@ -123,7 +125,7 @@ class EditFacilitator extends React.Component {
             .then((res) => {
                 const data = res.data;
                 console.log(data);
-                this.setState({ firstname:data.firstname,lastname:data.lastname,country:data.country,photo:data.photo,profile:data.profile,organisation:data.organisation});
+                this.setState({ firstname:data.firstname,lastname:data.lastname,country:data.country,photo:data.photo,profile:data.profile,organisation:data.organisation,email:data.email,contactno:data.contactno});
             });
             axios
       .get(`https://lakshy12.herokuapp.com/organisation/fetch`)
@@ -200,13 +202,15 @@ class EditFacilitator extends React.Component {
             formdata.append("profile", this.state.profile);
             formdata.append("photo", this.state.photo);
             formdata.append("country",this.state.country);
+            formdata.append("email",this.state.email);
+            formdata.append("contactno",this.state.contactno);
             for(let i=0;i<this.state.organisation.length;i++)
             {
                 formdata.append("organisation",this.state.organisation[i]);
             }
             axios
                 .put(
-                    `https://lakshy12.herokuapp.com/facilitator/save/${_id}`,
+                    `http://localhost:5000/facilitator/save/${_id}`,
                     formdata
                 )
                 .then(function (response) {
@@ -279,6 +283,44 @@ class EditFacilitator extends React.Component {
                                                     "lastname",
                                                     this.state.lastname,
                                                     "required|whitespace|min:1|max:150"
+                                                )}
+                                                {/* {this.state.mobile_message} */}
+                                            </div>
+                                            <div className="form-group tags-field row m-0">
+                                                <label className="col-lg-2 p-0">Email Address</label>
+                                                <input
+                                                    className="form-control col-lg-10"
+                                                    name="email"
+                                                    onChange={this.onChange}
+                                                    value={this.state.email}
+                                                    type="text"
+                                                    onfocus="this.placeholder = 'Menu Name'"
+                                                    onblur="this.placeholder = ''"
+                                                    placeholder="Enter Your Email"
+                                                />
+                                                {this.validator.message(
+                                                    "email",
+                                                    this.state.email,
+                                                    "required|whitespace|min:1|max:100"
+                                                )}
+                                                {/* {this.state.mobile_message} */}
+                                            </div>
+                                            <div className="form-group tags-field row m-0">
+                                                <label className="col-lg-2 p-0">Contact No</label>
+                                                <input
+                                                    className="form-control col-lg-10"
+                                                    name="contactno"
+                                                    onChange={this.onChange}
+                                                    value={this.state.contactno}
+                                                    type="text"
+                                                    onfocus="this.placeholder = 'Menu Name'"
+                                                    onblur="this.placeholder = ''"
+                                                    placeholder="Enter you contact No"
+                                                />
+                                                {this.validator.message(
+                                                    "contactno",
+                                                    this.state.contactno,
+                                                    "required|whitespace|min:1|max:100"
                                                 )}
                                                 {/* {this.state.mobile_message} */}
                                             </div>

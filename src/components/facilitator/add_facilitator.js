@@ -15,6 +15,8 @@ class AddFacilitator extends React.Component {
             organisation:[],
             organisationName:[],
             suggestions:[],
+            contactno:"",
+            email:"",
             firstname: "",
             lastname: "",
             photo: "",
@@ -191,13 +193,15 @@ class AddFacilitator extends React.Component {
             formdata.append("profile", this.state.profile);
             formdata.append("photo", this.state.photo);
             formdata.append("country",this.state.country);
+            formdata.append("email",this.state.email);
+            formdata.append("contactno",this.state.contactno);
             for(let i=0;i<this.state.organisation.length;i++)
             {
                 formdata.append("organisation",this.state.organisation[i]);
             }
             axios
                 .post(
-                    "https://lakshy12.herokuapp.com//facilitator/save",
+                    "http://localhost:5000/facilitator/save",
                     formdata
                 )
                 .then(function (response) {
@@ -270,6 +274,44 @@ class AddFacilitator extends React.Component {
                                                     "lastname",
                                                     this.state.lastname,
                                                     "required|whitespace|min:1|max:150"
+                                                )}
+                                                {/* {this.state.mobile_message} */}
+                                            </div>
+                                            <div className="form-group tags-field row m-0">
+                                                <label className="col-lg-2 p-0">Email Address</label>
+                                                <input
+                                                    className="form-control col-lg-10"
+                                                    name="email"
+                                                    onChange={this.onChange}
+                                                    value={this.state.email}
+                                                    type="text"
+                                                    onfocus="this.placeholder = 'Menu Name'"
+                                                    onblur="this.placeholder = ''"
+                                                    placeholder="Enter Your Email"
+                                                />
+                                                {this.validator.message(
+                                                    "email",
+                                                    this.state.email,
+                                                    "required|whitespace|min:1|max:100"
+                                                )}
+                                                {/* {this.state.mobile_message} */}
+                                            </div>
+                                            <div className="form-group tags-field row m-0">
+                                                <label className="col-lg-2 p-0">Contact No</label>
+                                                <input
+                                                    className="form-control col-lg-10"
+                                                    name="contactno"
+                                                    onChange={this.onChange}
+                                                    value={this.state.contactno}
+                                                    type="text"
+                                                    onfocus="this.placeholder = 'Menu Name'"
+                                                    onblur="this.placeholder = ''"
+                                                    placeholder="Enter you contact No"
+                                                />
+                                                {this.validator.message(
+                                                    "contactno",
+                                                    this.state.contactno,
+                                                    "required|whitespace|min:1|max:100"
                                                 )}
                                                 {/* {this.state.mobile_message} */}
                                             </div>
