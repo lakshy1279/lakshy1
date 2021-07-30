@@ -84,7 +84,7 @@ function Sidebar() {
 
                     <li>
                       {" "}
-                      <a href="#">
+                      <a>
                         <span>
                           <i
                             className="fa fa-rss-square"
