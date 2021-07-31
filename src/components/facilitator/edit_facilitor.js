@@ -210,7 +210,7 @@ class EditFacilitator extends React.Component {
             }
             axios
                 .put(
-                    `http://localhost:5000/facilitator/save/${_id}`,
+                    `https://lakshy12.herokuapp.com/facilitator/save/${_id}`,
                     formdata
                 )
                 .then(function (response) {
