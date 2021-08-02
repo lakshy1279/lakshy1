@@ -92,6 +92,11 @@ import EventCategory from "./components/events/eventcategory";
 import Events from "./components/events/eventsdetail";
 import EventTypes from "./components/events/event_types";
 import AddEvent from "./components/events/add_new_event";
+//Prgram
+import Program from "./components/program/program_view";
+import Add_Program from "./components/program/add_program";
+import EditProgram from "./components/program/edit_program";
+import ViewProgram from "./components/program/view_program";
 
 //Facilitatotr
 import Facilitator from "./components/facilitator/facilitatot_view";
@@ -279,6 +284,22 @@ function Routing() {
         <Route exact path="/events" component={Events}></Route>
         <Route exact path="/events" component={Events}></Route>
         {/* Facilitator */}
+        <Route exact path="/program" component={Program}></Route>
+        <Route
+          exact
+          path="/add_Program"
+          component={Add_Program}
+        ></Route>
+        <Route
+          exact
+          path="/edit_program/:id"
+          component={EditProgram}
+        ></Route>
+        <Route
+          exact
+          path="/view_program/:id"
+          component={ViewProgram}
+        ></Route>
         <Route exact path="/facilitator" component={Facilitator}></Route>
         <Route
           exact

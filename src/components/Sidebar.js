@@ -197,6 +197,19 @@ function Sidebar() {
                     <li></li>
                     <li>
                       {" "}
+                      <a href="/program">
+                        <span>
+                          <i
+                            className="fa fa-rss-square"
+                            aria-hidden="true"
+                          ></i>{" "}
+                         Program
+                        </span>
+                        <b className="gw-arrow" />
+                      </a>
+                    </li>
+                    <li>
+                      {" "}
                       <a href="/facilitator">
                         <span>
                           <i
