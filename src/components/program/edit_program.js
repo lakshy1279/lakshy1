@@ -115,18 +115,18 @@ class EditProgram extends React.Component {
         const _id  = this.props.match.params.id;
         console.log(_id);
         axios
-            .get(`http://localhost:5000/program/${_id}`)
+            .get(`https://lakshy12.herokuapp.com/program/fetch/${_id}`)
             .then((res) => {
                 const data = res.data;
                 console.log(data);
-                this.setState({ heading:data.heading,description:data.description,country:data.country,photo:data.photo,apply:data.apply,organisation:data.organisation});
+                this.setState({ heading:data.heading,description:data.description,apply:data.apply,photo:data.photo,date:data.date});
             });
         
     }
 
     handleChange(html) {
-        this.setState({ apply: html });
-        console.log(this.state.apply);
+        this.setState({ description: html });
+        console.log(this.state.description);
     }
     onChange(event) {
         this.setState({
@@ -187,7 +187,7 @@ class EditProgram extends React.Component {
             formdata.append("date", this.state.date);
             axios
                 .put(
-                    `https://lakshy12.herokuapp.com/facilitator/save/${_id}`,
+                    `https://lakshy12.herokuapp.com/program/save/${_id}`,
                     formdata
                 )
                 .then(function (response) {
@@ -199,7 +199,7 @@ class EditProgram extends React.Component {
                     // handle error
                     console.log(error);
                 });
-            this.props.history.push("/facilitator");
+            this.props.history.push("/program");
         } else {
             this.validator.showMessages();
             this.forceUpdate();
@@ -249,6 +249,7 @@ class EditProgram extends React.Component {
                                             <div className="form-group tags-field row m-0">
                                                 <label className="col-lg-2 p-0">Photo</label>
                                                 <input
+                                                
                                                     type="file"
                                                     onChange={this.onFileChange}
                                                     name="photo"
@@ -281,6 +282,25 @@ class EditProgram extends React.Component {
                                                     this.state.apply,
                                                     "required"
                                                 )}
+                                            </div>
+                                             <div className="form-group tags-field row m-0">
+                                                <label className="col-lg-2 p-0">Date and Time</label>
+                                                <input
+                                                    className="form-control col-lg-10"
+                                                    name="date"
+                                                    onChange={this.onChange}
+                                                    value={this.state.date}
+                                                    type="date"
+                                                    onfocus="this.placeholder = 'Menu Name'"
+                                                    onblur="this.placeholder = ''"
+
+                                                />
+                                                {this.validator.message(
+                                                    "date",
+                                                    this.state.date,
+                                                    "required"
+                                                )}
+                                                {/* {this.state.mobile_message} */}
                                             </div>
                                              <div className="form-group tags-field row m-0" >
                                                 <label className="col-lg-2 p-0">Description</label>

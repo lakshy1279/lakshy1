@@ -22,7 +22,7 @@ class ViewProgram extends React.Component {
         console.log(id);
         // https://lakshy12.herokuapp.com/
         axios
-            .get(`http://localhost:5000/program/fetch/${id}`)
+            .get(`https://lakshy12.herokuapp.com/program/fetch/${id}`)
             .then((res) => {
                 console.log(res.data);
                 const post = {

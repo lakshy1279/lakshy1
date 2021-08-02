@@ -19,16 +19,15 @@ class Program extends React.Component {
         this.handlePageClick = this.handlePageClick.bind(this);
     }
 
-    componentDidMount() {
+     componentDidMount() {
         axios
-            .get(`http://localhost:5000/program/fetch`)
+            .get(`https://lakshy12.herokuapp.com/program/fetch`)
             .then((res) => {
                 const fetchedData = res.data;
-                console.log(fetchedData);
                 this.setState({ fetchedData, loading: true });
             });
         this.unsubscribe = axios
-            .get(`http://localhost:5000/program/fetch`)
+            .get(`https://lakshy12.herokuapp.com/program/fetch`)
             .then((res) => {
                 const fetchedData = res.data;
                 console.log(fetchedData);
@@ -49,7 +48,7 @@ class Program extends React.Component {
                 // https://trw-backend-api.herokuapp.com/
                 axios
                     .delete(
-                        `http://localhost:5000/program/delete/${_id}`
+                        `https://lakshy12.herokuapp.com/program/delete/${_id}`
                     )
                     .then((res) => {
                         console.log(res);
