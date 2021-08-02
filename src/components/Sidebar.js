@@ -88,13 +88,13 @@ function Sidebar() {
                         <span>
                           <i
                             className="fa fa-rss-square"
-                            aria-hidden="false"
+                            aria-hidden="true"
                           ></i>{" "}
                           Event
                         </span>
                         <b className="gw-arrow" />
                       </a>
-                      <ul className="gw-submenu" style={{ display: "hidden" }}>
+                      <ul className="gw-submenu"  style={{ display: "hidden" }}>
                         <li>
                           {" "}
                           <a href="/add_new_event" style={{ color: "white" }}>
@@ -142,7 +142,7 @@ function Sidebar() {
                         </span>
                         <b className="gw-arrow" />
                       </a>
-                      <ul className="gw-submenu" style={{ display: "hidden" }}>
+                      <ul className="gw-submenu">
                         <li>
                           {" "}
                           <a href="/add_logos" style={{ color: "white" }}>

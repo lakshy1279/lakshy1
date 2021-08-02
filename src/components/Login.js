@@ -20,7 +20,7 @@ function Login() {
 
   const Lo = () => {
     axios
-      .post("https://trw-backend-api.herokuapp.com/admin/users/login", {
+      .post("https://lakshy12.herokuapp.com/admin/users/login", {
         email: email,
         password: password,
       })

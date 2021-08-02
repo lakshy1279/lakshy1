@@ -41,6 +41,8 @@ class ViewFacilitator extends React.Component {
                     photo: post.photo,
                     country:post.country,
                     organisation:post.organisation,
+                    email:res.data.email,
+                    contactno:res.data.contactno,
                     loading:true
                 });
             });
@@ -78,6 +80,18 @@ class ViewFacilitator extends React.Component {
                                                         <b>Last Name</b>
                                                     </td>
                                                     <td>{this.state.lastname}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td valign="top" width="150px;">
+                                                        <b>Email</b>
+                                                    </td>
+                                                    <td>{this.state.email}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td valign="top" width="150px;">
+                                                        <b>contactno</b>
+                                                    </td>
+                                                    <td>{this.state.contactno}</td>
                                                 </tr>
                                                 <tr>
                                                     <td valign="top" width="150px;">
