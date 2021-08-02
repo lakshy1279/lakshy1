@@ -71,12 +71,7 @@ class ViewProgram extends React.Component {
                                                     </td>
                                                     <td>{this.state.heading}</td>
                                                 </tr>
-                                                <tr>
-                                                    <td valign="top" width="150px;">
-                                                        <b>Description</b>
-                                                    </td>
-                                                    <td>{renderHTML(this.state.description)}</td>
-                                                </tr>
+                                               
                                                 <tr>
                                                     <td valign="top" width="150px;">
                                                         <b>Apply</b>
@@ -95,6 +90,12 @@ class ViewProgram extends React.Component {
                                                             height="70px"
                                                         />
                                                     </td>
+                                                </tr>
+                                                 <tr>
+                                                    <td valign="top" width="150px;">
+                                                        <b>Description</b>
+                                                    </td>
+                                                    <td>{renderHTML(this.state.description)}</td>
                                                 </tr>
 
                                               

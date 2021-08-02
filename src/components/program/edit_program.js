@@ -244,26 +244,6 @@ class EditProgram extends React.Component {
                                                 {/* {this.state.mobile_message} */}
                                             </div>
                                             
-                                            <div className="form-group tags-field row m-0">
-                                                <label className="col-lg-2 p-0">Description</label>
-                                                 <ReactQuill
-                                                    className=" col-lg-10 height"
-                                                    // theme={this.state.theme}
-                                                    onChange={this.handleChange}
-                                                    value={this.state.description}
-                                                // modules={AddEvent.modules}
-                                                // formats={AddEvent.formats}
-                                                // bounds={".app"}
-                                                // placeholder={this.props.placeholder}
-                                                />
-
-                                                {this.validator.message(
-                                                    "description",
-                                                    this.state.description,
-                                                    "required"
-                                                )}
-                                                {/* {this.state.mobile_message} */}
-                                            </div>
                                             
                                            
                                             <div className="form-group tags-field row m-0">
@@ -283,7 +263,7 @@ class EditProgram extends React.Component {
                                             </div>
 
                                             <div className="form-group tags-field row m-0">
-                                                <label className="col-lg-2 p-0">apply</label>
+                                                <label className="col-lg-2 p-0">Apply</label>
 
                                                 <input
                                                     className="form-control col-lg-10"
@@ -299,6 +279,26 @@ class EditProgram extends React.Component {
                                                 {this.validator.message(
                                                     "Apply",
                                                     this.state.apply,
+                                                    "required"
+                                                )}
+                                            </div>
+                                             <div className="form-group tags-field row m-0" >
+                                                <label className="col-lg-2 p-0">Description</label>
+
+                                                <ReactQuill
+                                                    className=" col-lg-10 height"
+                                                    // theme={this.state.theme}
+                                                    onChange={this.handleChange}
+                                                    value={this.state.description}
+                                                // modules={AddEvent.modules}
+                                                // formats={AddEvent.formats}
+                                                // bounds={".app"}
+                                                // placeholder={this.props.placeholder}
+                                                />
+
+                                                {this.validator.message(
+                                                    "Description",
+                                                    this.state.description,
                                                     "required"
                                                 )}
                                             </div>

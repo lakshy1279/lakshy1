@@ -16,7 +16,7 @@ class AddProgram extends React.Component {
             description: "",
             heading:"",
             apply: "",
-            date: Date.now(),
+            date:"",
         };
         this.handleChange = this.handleChange.bind(this);
         this.onChange = this.onChange.bind(this);
@@ -240,26 +240,7 @@ class AddProgram extends React.Component {
                                                 {/* {this.state.mobile_message} */}
                                             </div>
 
-                                            <div className="form-group tags-field row m-0" >
-                                                <label className="col-lg-2 p-0">Description</label>
-
-                                                <ReactQuill
-                                                    className=" col-lg-10 height"
-                                                    // theme={this.state.theme}
-                                                    onChange={this.handleChange}
-                                                    value={this.state.description}
-                                                // modules={AddEvent.modules}
-                                                // formats={AddEvent.formats}
-                                                // bounds={".app"}
-                                                // placeholder={this.props.placeholder}
-                                                />
-
-                                                {this.validator.message(
-                                                    "Description",
-                                                    this.state.description,
-                                                    "required"
-                                                )}
-                                            </div>
+                                           
 
                                             <div className="form-group tags-field row m-0">
                                                 <label className="col-lg-2 p-0">Image</label>
@@ -313,6 +294,26 @@ class AddProgram extends React.Component {
                                                     "required"
                                                 )}
                                                 {/* {this.state.mobile_message} */}
+                                            </div>
+                                             <div className="form-group tags-field row m-0" >
+                                                <label className="col-lg-2 p-0">Description</label>
+
+                                                <ReactQuill
+                                                    className=" col-lg-10 height"
+                                                    // theme={this.state.theme}
+                                                    onChange={this.handleChange}
+                                                    value={this.state.description}
+                                                // modules={AddEvent.modules}
+                                                // formats={AddEvent.formats}
+                                                // bounds={".app"}
+                                                // placeholder={this.props.placeholder}
+                                                />
+
+                                                {this.validator.message(
+                                                    "Description",
+                                                    this.state.description,
+                                                    "required"
+                                                )}
                                             </div>
 
                                         </div>

@@ -77,6 +77,7 @@ class Program extends React.Component {
                         <td>
                            {item.heading}
                         </td>
+                    
                         <td>
                            {item.date}
                         </td>
