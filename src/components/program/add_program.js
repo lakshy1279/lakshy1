@@ -283,7 +283,7 @@ class AddProgram extends React.Component {
                                                     name="date"
                                                     onChange={this.onChange}
                                                     value={this.state.date}
-                                                    type="date"
+                                                    type="datetime-local"
                                                     onfocus="this.placeholder = 'Menu Name'"
                                                     onblur="this.placeholder = ''"
 

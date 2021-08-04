@@ -147,19 +147,23 @@ class AddEvent extends React.Component {
         console.log(_id);
         // https://lakshy12.herokuapp.com/
         axios
-      .get(`https://trw-backend-api.herokuapp.com/blog/get_event_ById/${_id}`)
+      .get(`https://lakshy12.herokuapp.com/blog/get_event_ById/${_id}`)
       .then((res) => {
         this.setState({
             title: res.data.title,
             description: res.data.description,
             category: res.data.category,
             type: res.data.type,
-            image: res.data.image,
-            Fromdate: res.data.fromdate,
-            Enddate:res.data.enddate,
+          
+            FromDate: res.data.fromdate,
+            EndDate:res.data.enddate,
             eventby:res.data.eventby,
             loading: true,
-            facilitatorName:res.data.facilitatorName
+            facilitator:res.data.facilitator,
+            speaker:res.data.speaker,
+            organisation:res.data.organisation,
+            language:res.data.language
+
         });
     })
     axios
@@ -236,23 +240,34 @@ class AddEvent extends React.Component {
   }
    handleSubmit(e) {
         const { _id } = this.props.match.params;
-        e.preventDefault();
-        if (this.validator.allValid()) {
-            console.log(this.state)
-            const formdata = new FormData();
-            formdata.append("title", this.state.title);
-            formdata.append("category", this.state.category);
-            formdata.append("type", this.state.type);
-            formdata.append("description", this.state.description);
-            formdata.append("file", this.state.image);
-            formdata.append("fromdate", this.state.FromDate);
-            formdata.append("enddate",this.state.EndDate);
-            formdata.append("eventby",this.state.eventby);
+         e.preventDefault();
+    if (this.validator.allValid()) {
+      console.log(this.state);
+      const formdata = new FormData();
+      for (let i = 0; i < this.state.speaker.length; i++) {
+        formdata.append("speaker", this.state.speaker[i]);
+      }
+      for (let i = 0; i < this.state.facilitator.length; i++) {
+        formdata.append("facilitator", this.state.facilitator[i]);
+      }
+      for (let i = 0; i < this.state.organisation.length; i++) {
+        formdata.append("organisation", this.state.organisation[i]);
+      }
+      for (let i = 0; i < this.state.language.length; i++) {
+        formdata.append("language", this.state.language[i]);
+      }
+      formdata.append("title", this.state.title);
+      formdata.append("category", this.state.category);
+      formdata.append("type", this.state.type);
+      formdata.append("description", this.state.description);
+      formdata.append("file", this.state.image);
+      formdata.append("fromdate", this.state.FromDate);
+      formdata.append("enddate", this.state.EndDate);
 
             // https://lakshy12.herokuapp.com/
             axios
                 .put(
-                    `https://trw-backend-api.herokuapp.com/blog/update_event/${_id}`,
+                    `https://lakshy12.herokuapp.com/blog/update_event/${_id}`,
                     formdata
                 )
                 .then((res) => {
@@ -268,7 +283,7 @@ class AddEvent extends React.Component {
     }
   // handel facilitator input
   onTextChanged(e) {
-    this.setState({ text: e.target.value });
+    this.setState({text: e.target.value });
     let suggestions = [];
     if (this.state.text.length > 0) {
       const regex = new RegExp(`^${this.state.text}`, "i");
@@ -499,6 +514,7 @@ class AddEvent extends React.Component {
                                     name="category"
                                     onChange={this.onChange}
                                     value={data.event_category}
+                                    checked={this.state.category===data.event_category?true:false}
                                     id={data._id}
                                   />
                                   <label htmlFor={data._id}>
@@ -528,6 +544,7 @@ class AddEvent extends React.Component {
                                     name="type"
                                     onChange={this.onChange}
                                     value={data.event_type}
+                                     checked={this.state.type===data.event_type?true:false}
                                   />
                                   <label htmlFor={data._id}>
                                     {data.event_type}
@@ -546,6 +563,7 @@ class AddEvent extends React.Component {
                       <div className="form-group tags-field row m-0">
                         <label className="col-lg-2 p-0">Upload Image</label>
                         <input
+                       
                           type="file"
                           onChange={this.onFileChange}
                           name="file"
@@ -563,6 +581,7 @@ class AddEvent extends React.Component {
                           From Date and Time
                         </label>
                         <input
+                        value={this.state.FromDate}
                           type="datetime-local"
                           name="FromDate"
                           onChange={this.onChange}
@@ -579,6 +598,7 @@ class AddEvent extends React.Component {
                           End Date and Time
                         </label>
                         <input
+                         value={this.state.EndDate}
                           type="datetime-local"
                           name="EndDate"
                           onChange={this.onChange}

@@ -78,7 +78,7 @@ class Program extends React.Component {
                         </td>
                     
                         <td>
-                           {item.date}
+                          {new Date(item.date).toDateString() + "," + new Date(item.date).toLocaleTimeString()}
                         </td>
                         <td>
                            {new Date(item.createdAt).toDateString()}
