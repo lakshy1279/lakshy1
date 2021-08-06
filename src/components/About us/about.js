@@ -17,6 +17,7 @@ class About extends React.Component {
             Vision: "",
             fetchedData: [],
             mobile_message: "",
+            subtext:"",
             loading: false,
             validError: false,
         };
@@ -118,6 +119,7 @@ class About extends React.Component {
             ourObjective: res.data[0]?.ourObjective,
             Mission: res.data[0]?.Mission,
             Vision: res.data[0]?.Vision,
+            subtext:res.data[0]?.subtext,
         })
     }
     onChange(html) {
@@ -137,6 +139,7 @@ class About extends React.Component {
             ourObjective: this.state.ourObjective,
             Mission: this.state.Mission,
             Vision: this.state.Vision,
+            subtext:this.state.subtext
         };
         axios
             .post(
@@ -187,6 +190,20 @@ class About extends React.Component {
                                                             name="heading"
                                                             onChange={this.handleChange}
                                                             value={this.state.heading}
+                                                            type="textarea"
+                                                            onfocus="this.placeholder = 'Menu Name'"
+                                                            onblur="this.placeholder = ''"
+                                                            placeholder=""
+                                                            
+                                                        />
+                                                    </div>
+                                                    <div className="form-group tags-field row m-0">
+                                                        <label className="col-lg-2 p-0">Heading(Subtext)</label>
+                                                        <textarea
+                                                            className="form-control col-lg-8"
+                                                            name="subtext"
+                                                            onChange={this.handleChange}
+                                                            value={this.state.subtext}
                                                             type="textarea"
                                                             onfocus="this.placeholder = 'Menu Name'"
                                                             onblur="this.placeholder = ''"
