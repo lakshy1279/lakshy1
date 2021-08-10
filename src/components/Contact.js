@@ -72,43 +72,6 @@ function deleteItem(_id){
                   <span className="btn" onClick={() => deleteItem(item._id)}>Delete</span></td>
               </tr>);
             })};
-           
-            {/* // <tr>
-            //   <td>2</td>
-            //   <td>Rani</td>
-            //   <td>9703371164</td>
-            //   <td>rani.kola@gmail.com</td>
-            //   <td>
-            //     <a href="contact-us-view.html"><span className="btn">View</span></a>
-            //     <span className="btn">Delete</span></td>
-            // </tr>
-            // <tr>
-            //   <td>3</td>
-            //   <td>Nihal</td>
-            //   <td>9703371164</td>
-            //   <td>nihal.kola@gmail.com</td>
-            //   <td>
-            //     <a href="contact-us-view.html"><span className="btn">View</span></a>
-            //     <span className="btn">Delete</span></td>
-            // </tr>
-            // <tr>
-            //   <td>4</td>
-            //   <td>Namasvi</td>
-            //   <td>9703371164</td>
-            //   <td>namasvi.kola@gmail.com</td>
-            //   <td>
-            //     <a href="contact-us-view.html"><span className="btn">View</span></a>
-            //     <span className="btn">Delete</span></td>
-            // </tr>
-            // <tr>
-            //   <td>5</td>
-            //   <td>Satya</td>
-            //   <td>9703371164</td>
-            //   <td>satya.kola@gmail.com</td>
-            //   <td>
-            //     <a href="contact-us-view.html"><span className="btn">View</span></a>
-            //     <span className="btn">Delete</span></td>
-            // </tr> */}
           </tbody>
         </table>
       </div>

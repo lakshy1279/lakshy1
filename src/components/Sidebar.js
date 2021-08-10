@@ -173,6 +173,12 @@ function Sidebar() {
                             Languages
                           </a>{" "}
                         </li>
+                        <li>
+                          {" "}
+                          <a href="/reason" style={{ color: "white" }}>
+                            Contact Us Reason
+                          </a>{" "}
+                        </li>
                       </ul>
                     </li>
                     {/* <li>

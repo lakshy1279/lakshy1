@@ -6,7 +6,7 @@ import swal from "sweetalert";
 import ReactPaginate from "react-paginate";
 import Loader from "react-loader-spinner";
 const PER_PAGE = 10;
-class Language extends React.Component {
+class Reason extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -20,14 +20,14 @@ class Language extends React.Component {
     componentDidMount() {
         // https://trw-backend-api.herokuapp.com/
         axios
-            .get(`https://lakshy12.herokuapp.com/language/fetch`)
+            .get(`https://lakshy12.herokuapp.com/reason/fetch`)
             .then((res) => {
                 const fetchedData = res.data;
                 console.log(fetchedData);
                 this.setState({ fetchedData, loading: true });
             });
         this.unsubscribe = axios
-            .get(`https://lakshy12.herokuapp.com/language/fetch`)
+            .get(`https://lakshy12.herokuapp.com/reason/fetch`)
             .then((res) => {
                 const fetchedData = res.data;
                 console.log(fetchedData);
@@ -48,7 +48,7 @@ class Language extends React.Component {
                 // https://trw-backend-api.herokuapp.com/
                 axios
                     .delete(
-                        `https://lakshy12.herokuapp.com/language/delete/${_id}`
+                        `https://lakshy12.herokuapp.com/reason/delete/${_id}`
                     )
                     .then((res) => {
                         console.log(res);
@@ -68,7 +68,7 @@ class Language extends React.Component {
         const offset = this.state.currentPage * PER_PAGE;
         let count = 0;
         const currentPageData =
-            this.state.fetchedData &&
+            this.state.fetchedData.length>0 &&
             this.state.fetchedData.reverse().slice(offset, offset + PER_PAGE).map((item, index) => {
                 return (
 
@@ -76,7 +76,7 @@ class Language extends React.Component {
                         < tr key={index} >
                             <td>{++count}</td>
                             <td>
-                                <div className="limited-text">{item.language}</div>
+                                <div className="limited-text">{item.reason}</div>
                             </td>
                             <td>
                                 <span
@@ -100,12 +100,12 @@ class Language extends React.Component {
                 <Sidebar></Sidebar>
                 <div className="admin-wrapper col-12">
                     <div className="admin-content">
-                        <div className="admin-head">Language</div>
+                        <div className="admin-head">Contact Reason</div>
                         <div className="admin-data">
                             {this.state.loading ? (
                                 <>
                                     <div className="col-lg-12 p-0 text-right mb-30">
-                                        <a href="add_new_language">
+                                        <a href="add_reason">
                                             <button className="button button-contactForm boxed-btn">
                                                 Add New
                                             </button>
@@ -116,7 +116,7 @@ class Language extends React.Component {
                                             <thead>
                                                 <tr>
                                                     <th>S.No</th>
-                                                    <th>Language</th>
+                                                    <th>Reason</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -158,4 +158,4 @@ class Language extends React.Component {
     }
 }
 
-export default Language;
+export default Reason;

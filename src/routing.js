@@ -128,6 +128,7 @@ import EditEventCat from "./components/events/editEventCat";
 import ViewEventCat from "./components/events/viewEventCat";
 import ViewEvents from "./components/events/view_events";
 import EditEvent from "./components/events/edit_events";
+// Site preferances
 import AddLogos from "./components/site_preferences/add_logos";
 import AddAddress from "./components/site_preferences/add_address";
 import AddSocialMedia from "./components/site_preferences/add_socialmedia";
@@ -137,6 +138,8 @@ import EditCompliance from "./components/site_preferences/edit_compliance";
 import Subscriber from "./components/subscriber";
 import Language from "./components/site_preferences/language";
 import AddLanguage from "./components/site_preferences/addlanguage";
+import Reason from "./components/site_preferences/reason";
+import AddReason from "./components/site_preferences/add_reason";
 function Routing() {
   return (
     <Router>
@@ -345,6 +348,8 @@ function Routing() {
         ></Route>
             <Route exact path="/language" component={Language}></Route>
             <Route exact path="/add_new_language" component={AddLanguage}></Route>
+            <Route exact path="/reason" component={Reason}></Route>
+            <Route exact path="/add_reason" component={AddReason}></Route>
         {/* change password */}
         <Route
           exact
