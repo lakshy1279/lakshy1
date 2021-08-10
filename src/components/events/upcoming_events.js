@@ -17,6 +17,7 @@ class EventUpcoming extends React.Component {
         };
         this.deleteItem = this.deleteItem.bind(this);
         this.handlePageClick = this.handlePageClick.bind(this);
+        this.handleFeatured=this.handleFeatured.bind(this);
     }
     componentDidMount() {
         // https://trw-backend-api.herokuapp.com/
@@ -109,6 +110,40 @@ class EventUpcoming extends React.Component {
             currentPage: selectedPage,
         });
     }
+    handleFeatured(e,_id)
+    {
+      console.log(e.target.innerHTML);
+      console.log(_id);
+      const value=e.target.innerHTML;
+      if(value==='featured')
+      {
+        axios
+        .put(
+            `https://lakshy12.herokuapp.com/blog/update_feature/${_id}`,
+            {
+                featured:true
+            }
+        )
+        .then((res) => {
+            console.log(res.data);
+            window.location.reload();
+        })
+      }
+      else
+      {
+        axios
+        .put(
+            `https://lakshy12.herokuapp.com/blog/update_feature/${_id}`,
+            {
+              featured:false
+            }
+        )
+        .then((res) => {
+            console.log(res.data);
+            window.location.reload();
+        })
+      }
+    }
     render() {
         console.log("events",this.state.events);
         const offset = this.state.currentPage * PER_PAGE;
@@ -126,8 +161,7 @@ class EventUpcoming extends React.Component {
                                 <div className="limited-text">{blog.title}</div>
                             </td>
                             <td>{blog.category}</td>
-                            <td>{blog.type}</td>
-                            {/* <td>{ }</td> */}
+                            <td>{blog.featured?'Featured':'Unfeatured'}</td>
                             <td>{new Date(blog.fromdate).toDateString() + "," + new Date(blog.fromdate).toLocaleTimeString()}</td>
                             <td>
                                 <Link to={`/view_events/${blog._id}`}>
@@ -142,6 +176,12 @@ class EventUpcoming extends React.Component {
                                     onClick={this.deleteItem.bind(this, blog._id)}
                                 >
                                     Delete
+                                </span>
+                                <span
+                                    className="btn"
+                                    onClick={(e)=>this.handleFeatured(e,blog._id)}
+                                >
+                                  {blog.featured?'UnFeatured':'featured'}  
                                 </span>
                             </td>
                         </tr >
@@ -176,7 +216,7 @@ class EventUpcoming extends React.Component {
                                                     <th>S.No</th>
                                                     <th>Title</th>
                                                     <th>category</th>
-                                                    <th>Type</th>
+                                                    <th>Featured</th>
                                                     <th>Date/Time</th>
                                                     <th>Action</th>
                                                 </tr>

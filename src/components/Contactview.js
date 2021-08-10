@@ -45,6 +45,10 @@ const Contactview=({match})=> {
                 <td>{new Date(contact.createdAt).toDateString()}</td>
               </tr>
               <tr>
+                <td><b>Reason</b></td>
+                <td>{contact.reason}</td>
+              </tr>
+              <tr>
                 <td valign="top"><b>Message</b></td>
                 <td>{contact.message}
                 </td>
