@@ -75,7 +75,7 @@ class Facilitator extends React.Component {
       {
         axios
         .put(
-            `http://localhost:5000/facilitator/update_feature/${_id}`,
+            `https://lakshy12.herokuapp.com/facilitator/update_feature/${_id}`,
             {
                 featured:true
             }
@@ -89,7 +89,7 @@ class Facilitator extends React.Component {
       {
         axios
         .put(
-            `http://localhost:5000/facilitator/update_feature/${_id}`,
+            `https://lakshy12.herokuapp.com/facilitator/update_feature/${_id}`,
             {
               featured:false
             }

@@ -73,7 +73,7 @@ class Organisation extends React.Component {
     {
       axios
       .put(
-          `http://localhost:5000/organisation/update_feature/${_id}`,
+          `https://lakshy12.herokuapp.com/organisation/update_feature/${_id}`,
           {
               featured:true
           }
@@ -87,7 +87,7 @@ class Organisation extends React.Component {
     {
       axios
       .put(
-          `http://localhost:5000/organisation/update_feature/${_id}`,
+          `https://lakshy12.herokuapp.com/organisation/update_feature/${_id}`,
           {
             featured:false
           }
