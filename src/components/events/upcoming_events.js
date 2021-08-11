@@ -105,9 +105,10 @@ class EventUpcoming extends React.Component {
             }
         });
     }
-    handlePageClick({ selected: selectedPage }) {
+    handlePageClick({selected}) {
+        console.log(selected);
         this.setState({
-            currentPage: selectedPage,
+            currentPage: selected,
         });
     }
     handleFeatured(e,_id)
@@ -146,6 +147,7 @@ class EventUpcoming extends React.Component {
     }
     render() {
         console.log("events",this.state.events);
+        console.log()
         const offset = this.state.currentPage * PER_PAGE;
         let count = 0;
         const currentPageData =
@@ -191,7 +193,7 @@ class EventUpcoming extends React.Component {
             });
 
         const pageCount = Math.ceil(
-            this.state.blogs && this.state.blogs.length / PER_PAGE
+            this.state.events && this.state.events.length / PER_PAGE
         );
         return (
             <div>
@@ -230,7 +232,7 @@ class EventUpcoming extends React.Component {
                                             previousLabel={"Previous"}
                                             nextLabel={"Next"}
                                             pageCount={pageCount}
-                                            onPageChange={this.handlePageClick.bind(this)}
+                                            onPageChange={this.handlePageClick}
                                             containerClassName={"pagination"}
                                             previousLinkClassName={"pagination__link"}
                                             nextLinkClassName={"pagination__link"}

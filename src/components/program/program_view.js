@@ -103,7 +103,7 @@ class Program extends React.Component {
             });
 
         const pageCount = Math.ceil(
-            this.state.blogs && this.state.blogs.length / PER_PAGE
+            this.state.fetchedData && this.state.fetchedData.length / PER_PAGE
         );
         return (
             <div>

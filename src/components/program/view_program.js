@@ -10,10 +10,8 @@ class ViewProgram extends React.Component {
         this.state = {
             heading: "",
             description: "",
-           
             photo:"",
             apply:"",
-           
             loading: false,
         };
     }

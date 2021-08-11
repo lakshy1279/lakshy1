@@ -17,6 +17,7 @@ class Facilitator extends React.Component {
         };
         this.deleteItem = this.deleteItem.bind(this);
         this.handlePageClick = this.handlePageClick.bind(this);
+        this.handleFeatured=this.handleFeatured.bind(this);
     }
 
     componentDidMount() {
@@ -65,6 +66,40 @@ class Facilitator extends React.Component {
             currentPage: selectedPage,
         });
     }
+    handleFeatured(e,_id)
+    {
+      console.log(e.target.innerHTML);
+      console.log(_id);
+      const value=e.target.innerHTML;
+      if(value==='featured')
+      {
+        axios
+        .put(
+            `http://localhost:5000/facilitator/update_feature/${_id}`,
+            {
+                featured:true
+            }
+        )
+        .then((res) => {
+            console.log(res.data);
+            window.location.reload();
+        })
+      }
+      else
+      {
+        axios
+        .put(
+            `http://localhost:5000/facilitator/update_feature/${_id}`,
+            {
+              featured:false
+            }
+        )
+        .then((res) => {
+            console.log(res.data);
+            window.location.reload();
+        })
+      }
+    }
     render() {
         const offset = this.state.currentPage * PER_PAGE;
 
@@ -97,13 +132,19 @@ class Facilitator extends React.Component {
                             >
                                 Delete
                             </span>
+                            <span
+                                className="btn"
+                                onClick={(e)=>this.handleFeatured(e,item._id)}
+                            >
+                              {item.featured?'UnFeatured':'featured'}  
+                            </span>
                         </td>
                     </tr>
                 );
             });
 
         const pageCount = Math.ceil(
-            this.state.blogs && this.state.blogs.length / PER_PAGE
+            this.state.fetchedData && this.state.fetchedData.length / PER_PAGE
         );
         return (
             <div>

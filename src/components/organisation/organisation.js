@@ -64,6 +64,40 @@ class Organisation extends React.Component {
       currentPage: selectedPage,
     });
   }
+  handleFeatured(e,_id)
+  {
+    console.log(e.target.innerHTML);
+    console.log(_id);
+    const value=e.target.innerHTML;
+    if(value==='featured')
+    {
+      axios
+      .put(
+          `http://localhost:5000/organisation/update_feature/${_id}`,
+          {
+              featured:true
+          }
+      )
+      .then((res) => {
+          console.log(res.data);
+          window.location.reload();
+      })
+    }
+    else
+    {
+      axios
+      .put(
+          `http://localhost:5000/organisation/update_feature/${_id}`,
+          {
+            featured:false
+          }
+      )
+      .then((res) => {
+          console.log(res.data);
+          window.location.reload();
+      })
+    }
+  }
   render() {
     const offset = this.state.currentPage * PER_PAGE;
 
@@ -94,6 +128,12 @@ class Organisation extends React.Component {
               >
                 Delete
               </span>
+              <span
+                                className="btn"
+                                onClick={(e)=>this.handleFeatured(e,blog._id)}
+                            >
+                              {blog.featured?'UnFeatured':'featured'}  
+                            </span>
             </td>
           </tr>
         );
