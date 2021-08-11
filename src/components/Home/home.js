@@ -7,25 +7,23 @@ import Loader from "react-loader-spinner";
 import PropTypes from "prop-types";
 import ReactQuill from "react-quill";
 
-class About extends React.Component {
+class Home extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             heading: "",
-            ourObjective: "",
-            Mission: "",
-            Vision: "",
             fetchedData: [],
-            image:"",
+            image:[],
             mobile_message: "",
             subtext:"",
+            buttonname:"",
+            buttonurl:"",
             loading: false,
             validError: false,
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.onFileChange=this.onFileChange.bind(this);
-        this.onChange = this.onChange.bind(this);
         this.validator = new SimpleReactValidator({
             className: "text-danger",
             validators: {
@@ -113,23 +111,19 @@ class About extends React.Component {
         });
     }
     async componentDidMount() {
-        let res = await axios.get("https://lakshy12.herokuapp.com/about1/fetch_about");
+        let res = await axios.get("https://lakshy12.herokuapp.com/home/fetch_home");
         // const fetchedData = res.data;
         console.log(res.data);
         this.setState({
             heading: res.data[0]?.heading,
-            ourObjective: res.data[0]?.ourObjective,
-            Mission: res.data[0]?.Mission,
-            Vision: res.data[0]?.Vision,
             subtext:res.data[0]?.subtext,
-            image:res.data[0]?.image
+            buttonname:res.data[0]?.buttonname,
+            buttonurl:res.data[0]?.buttonurl
+            // image:res.data[0]?.image
         })
     }
-    onChange(html) {
-        this.setState({ ourObjective: html });
-    }
     onFileChange(e) {
-        this.setState({ image: e.target.files[0] });
+        this.setState({ image: [...this.state.image,...e.target.files] });
       }
     handleChange(event) {
         this.setState({
@@ -142,15 +136,17 @@ class About extends React.Component {
         this.setState({ loading: true })
         const formdata = new FormData();
         formdata.append("heading",this.state.heading);
-        formdata.append("ourObjective",this.state.ourObjective);
-        formdata.append("Mission",this.state.Mission);
-        formdata.append("Vision",this.state.Vision);
         formdata.append("subtext",this.state.subtext);
-        formdata.append("file",this.state.image);
+        formdata.append("buttonname",this.state.buttonname);
+        formdata.append("url",this.state.buttonurl);
+        for(let i=0;i<this.state.image.length;i++)
+        {
+          formdata.append("file",this.state.image[i]);
+        }
         console.log(formdata);
         axios
             .post(
-                "https://lakshy12.herokuapp.com/about1/add_about",
+                "https://lakshy12.herokuapp.com/home/add_home",
                 formdata
             )
             .then(function (response) {
@@ -171,7 +167,7 @@ class About extends React.Component {
                 <Sidebar></Sidebar>
                 <div className="admin-wrapper col-12">
                     <div className="admin-content">
-                        <div className="admin-head">About Us</div>
+                        <div className="admin-head">Home</div>
                         <div className="admin-data">
                             {this.state.loading === false ? (
                                 <>
@@ -219,9 +215,38 @@ class About extends React.Component {
                                                         />
                                                     </div>
                                                     <div className="form-group tags-field row m-0">
-                        <label className="col-lg-2 p-0">Banner Image</label>
+                                                        <label className="col-lg-2 p-0">CTA Button(U.R.L)</label>
+                                                        <input
+                                                            className="form-control col-lg-8"
+                                                            name="buttonurl"
+                                                            onChange={this.handleChange}
+                                                            value={this.state.buttonurl}
+                                                            type="textarea"
+                                                            onfocus="this.placeholder = 'Menu Name'"
+                                                            onblur="this.placeholder = ''"
+                                                            placeholder=""
+                                                            
+                                                        />
+                                                    </div>
+                                                    <div className="form-group tags-field row m-0">
+                                                        <label className="col-lg-2 p-0">CTA Button(Name)</label>
+                                                        <textarea
+                                                            className="form-control col-lg-8"
+                                                            name="buttonname"
+                                                            onChange={this.handleChange}
+                                                            value={this.state.buttonname}
+                                                            type="textarea"
+                                                            onfocus="this.placeholder = 'Menu Name'"
+                                                            onblur="this.placeholder = ''"
+                                                            placeholder=""
+                                                            
+                                                        />
+                                                    </div>
+                                                    <div className="form-group tags-field row m-0">
+                        <label className="col-lg-2 p-0">Banner Images</label>
                         <input
                           type="file"
+                          multiple
                           onChange={this.onFileChange}
                           name="file"
                           className="form-control col-lg-8"
@@ -233,58 +258,7 @@ class About extends React.Component {
                           "required"
                         )}
                       </div>
-                                                    <div className="form-group tags-field row m-0">
-                        <label className="col-lg-2 p-0">Our Objective</label>
-
-                        <ReactQuill
-                          className=" col-lg-8"
-                          theme={this.state.theme}
-                          onChange={this.onChange}
-                          value={this.state.ourObjective}
-                          modules={About.modules}
-                          formats={About.formats}
-                          bounds={".app"}
-                          placeholder={this.props.placeholder}
-                        />
-                      </div>
-                                                    <div className="form-group tags-field row m-0 ">
-                                                        <label className="col-lg-2 p-0">Mission</label>
-                                                        <textarea
-                                                            className="form-control col-lg-8"
-                                                            name="Mission"
-                                                            onChange={this.handleChange}
-                                                            value={this.state.Mission}
-                                                            type="textarea"
-                                                            onfocus="this.placeholder = 'Menu Name'"
-                                                            onblur="this.placeholder = ''"
-                                                            placeholder=""
-                                                            row={3}
-                                                        />
-                                                        {this.validator.message(
-                                                            "Mission",
-                                                            this.state.Mission,
-                                                            "required|whitespace|min:1|max:40"
-                                                        )}
-                                                    </div>
-                                                    <div className="form-group tags-field row m-0 ">
-                                                        <label className="col-lg-2 p-0">Vision</label>
-                                                        <textarea
-                                                            className="form-control col-lg-8"
-                                                            name="Vision"
-                                                            onChange={this.handleChange}
-                                                            value={this.state.Vision}
-                                                            type="textarea"
-                                                            onfocus="this.placeholder = 'Menu Name'"
-                                                            onblur="this.placeholder = ''"
-                                                            placeholder=""
-                                                            row={3}
-                                                        />
-                                                        {this.validator.message(
-                                                            "Vision",
-                                                            this.state.Vision,
-                                                            "required|whitespace|min:1|max:40"
-                                                        )}
-                                                    </div>
+                                            
                                                 </div>
 
                                                 <div className="col-lg-12 p-0">
@@ -323,7 +297,7 @@ class About extends React.Component {
         );
     }
 }
-About.modules = {
+Home.modules = {
     toolbar: [
       [{ header: "1" }, { header: "2" }, { font: [] }],
       [{ size: [] }],
@@ -342,7 +316,7 @@ About.modules = {
     },
   };
   
-  About.formats = [
+  Home.formats = [
     "header",
     "font",
     "size",
@@ -359,7 +333,7 @@ About.modules = {
     "video",
   ];
   
-  About.propTypes = {
+  Home.propTypes = {
     placeholder: PropTypes.string,
   };
-export default About;
+export default Home;

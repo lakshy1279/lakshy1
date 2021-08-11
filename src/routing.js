@@ -140,6 +140,8 @@ import Language from "./components/site_preferences/language";
 import AddLanguage from "./components/site_preferences/addlanguage";
 import Reason from "./components/site_preferences/reason";
 import AddReason from "./components/site_preferences/add_reason";
+// Home
+import Home from "./components/Home/home";
 function Routing() {
   return (
     <Router>
@@ -356,6 +358,8 @@ function Routing() {
           path="/password"
           component={Changepassword}
         ></Route>
+        {/* Home */}
+        <Route exact path="/home" component={Home}></Route>
       </Switch>
     </Router>
   );

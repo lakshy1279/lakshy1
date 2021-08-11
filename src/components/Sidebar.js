@@ -42,6 +42,19 @@ function Sidebar() {
                     </li>
                     <li>
                       {" "}
+                      <a href="/home">
+                        <span>
+                          <i
+                            className="fa fa-rss-square"
+                            aria-hidden="true"
+                          ></i>{" "}
+                          Home
+                        </span>
+                        <b className="gw-arrow" />
+                      </a>
+                    </li>
+                    <li>
+                      {" "}
                       <a href="/about">
                         <span>
                           <i
