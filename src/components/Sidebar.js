@@ -42,7 +42,7 @@ function Sidebar() {
                     </li>
                     <li>
                       {" "}
-                      <a href="/home">
+                      <a href="#">
                         <span>
                           <i
                             className="fa fa-rss-square"
@@ -52,6 +52,26 @@ function Sidebar() {
                         </span>
                         <b className="gw-arrow" />
                       </a>
+                      <ul className="gw-submenu" style={{ display: "hidden" }}>
+                        <li>
+                          {" "}
+                          <a href="/home" style={{ color: "white" }}>
+                            BannerSection
+                          </a>{" "}
+                        </li>
+                        <li>
+                          {" "}
+                          <a href="/home1" style={{ color: "white" }}>
+                            Section1
+                          </a>{" "}
+                        </li>
+                        <li>
+                          {" "}
+                          <a href="/home2" style={{ color: "white" }}>
+                            Section2
+                          </a>{" "}
+                        </li>
+                      </ul>
                     </li>
                     <li>
                       {" "}

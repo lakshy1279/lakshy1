@@ -27,37 +27,6 @@ import Post from "./components/post/Post";
 import Addpost from "./components/post/add_post";
 import EditPost from "./components/post/edit_post";
 import ViewPost from "./components/post/view_post";
-//Home1
-// import EditHome1 from "./components/home1/edit_home1";
-import AddHome1 from "./components/home1/add_home1";
-import EditHome1 from "./components/home1/edit_home1";
-import ViewHome1 from "./components/home1/view_home1";
-import Home1 from "./components/home1/home1";
-//AddHome2
-//home 1.1 images
-
-import AddHome1_1 from "./components/home1_1/add_home1_1";
-import EditHome1_1 from "./components/home1_1/edit_home1_1";
-import ViewHome1_1 from "./components/home1_1/view_home1_1";
-import Home1_1 from "./components/home1_1/home1_1";
-//AddHome2
-import Home2 from "./components/home2/home2";
-import AddHome2 from "./components/home2/add_home2";
-import EditHome2 from "./components/home2/edit_home2";
-import ViewHome2 from "./components/home2/view_home2";
-
-//AddHome3
-import Home3 from "./components/home3/home3";
-import AddHome3 from "./components/home3/add_home3";
-import EditHome3 from "./components/home3/edit_home3";
-import ViewHome3 from "./components/home3/view_home3";
-
-//AddHome4
-import Home4 from "./components/home4/home4";
-import AddHome4 from "./components/home4/add_home4";
-import EditHome4 from "./components/home4/edit_home4";
-import ViewHome4 from "./components/home4/view_home4";
-
 //About2
 import About2 from "./components/about2/about2";
 import AddAbout2 from "./components/about2/add_about2";
@@ -142,6 +111,8 @@ import Reason from "./components/site_preferences/reason";
 import AddReason from "./components/site_preferences/add_reason";
 // Home
 import Home from "./components/Home/home";
+import Section2 from "./components/Home/section2";
+import Section3 from "./components/Home/section3";
 function Routing() {
   return (
     <Router>
@@ -169,40 +140,6 @@ function Routing() {
         <Route exact path="/add_post" component={Addpost}></Route>
         <Route exact path="/edit_post/:_id" component={EditPost}></Route>
         <Route exact path="/view_post/:_id" component={ViewPost}></Route>
-        {/* AddHome1 */}
-
-        <Route exact path="/home_section_1" component={Home1}></Route>
-        <Route exact path="/add_home1" component={AddHome1}></Route>
-        {/* <Route exact path="/edit_home1/:_id" component={EditHome1}></Route> */}
-        <Route
-          exact
-          path="/home1/608b912efcc7860015dce5b1"
-          component={EditHome1}
-        ></Route>
-        <Route exact path="/view_home1/:_id" component={ViewHome1}></Route>
-        {/* //Home2 */}
-        <Route exact path="/home_section_2" component={Home2}></Route>
-        <Route exact path="/add_home2" component={AddHome2}></Route>
-        <Route exact path="/edit_home2/:_id" component={EditHome2}></Route>
-        <Route exact path="/view_home2/:_id" component={ViewHome2}></Route>
-        {/* <Route exact path="/view_home2/:_id" component={ViewHome2}></Route> */}
-        {/* //Home3 */}
-        <Route exact path="/home_section_3" component={Home3}></Route>
-        <Route exact path="/add_home3" component={AddHome3}></Route>
-        <Route exact path="/edit_home3/:_id" component={EditHome3}></Route>
-        <Route exact path="/view_home3/:_id" component={ViewHome3}></Route>
-
-        {/* Home1-1 */}
-        <Route exact path="/home_section_1_1" component={Home1_1}></Route>
-        <Route exact path="/add_home1_1" component={AddHome1_1}></Route>
-        <Route exact path="/edit_home1_1/:_id" component={EditHome1_1}></Route>
-        <Route exact path="/view_home1_1/:_id" component={ViewHome1_1}></Route>
-
-        {/* //Home4 */}
-        <Route exact path="/home_section_4" component={Home4}></Route>
-        <Route exact path="/add_home4" component={AddHome4}></Route>
-        <Route exact path="/edit_home4/:_id" component={EditHome4}></Route>
-        <Route exact path="/view_home4/:_id" component={ViewHome4}></Route>
         {/* Testimonials*/}
         <Route exact path="/testimonials" component={Testimonial}></Route>
         <Route exact path="/add_testimonial" component={AddTestimonial}></Route>
@@ -360,6 +297,8 @@ function Routing() {
         ></Route>
         {/* Home */}
         <Route exact path="/home" component={Home}></Route>
+        <Route exact path="/home1" component={Section2}></Route>
+        <Route exact path="/home2" component={Section3}></Route>
       </Switch>
     </Router>
   );
