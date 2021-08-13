@@ -73,7 +73,7 @@ class ViewOrganisation extends React.Component {
                                                     <td valign="top" width="150px;">
                                                         <b>Faciliatator</b>
                                                     </td>
-                                                    <td>{this.state.facilitator.toString()}</td>
+                                                    <td>{this.state.facilitator!=null&&this.state.facilitator.toString()}</td>
                                                 </tr>
                                                 <tr>
                                                     <td valign="top" width="150px;">

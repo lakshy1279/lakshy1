@@ -199,10 +199,13 @@ class EditOrg extends React.Component {
       formdata.append("logo", this.state.logo);
       formdata.append("profile",this.state.profile);
       formdata.append("url",this.state.url);
+      if(this.state.facilitator!=null)
+      {
       for(let i=0;i<this.state.facilitator.length;i++)
       {
         formdata.append("facilitator",this.state.facilitator[i]);
       }
+    }
       axios
         .put(
           `https://lakshy12.herokuapp.com/organisation/save/${id}`,
@@ -332,13 +335,13 @@ class EditOrg extends React.Component {
 
                         {this.state.mobile_message}
                       </div>
-                      {this.state.facilitator.length > 0 ? (
+                      {this.state.facilitator!=null&&this.state.facilitator.length > 0 ? (
                         <div className="form-group tags-field row m-0">
                           <label className="col-lg-2 p-0">
                             Added Facilitator
                           </label>
                           <ul>
-                            {this.state.facilitator.map((items) => {
+                            {this.state.facilitator!=null&&this.state.facilitator.map((items) => {
                               return <li>{items}</li>;
                             })}
                           </ul>
