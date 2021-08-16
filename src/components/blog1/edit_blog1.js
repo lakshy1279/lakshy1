@@ -207,10 +207,11 @@ class EditBlog1 extends React.Component {
       formdata.append("author", this.state.author);
       formdata.append("featured", this.state.featured);
       axios
-        .put(`http://localhost:5000/blog/update_blog1_patch/${_id}`, formdata)
-        .then((res) => console.log(res.data));
-
-      // this.props.history.push("/article");
+        .put(`https://lakshy12.herokuapp.com/blog/update_blog1_patch/${_id}`, formdata)
+        .then((res) => {
+          console.log(res.data)
+         this.props.history.push("/article");
+        });
     } else {
       this.validator.showMessages();
       this.forceUpdate();

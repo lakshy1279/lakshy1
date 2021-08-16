@@ -156,7 +156,7 @@ class AddBlog1 extends React.Component {
       formdata.append("author", this.state.author);
       formdata.append("featured", this.state.featured);
       axios
-        .post("http://localhost:5000/blog/AddBlog1", formdata)
+        .post("https://lakshy12.herokuapp.com/blog/AddBlog1", formdata)
         .then((response) => {
           // handle success
           this.props.history.push("/article");

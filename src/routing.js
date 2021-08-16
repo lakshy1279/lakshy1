@@ -49,7 +49,7 @@ import BlogCategory from "./components/blogcategories/blogcategory";
 import AddBlogCategory from "./components/blogcategories/add_blogcategory";
 import EditBlogCategory from "./components/blogcategories/edit_blogcategory";
 import ViewBlogCategory from "./components/blogcategories/view_blogcategory";
-
+import BlogBanner from "./components/blog1/baneer";
 //Article
 import Blog1 from "./components/blog1/blog1";
 import AddBlog1 from "./components/blog1/add_blog1";
@@ -113,6 +113,9 @@ import AddReason from "./components/site_preferences/add_reason";
 import Home from "./components/Home/home";
 import Section2 from "./components/Home/section2";
 import Section3 from "./components/Home/section3";
+import Home1 from "./components/Home/Home1";
+import ViewHome from "./components/Home/view_home";
+import Edit_Home from "./components/Home/edit_home";
 function Routing() {
   return (
     <Router>
@@ -182,7 +185,7 @@ function Routing() {
           path="/view_blogcategory/:_id"
           component={ViewBlogCategory}
         ></Route>
-
+         <Route exact path="/blogbanner" component={BlogBanner}></Route>
         {/* Article */}
         <Route exact path="/article" component={Blog1}></Route>
         <Route exact path="/add_article" component={AddBlog1}></Route>
@@ -297,6 +300,9 @@ function Routing() {
         ></Route>
         {/* Home */}
         <Route exact path="/home" component={Home}></Route>
+        <Route exact path="/home1" component={Home1}></Route>
+        <Route exact path="/view_home/:id" component={ViewHome}></Route>
+        <Route exact path="/edit_home/:id" component={Edit_Home}></Route>
         <Route exact path="/home1" component={Section2}></Route>
         <Route exact path="/home2" component={Section3}></Route>
       </Switch>

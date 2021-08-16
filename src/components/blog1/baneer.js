@@ -7,7 +7,7 @@ import Loader from "react-loader-spinner";
 import PropTypes from "prop-types";
 import ReactQuill from "react-quill";
 
-class Home extends React.Component {
+class BlogBanner extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -16,8 +16,6 @@ class Home extends React.Component {
             image:"",
             mobile_message: "",
             subtext:"",
-            buttonname:"",
-            buttonurl:"",
             loading: false,
             validError: false,
         };
@@ -110,8 +108,18 @@ class Home extends React.Component {
             },
         });
     }
+    async componentDidMount() {
+        let res = await axios.get("https://lakshy12.herokuapp.com/blog/fetch_banner");
+        // const fetchedData = res.data;
+        console.log("banner_data",res.data);
+        this.setState({
+            heading: res.data[0]?.heading,
+            subtext:res.data[0]?.subtext,
+            image:res.data[0]?.image
+        })
+    }
     onFileChange(e) {
-        this.setState({ image:e.target.files[0] });
+        this.setState({ image: e.target.files[0] });
       }
     handleChange(event) {
         this.setState({
@@ -125,20 +133,19 @@ class Home extends React.Component {
         const formdata = new FormData();
         formdata.append("heading",this.state.heading);
         formdata.append("subtext",this.state.subtext);
-        formdata.append("buttonname",this.state.buttonname);
-        formdata.append("url",this.state.buttonurl);
         formdata.append("file",this.state.image);
         console.log(formdata);
         axios
             .post(
-                "https://lakshy12.herokuapp.com/home/add_home",
+                "https://lakshy12.herokuapp.com/blog/add_banner",
                 formdata
             )
-            .then((response)=> {
+            .then(function (response) {
                 // handle success
                 console.log(response.data);
-              
-                  this.props.history.push("/home1");
+                if (response.data) {
+                    window.location.reload()
+                }
             })
             .catch(function (error) {
                 // handle error
@@ -151,7 +158,7 @@ class Home extends React.Component {
                 <Sidebar></Sidebar>
                 <div className="admin-wrapper col-12">
                     <div className="admin-content">
-                        <div className="admin-head">Home</div>
+                        <div className="admin-head">BlogBanner</div>
                         <div className="admin-data">
                             {this.state.loading === false ? (
                                 <>
@@ -199,35 +206,7 @@ class Home extends React.Component {
                                                         />
                                                     </div>
                                                     <div className="form-group tags-field row m-0">
-                                                        <label className="col-lg-2 p-0">CTA Button(U.R.L)</label>
-                                                        <input
-                                                            className="form-control col-lg-8"
-                                                            name="buttonurl"
-                                                            onChange={this.handleChange}
-                                                            value={this.state.buttonurl}
-                                                            type="textarea"
-                                                            onfocus="this.placeholder = 'Menu Name'"
-                                                            onblur="this.placeholder = ''"
-                                                            placeholder=""
-                                                            
-                                                        />
-                                                    </div>
-                                                    <div className="form-group tags-field row m-0">
-                                                        <label className="col-lg-2 p-0">CTA Button(Name)</label>
-                                                        <textarea
-                                                            className="form-control col-lg-8"
-                                                            name="buttonname"
-                                                            onChange={this.handleChange}
-                                                            value={this.state.buttonname}
-                                                            type="textarea"
-                                                            onfocus="this.placeholder = 'Menu Name'"
-                                                            onblur="this.placeholder = ''"
-                                                            placeholder=""
-                                                            
-                                                        />
-                                                    </div>
-                                                    <div className="form-group tags-field row m-0">
-                        <label className="col-lg-2 p-0">Banner Images</label>
+                        <label className="col-lg-2 p-0">Banner Image</label>
                         <input
                           type="file"
                           onChange={this.onFileChange}
@@ -241,7 +220,6 @@ class Home extends React.Component {
                           "required"
                         )}
                       </div>
-                                            
                                                 </div>
 
                                                 <div className="col-lg-12 p-0">
@@ -280,43 +258,4 @@ class Home extends React.Component {
         );
     }
 }
-Home.modules = {
-    toolbar: [
-      [{ header: "1" }, { header: "2" }, { font: [] }],
-      [{ size: [] }],
-      ["bold", "italic", "underline", "strike", "blockquote"],
-      [
-        { list: "ordered" },
-        { list: "bullet" },
-        { indent: "-1" },
-        { indent: "+1" },
-      ],
-      ["link", "image", "video"],
-      ["clean"],
-    ],
-    clipboard: {
-      matchVisual: false,
-    },
-  };
-  
-  Home.formats = [
-    "header",
-    "font",
-    "size",
-    "bold",
-    "italic",
-    "underline",
-    "strike",
-    "blockquote",
-    "list",
-    "bullet",
-    "indent",
-    "link",
-    "image",
-    "video",
-  ];
-  
-  Home.propTypes = {
-    placeholder: PropTypes.string,
-  };
-export default Home;
+export default BlogBanner;

@@ -55,8 +55,8 @@ function Sidebar() {
                       <ul className="gw-submenu" style={{ display: "hidden" }}>
                         <li>
                           {" "}
-                          <a href="/home" style={{ color: "white" }}>
-                            BannerSection
+                          <a href="/home1" style={{ color: "white" }}>
+                            Home
                           </a>{" "}
                         </li>
                         <li>
@@ -99,6 +99,12 @@ function Sidebar() {
                         <b className="gw-arrow" />
                       </a>
                       <ul className="gw-submenu" style={{ display: "hidden" }}>
+                      <li>
+                          {" "}
+                          <a href="/blogbanner" style={{ color: "white" }}>
+                            BannerSection
+                          </a>{" "}
+                        </li>
                         <li>
                           {" "}
                           <a href="/article" style={{ color: "white" }}>

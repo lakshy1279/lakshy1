@@ -7,7 +7,7 @@ import Loader from "react-loader-spinner";
 import PropTypes from "prop-types";
 import ReactQuill from "react-quill";
 
-class Home extends React.Component {
+class Edit_Home extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -110,6 +110,19 @@ class Home extends React.Component {
             },
         });
     }
+    async componentDidMount() {
+        const { id } = this.props.match.params;
+        let res = await axios.get(`https://lakshy12.herokuapp.com/home/get_home/${id}`);
+        // const fetchedData = res.data;
+        console.log(res.data);
+        this.setState({
+            heading: res.data.heading,
+            subtext:res.data.subtext,
+            buttonname:res.data.buttonname,
+            buttonurl:res.data.buttonurl
+            // image:res.data[0]?.image
+        })
+    }
     onFileChange(e) {
         this.setState({ image:e.target.files[0] });
       }
@@ -129,16 +142,16 @@ class Home extends React.Component {
         formdata.append("url",this.state.buttonurl);
         formdata.append("file",this.state.image);
         console.log(formdata);
+        const { id } = this.props.match.params;
         axios
-            .post(
-                "https://lakshy12.herokuapp.com/home/add_home",
+            .put(
+                `https://lakshy12.herokuapp.com/home/edit_home/${id}`,
                 formdata
             )
             .then((response)=> {
                 // handle success
                 console.log(response.data);
-              
-                  this.props.history.push("/home1");
+                this.props.history.push("/home1");
             })
             .catch(function (error) {
                 // handle error
@@ -230,6 +243,7 @@ class Home extends React.Component {
                         <label className="col-lg-2 p-0">Banner Images</label>
                         <input
                           type="file"
+                          multiple
                           onChange={this.onFileChange}
                           name="file"
                           className="form-control col-lg-8"
@@ -280,43 +294,5 @@ class Home extends React.Component {
         );
     }
 }
-Home.modules = {
-    toolbar: [
-      [{ header: "1" }, { header: "2" }, { font: [] }],
-      [{ size: [] }],
-      ["bold", "italic", "underline", "strike", "blockquote"],
-      [
-        { list: "ordered" },
-        { list: "bullet" },
-        { indent: "-1" },
-        { indent: "+1" },
-      ],
-      ["link", "image", "video"],
-      ["clean"],
-    ],
-    clipboard: {
-      matchVisual: false,
-    },
-  };
-  
-  Home.formats = [
-    "header",
-    "font",
-    "size",
-    "bold",
-    "italic",
-    "underline",
-    "strike",
-    "blockquote",
-    "list",
-    "bullet",
-    "indent",
-    "link",
-    "image",
-    "video",
-  ];
-  
-  Home.propTypes = {
-    placeholder: PropTypes.string,
-  };
-export default Home;
+
+export default Edit_Home;
