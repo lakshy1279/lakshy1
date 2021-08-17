@@ -116,6 +116,8 @@ import Section3 from "./components/Home/section3";
 import Home1 from "./components/Home/Home1";
 import ViewHome from "./components/Home/view_home";
 import Edit_Home from "./components/Home/edit_home";
+//TRW_2021
+import TRW from "./components/TRW_2021/trw";
 function Routing() {
   return (
     <Router>
@@ -305,6 +307,8 @@ function Routing() {
         <Route exact path="/edit_home/:id" component={Edit_Home}></Route>
         <Route exact path="/home1" component={Section2}></Route>
         <Route exact path="/home2" component={Section3}></Route>
+        {/* TRW */}
+        <Route exact path="/trw_2021" component={TRW}></Route>
       </Switch>
     </Router>
   );

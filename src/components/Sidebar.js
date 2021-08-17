@@ -171,6 +171,19 @@ function Sidebar() {
                     </li>
                     <li>
                       {" "}
+                      <a href="/trw_2021">
+                        <span>
+                          <i
+                            className="fa fa-rss-square"
+                            aria-hidden="true"
+                          ></i>{" "}
+                          T.R.W 2021
+                        </span>
+                        <b className="gw-arrow" />
+                      </a>
+                    </li>
+                    <li>
+                      {" "}
                       <a href="#">
                         <span>
                           <i
