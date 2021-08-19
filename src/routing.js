@@ -72,7 +72,7 @@ import Facilitator from "./components/facilitator/facilitatot_view";
 import Add_facilitator from "./components/facilitator/add_facilitator";
 import EditFacilitator from "./components/facilitator/edit_facilitor";
 import ViewFacilitator from "./components/facilitator/view_facilitator";
-
+import Facilitator_Banner from "./components/facilitator/banner";
 // Subscriber
 import Subscriber1 from "./components/subscriber";
 
@@ -81,6 +81,7 @@ import Organisation from "./components/organisation/organisation";
 import AddOrg from "./components/organisation/add_organisation";
 import EditOrg from "./components/organisation/edit_org";
 import ViewOrganisation from "./components/organisation/view_organisation";
+import Organisation_Banner from "./components/organisation/org_banner";
 
 //testimonials
 import Testimonial from "./components/testimonial/view_testimonial";
@@ -118,6 +119,8 @@ import ViewHome from "./components/Home/view_home";
 import Edit_Home from "./components/Home/edit_home";
 //TRW_2021
 import TRW from "./components/TRW_2021/trw";
+// offering
+import Offering_Banner from "./components/offering/offering";
 function Routing() {
   return (
     <Router>
@@ -232,6 +235,7 @@ function Routing() {
         <Route exact path="/events" component={Events}></Route>
         {/* Facilitator */}
         <Route exact path="/program" component={Program}></Route>
+        <Route exact path="/fac_banner" component={Facilitator_Banner}></Route>
         <Route
           exact
           path="/add_Program"
@@ -272,6 +276,7 @@ function Routing() {
         <Route exact path="/subscriber" component={Subscriber1}></Route>
         {/* organisation */}
         <Route exact path="/organisation" component={Organisation}></Route>
+        <Route exact path="/org_banner" component={Organisation_Banner}></Route>
         <Route exact path="/add_organisation" component={AddOrg}></Route>
         <Route exact path="/edit_organisation/:id" component={EditOrg}></Route>
         <Route exact path="/view_organisation/:id" component={ViewOrganisation}></Route>
@@ -309,6 +314,8 @@ function Routing() {
         <Route exact path="/home2" component={Section3}></Route>
         {/* TRW */}
         <Route exact path="/trw_2021" component={TRW}></Route>
+        {/* offering */}
+        <Route exact path="/offering" component={Offering_Banner}></Route>
       </Switch>
     </Router>
   );

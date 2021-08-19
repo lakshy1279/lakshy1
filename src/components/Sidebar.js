@@ -184,6 +184,19 @@ function Sidebar() {
                     </li>
                     <li>
                       {" "}
+                      <a href="/offering">
+                        <span>
+                          <i
+                            className="fa fa-rss-square"
+                            aria-hidden="true"
+                          ></i>{" "}
+                          Offering
+                        </span>
+                        <b className="gw-arrow" />
+                      </a>
+                    </li>
+                    <li>
+                      {" "}
                       <a href="#">
                         <span>
                           <i
@@ -268,7 +281,7 @@ function Sidebar() {
                     </li>
                     <li>
                       {" "}
-                      <a href="/facilitator">
+                      <a href="#">
                         <span>
                           <i
                             className="fa fa-rss-square"
@@ -278,6 +291,20 @@ function Sidebar() {
                         </span>
                         <b className="gw-arrow" />
                       </a>
+                      <ul className="gw-submenu">
+                        <li>
+                          {" "}
+                          <a href="/facilitator" style={{ color: "white" }}>
+                            Facilitator
+                          </a>{" "}
+                        </li>
+                        <li>
+                          {" "}
+                          <a href="/fac_banner" style={{ color: "white" }}>
+                            Banner
+                          </a>{" "}
+                        </li>
+                      </ul>
                     </li>
                     {/* speakers */}
                     <li>
@@ -296,7 +323,7 @@ function Sidebar() {
                     {/* organisation */}
                     <li>
                       {" "}
-                      <a href="/organisation">
+                      <a href="#">
                         <span>
                           <i
                             className="fa fa-rss-square"
@@ -306,6 +333,20 @@ function Sidebar() {
                         </span>
                         <b className="gw-arrow" />
                       </a>
+                      <ul className="gw-submenu">
+                        <li>
+                          {" "}
+                          <a href="/organisation" style={{ color: "white" }}>
+                            Organisation
+                          </a>{" "}
+                        </li>
+                        <li>
+                          {" "}
+                          <a href="/org_banner" style={{ color: "white" }}>
+                            Banner
+                          </a>{" "}
+                        </li>
+                      </ul>
                     </li>
                     <li>
                       <Link to="/post">
