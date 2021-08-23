@@ -10,13 +10,23 @@ class AddProgram extends React.Component {
     constructor(props) {
         super(props);
         this.organisation = React.createRef();
+        this.facilitator = React.createRef();
         this.organisationList = [];
+        this.facilitatorList=[];
         this.state = {
             photo: "",
             description: "",
             heading:"",
             apply: "",
             date:"",
+            facilitatorName:[],
+            organisationName:[],
+            organisationSuggestions: [],
+            suggestions:[],
+            facilitator:[],
+            organisation:[],
+            text: "",
+            organisationText: "",
         };
         this.handleChange = this.handleChange.bind(this);
         this.onChange = this.onChange.bind(this);
@@ -109,7 +119,96 @@ class AddProgram extends React.Component {
         });
     }
 
+  componentDidMount()
+  {
+    axios
+    .get(`https://lakshy12.herokuapp.com/facilitator/fetch`)
+    .then((res) => {
+      res?.data.map((name) => {
+        this.setState({
+          facilitatorName: [
+            ...this.state.facilitatorName,
+            `${name.firstname} ${name.lastname}`,
+          ]
+        });
+      });
+    });
+    axios
+    .get(`https://lakshy12.herokuapp.com/organisation/fetch`)
+    .then((res) => {
+      res?.data.map((org) => {
+        this.setState({
+          organisationName: [...this.state.organisationName, org.name],
+        });
+      });
+    });
+  }
+  //handle facilitator input
+  onTextChanged(e) {
+    this.setState({ text: e.target.value });
+    let suggestions = [];
+    if (this.state.text.length > 0) {
+      const regex = new RegExp(`^${this.state.text}`, "i");
 
+      suggestions = this.state.facilitatorName
+        .sort()
+        .filter((v) => regex.test(v));
+    }
+
+    this.setState({
+      suggestions: suggestions,
+    });
+  }
+  //set facilitator
+  setFacilitator(facilitator) {
+    this.facilitator.current.value = "";
+    if (!this.facilitatorList.includes(facilitator)) {
+      this.facilitatorList.push(facilitator);
+    }
+
+    this.setState({
+      facilitator: this.facilitatorList,
+      suggestions: [],
+      text: "",
+    });
+  }
+//   focus facilitator input
+focusInput() {
+    this.facilitator.current.focus();
+}
+// handel organisation input
+onOrganisationChange(e) {
+    this.setState({ organisationText: e.target.value });
+
+    let organisationSuggestions = [];
+    if (this.state.organisationText.length > 0) {
+      const regex = new RegExp(`^${this.state.organisationText}`, "i");
+
+      organisationSuggestions = this.state.organisationName
+        .sort()
+        .filter((v) => regex.test(v));
+    }
+    this.setState({
+      organisationSuggestions: organisationSuggestions,
+    });
+  }
+  // set organisation
+  setOrganisation(organisation) {
+    this.organisation.current.value = "";
+    if (!this.organisationList.includes(organisation)) {
+      this.organisationList.push(organisation);
+    }
+
+    this.setState({
+      organisation: this.organisationList,
+      organisationSuggestions: [],
+      organisationText: "",
+    });
+  }
+  // focus organisation input
+  focusOrgInput() {
+    this.organisation.current.focus();
+  }
     handleChange(html) {
         this.setState({ description: html });
         console.log(this.state.description);
@@ -128,48 +227,6 @@ class AddProgram extends React.Component {
     onFileChange(e) {
         this.setState({ photo: e.target.files[0] });
     }
-    // onTextChanged(e) {
-    //     this.setState({ text: e.target.value });
-    //     let suggestions = [];
-    //     if (this.state.text.length > 0) {
-    //         const regex = new RegExp(`^${this.state.text}`, "i");
-    //         suggestions = this.state.organisationName.sort().filter((v) => regex.test(v));
-    //     }
-    //     this.setState({
-    //         suggestions: suggestions
-    //     })
-    // }
-    // set Faciliatator
-    // setOrganisation(organisation) {
-    //     this.organisation.current.value = "";
-    //     if (!this.organisationList.includes(organisation)) {
-    //         this.organisationList.push(organisation);
-    //     }
-    //     this.setState({
-    //         organisation: this.organisationList,
-    //         suggestions: [],
-    //         text: "",
-    //     })
-    // }
-    // // focus facilitator input
-    // focusInput() {
-    //     this.organisation.current.focus();
-    // }
-    // componentDidMount() {
-    //     axios
-    //         .get(`https://lakshy12.herokuapp.com/organisation/fetch`)
-    //         .then((res) => {
-    //             res?.data.map((name) => {
-    //                 this.setState({
-    //                     organisationName: [
-    //                         ...this.state.organisationName,
-    //                         `${name.name}`,
-    //                     ]
-    //                 });
-    //             });
-    //         });
-    // }
-    // https://lakshy12.herokuapp.com
     handleSubmit(e) {
         e.preventDefault();
         if (this.validator.allValid()) {
@@ -180,22 +237,27 @@ class AddProgram extends React.Component {
             formdata.append("description", this.state.description);
             formdata.append("photo", this.state.photo);
             formdata.append("date", this.state.date);
-           
+            for (let i = 0; i < this.state.facilitator.length; i++) {
+                formdata.append("facilitator", this.state.facilitator[i]);
+              }
+              for (let i = 0; i < this.state.organisation.length; i++) {
+                formdata.append("organisation", this.state.organisation[i]);
+              }
             axios
                 .post(
-                    "https://lakshy12.herokuapp.com/program/save",
+                    "http://localhost:5000/program/save",
                     formdata
                 )
-                .then(function (response) {
+                .then((response)=> {
                     // handle success
-
+                    this.props.history.push("/program");
                     console.log(response.data);
                 })
                 .catch(function (error) {
                     // handle error
                     console.log(error);
                 });
-            this.props.history.push("/program");
+            
         } else {
             this.validator.showMessages();
             this.forceUpdate();
@@ -276,6 +338,98 @@ class AddProgram extends React.Component {
                                                 )}
                                                 {/* {this.state.mobile_message} */}
                                             </div>
+                                            <div className="form-group tags-field row m-0">
+                        <label className="col-lg-2 p-0">Add Facilitator</label>
+                        <input
+                          className="form-control col-lg-7"
+                          name="facilitator"
+                          ref={this.facilitator}
+                          onChange={this.onTextChanged.bind(this)}
+                          autocomplete="off"
+                          value={this.state.text}
+                          type="text"
+                          onfocus="this.placeholder = 'Menu Name'"
+                          onblur="this.placeholder = ''"
+                          placeholder=""
+                        />
+                        <button
+                          onClick={this.focusInput.bind(this)}
+                          className=" col-lg-2"
+                          style={{ marginLeft: "1rem" }}
+                        >
+                          Add More +
+                        </button>
+                        <ul className="autoSuggestionList col-lg-5">
+                          {this.state.suggestions.map((item) => {
+                            return (
+                              <li
+                                onClick={this.setFacilitator.bind(this, item)}
+                              >
+                                {item}
+                              </li>
+                            );
+                          })}
+                        </ul>
+
+                        {this.state.mobile_message}
+                      </div>
+                      {this.state.facilitator.length > 0 ? (
+                        <div className="form-group tags-field row m-0">
+                          <label className="col-lg-2 p-0">
+                            Added Facilitator
+                          </label>
+                          <ul>
+                            {this.state.facilitator.map((items) => {
+                              return <li>{items}</li>;
+                            })}
+                          </ul>
+                        </div>
+                      ) : null}
+                      <div className="form-group tags-field row m-0">
+                        <label className="col-lg-2 p-0">Add Organisation</label>
+                        <input
+                          className="form-control col-lg-7"
+                          name="organisation"
+                          ref={this.organisation}
+                          onChange={this.onOrganisationChange.bind(this)}
+                          autocomplete="off"
+                          value={this.state.organisationText}
+                          type="text"
+                          onfocus="this.placeholder = 'Menu Name'"
+                          onblur="this.placeholder = ''"
+                          placeholder=""
+                        />
+                        <button
+                          onClick={this.focusOrgInput.bind(this)}
+                          className=" col-lg-2"
+                          style={{ marginLeft: "1rem" }}
+                        >
+                          Add More +
+                        </button>
+                        <ul className="autoSuggestionList col-lg-5">
+                          {this.state.organisationSuggestions.map((item) => {
+                            return (
+                              <li
+                                onClick={this.setOrganisation.bind(this, item)}
+                              >
+                                {item}
+                              </li>
+                            );
+                          })}
+                        </ul>
+                      </div>
+                      {this.state.organisation.length > 0 ? (
+                        <div className="form-group tags-field row m-0">
+                          <label className="col-lg-2 p-0">
+                            Added Organisation
+                          </label>
+                          <ul>
+                            {this.state.organisation.map((items) => {
+                              return <li>{items}</li>;
+                            })}
+                          </ul>
+                        </div>
+                      ) : null}
                                             <div className="form-group tags-field row m-0">
                                                 <label className="col-lg-2 p-0">Date and Time</label>
                                                 <input
