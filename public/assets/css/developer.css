@@ -246,3 +246,17 @@
   font-size: 15px;
   text-decoration: none;
 }
+.download
+{
+  padding: 5px 15px;
+    border-radius: 5px;
+    color: #fff;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 400;
+    background: #f39e1f;
+    margin-right: 15px;
+    margin-bottom: 15px;
+    margin-left: 90%;
+    margin-top: 15px;
+}
