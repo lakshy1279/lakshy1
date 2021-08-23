@@ -48,7 +48,7 @@ class Program extends React.Component {
                 // https://trw-backend-api.herokuapp.com/
                 axios
                     .delete(
-                        `http://localhost:5000/program/delete/${_id}`
+                        `https://lakshy12.herokuapp.com/program/delete/${_id}`
                     )
                     .then((res) => {
                         console.log(res);
