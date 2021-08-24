@@ -169,30 +169,6 @@ class EditBlog1 extends React.Component {
     if (newTheme === "core") newTheme = null;
     this.setState({ theme: newTheme });
   }
-
-  //   handleSubmit(e) {
-  //     const { _id } = this.props.match.params;
-  //     e.preventDefault();
-  //     if (this.validator.allValid()) {
-  //       const post = {
-  //         title: this.state.title,
-  //         category: this.state.category,
-  //         description: this.state.description,
-  //       };
-  //       axios
-  //         .put(
-  //           `https://lakshy12.herokuapp.com/blog/update_blog1_patch/${_id}`,
-  //           post
-  //         )
-  //         .then((res) => console.log(res.data));
-
-  //       this.props.history.push("/article");
-  //     } else {
-  //       this.validator.showMessages();
-  //       this.forceUpdate();
-  //     }
-  //   }
-
   handleSubmit(e) {
     const { _id } = this.props.match.params;
     e.preventDefault();

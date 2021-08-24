@@ -48,7 +48,7 @@ class Blog1 extends React.Component {
         console.log(_id);
         axios
           .delete(
-            `https://trw-backend-api.herokuapp.com/blog/delete_blog1/${_id}`
+            `https://lakshy12.herokuapp.com/blog/delete_blog1/${_id}`
           )
           .then((res) => {
             console.log(res);

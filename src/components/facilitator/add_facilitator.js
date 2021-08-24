@@ -204,16 +204,15 @@ class AddFacilitator extends React.Component {
                     "https://lakshy12.herokuapp.com/facilitator/save",
                     formdata
                 )
-                .then(function (response) {
+                .then((response)=> {
                     // handle success
-
+                    this.props.history.push("/facilitator");
                     console.log(response.data);
                 })
-                .catch(function (error) {
-                    // handle error
+                .catch((error)=> {
                     console.log(error);
                 });
-            this.props.history.push("/facilitator");
+           
         } else {
             this.validator.showMessages();
             this.forceUpdate();
