@@ -28,15 +28,17 @@ class ViewProgram extends React.Component {
                     description: res.data.description,
                     photo: res.data.photo,
                     apply:res.data.apply,
+                    facilitator:res.data.facilitator,
+                    organisation:res.data.organisation
                 };
                 console.log(post);
                 this.setState({
                     heading: post.heading,
                     description: post.description,
-                   
                     photo: post.photo,
                     apply:post.apply,
-                   
+                    facilitator:res.data.facilitator,
+                    organisation:res.data.organisation,
                     loading:true
                 });
             });
@@ -76,7 +78,18 @@ class ViewProgram extends React.Component {
                                                     </td>
                                                     <td>{this.state.apply}</td>
                                                 </tr>
-                                              
+                                                <tr>
+                                                    <td valign="top" width="150px;">
+                                                        <b>Faciliatator</b>
+                                                    </td>
+                                                    <td>{this.state.facilitator!=null&&this.state.facilitator.toString()}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td valign="top" width="150px;">
+                                                        <b>Organisation</b>
+                                                    </td>
+                                                    <td>{this.state.organisation!=null&&this.state.organisation.toString()}</td>
+                                                </tr>
                                                 <tr>
                                                     <td valign="top" width="150px;">
                                                         <b>Photo</b>

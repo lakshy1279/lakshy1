@@ -48,7 +48,7 @@ class Organisation extends React.Component {
         console.log(_id);
         axios
           .delete(
-            `https://lakshy12.herokuapp.com//organisation/delete/${_id}`
+            `https://lakshy12.herokuapp.com/organisation/delete/${_id}`
           )
           .then((res) => {
             console.log(res);
