@@ -310,7 +310,7 @@ function Routing() {
         <Route exact path="/home1" component={Home1}></Route>
         <Route exact path="/view_home/:id" component={ViewHome}></Route>
         <Route exact path="/edit_home/:id" component={Edit_Home}></Route>
-        <Route exact path="/home1" component={Section2}></Route>
+        <Route exact path="/section1" component={Section2}></Route>
         <Route exact path="/home2" component={Section3}></Route>
         {/* TRW */}
         <Route exact path="/trw_2021" component={TRW}></Route>

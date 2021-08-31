@@ -61,7 +61,7 @@ function Sidebar() {
                         </li>
                         <li>
                           {" "}
-                          <a href="/home1" style={{ color: "white" }}>
+                          <a href="/section1" style={{ color: "white" }}>
                             Section1
                           </a>{" "}
                         </li>
@@ -238,12 +238,7 @@ function Sidebar() {
                             Languages
                           </a>{" "}
                         </li>
-                        <li>
-                          {" "}
-                          <a href="/reason" style={{ color: "white" }}>
-                            Contact Us Reason
-                          </a>{" "}
-                        </li>
+                        
                       </ul>
                     </li>
                     {/* <li>
@@ -365,10 +360,11 @@ function Sidebar() {
                         </span>
                         <b className="gw-arrow" />
                       </a>
+                     
                     </li>
                     <li>
                       {" "}
-                      <a href="/contact">
+                      <a href="#">
                         <span>
                           <i
                             className="fa fa-rss-square"
@@ -378,6 +374,20 @@ function Sidebar() {
                         </span>
                         <b className="gw-arrow" />
                       </a>
+                      <ul className="gw-submenu">
+                        <li>
+                        {" "}
+                          <a href="/contact" style={{ color: "white" }}>
+                            Contact List
+                          </a>{" "}
+                        </li>
+                        <li>
+                          {" "}
+                          <a href="/reason" style={{ color: "white" }}>
+                            Contact Us Reason
+                          </a>{" "}
+                        </li>
+                        </ul>
                     </li>
                     <li>
                       {" "}
