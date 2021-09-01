@@ -168,8 +168,8 @@ class AddEvent extends React.Component {
             language:res.data.language,
             image:res.data.image,
             featuredhome:res.data.featuredhome,
-            featuredoffering:res.data.offering,
-            featuredtrw:res.data.trw
+            featuredoffering:res.data.featuredoffering,
+            featuredtrw:res.data.featuredtrw
         });
     })
     axios
