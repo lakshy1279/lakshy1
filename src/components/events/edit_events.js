@@ -45,6 +45,9 @@ class AddEvent extends React.Component {
       speakerText: "",
       description: "",
       image: "",
+      featuredhome:"false",
+      featuredoffering:"false",
+      featuredtrw:"false",
       theme: "snow",
       mobile_message: "",
       validError: false,
@@ -52,6 +55,7 @@ class AddEvent extends React.Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.onChange = this.onChange.bind(this);
+    this.featured=this.featured.bind(this);
     this.onFileChange = this.onFileChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.validator = new SimpleReactValidator({
@@ -154,7 +158,6 @@ class AddEvent extends React.Component {
             description: res.data.description,
             category: res.data.category,
             type: res.data.type,
-          
             FromDate: res.data.fromdate,
             EndDate:res.data.enddate,
             eventby:res.data.eventby,
@@ -162,8 +165,8 @@ class AddEvent extends React.Component {
             facilitator:res.data.facilitator,
             speaker:res.data.speaker,
             organisation:res.data.organisation,
-            language:res.data.language
-
+            language:res.data.language,
+            image:res.data.image
         });
     })
     axios
@@ -263,11 +266,13 @@ class AddEvent extends React.Component {
       formdata.append("file", this.state.image);
       formdata.append("fromdate", this.state.FromDate);
       formdata.append("enddate", this.state.EndDate);
-
+      formdata.append("featuredoffering",this.state.featuredoffering);
+      formdata.append("featuredtrw",this.state.featuredtrw);
+      formdata.append("featuredhome",this.state.featuredhome);
             // https://lakshy12.herokuapp.com/
             axios
                 .put(
-                    `https://lakshy12.herokuapp.com/blog/update_event/${_id}`,
+                    `http://localhost:5000/blog/update_event/${_id}`,
                     formdata
                 )
                 .then((res) => {
@@ -414,6 +419,13 @@ class AddEvent extends React.Component {
   focusOrgInput() {
     this.organisation.current.focus();
   }
+  featured(event){
+    console.log(event.target.checked);
+    console.log("hii");
+    this.setState({
+      [event.target.name]: event.target.checked,
+    });
+  }
   render() {
     console.log(this.state);
 
@@ -422,7 +434,7 @@ class AddEvent extends React.Component {
         <Sidebar></Sidebar>
         <div className="admin-wrapper col-12">
           <div className="admin-content">
-            <div className="admin-head">Event - Add New</div>
+            <div className="admin-head">Event - Edit</div>
             <div className="admin-data">
               <div className="container-fluid p-0">
                 <form
@@ -531,6 +543,51 @@ class AddEvent extends React.Component {
                         )}
                       </div>
                       <div className="form-group tags-field row m-0 ">
+                        <label className="col-lg-2 p-0">Select Featured Category</label>
+                        <div className="radioBtn">
+                                <div className="radioContent">
+                                  <input
+                                    type="checkbox"
+                                    className="radio"
+                                    name="featuredhome"
+                                    onClick={this.featured}
+                                    value="true"
+                                  />
+                                  <label>
+                                     Home
+                                  </label>
+                                </div>
+                        </div>
+                        <div className="radioBtn">
+                                <div className="radioContent">
+                                  <input
+                                    type="checkbox"
+                                    className="radio"
+                                    name="featuredoffering"
+                                    onChange={this.featured}
+                                    value="true"
+                                  />
+                                  <label >
+                                     Offering
+                                  </label>
+                                </div>
+                        </div>
+                        <div className="radioBtn">
+                                <div className="radioContent">
+                                  <input
+                                    type="checkbox"
+                                    className="radio"
+                                    name="featuredtrw"
+                                    onClick={this.featured}
+                                    value="true"
+                                  />
+                                  <label>
+                                    T.R.W
+                                  </label>
+                                </div>
+                        </div>
+                      </div>
+                      <div className="form-group tags-field row m-0 ">
                         <label className="col-lg-2 p-0">Select Theme</label>
                         <div className="radioBtn">
                           {this.state.eventTypes &&
@@ -563,13 +620,11 @@ class AddEvent extends React.Component {
                       <div className="form-group tags-field row m-0">
                         <label className="col-lg-2 p-0">Upload Image</label>
                         <input
-                       
                           type="file"
                           onChange={this.onFileChange}
                           name="file"
                           className="form-control col-lg-10"
                         />
-
                         {this.validator.message(
                           "Image",
                           this.state.image,

@@ -4,8 +4,6 @@ import Sidebar from "../../components/Sidebar";
 import SimpleReactValidator from "simple-react-validator";
 import '../../App.css'
 import Loader from "react-loader-spinner";
-import PropTypes from "prop-types";
-import ReactQuill from "react-quill";
 
 class TRW extends React.Component {
     constructor(props) {

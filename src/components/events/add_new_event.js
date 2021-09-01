@@ -44,6 +44,9 @@ class AddEvent extends React.Component {
       languageText:"",
       speakerText: "",
       description: "",
+      featuredhome:"false",
+      featuredoffering:"false",
+      featuredtrw:"false",
       image: "",
       theme: "snow",
       mobile_message: "",
@@ -52,6 +55,7 @@ class AddEvent extends React.Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.onChange = this.onChange.bind(this);
+    this.featured=this.featured.bind(this);
     this.onFileChange = this.onFileChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.validator = new SimpleReactValidator({
@@ -239,9 +243,11 @@ class AddEvent extends React.Component {
       formdata.append("file", this.state.image);
       formdata.append("fromdate", this.state.FromDate);
       formdata.append("enddate", this.state.EndDate);
-
+      formdata.append("featuredoffering",this.state.featuredoffering);
+      formdata.append("featuredtrw",this.state.featuredtrw);
+      formdata.append("featuredhome",this.state.featuredhome);
       axios
-        .post("https://lakshy12.herokuapp.com/blog/AddEvent", formdata)
+        .post("http://localhost:5000/blog/AddEvent", formdata)
         .then((response)=> {
           // handle success
           this.props.history.push("/upcomming_events");
@@ -389,6 +395,13 @@ class AddEvent extends React.Component {
   focusOrgInput() {
     this.organisation.current.focus();
   }
+  featured(event){
+    console.log(event.target.checked);
+    console.log("hii");
+    this.setState({
+      [event.target.name]: event.target.checked,
+    });
+  }
   render() {
     console.log(this.state);
 
@@ -503,6 +516,51 @@ class AddEvent extends React.Component {
                           this.state.category,
                           "required"
                         )}
+                      </div>
+                      <div className="form-group tags-field row m-0 ">
+                        <label className="col-lg-2 p-0">Select Featured Category</label>
+                        <div className="radioBtn">
+                                <div className="radioContent">
+                                  <input
+                                    type="checkbox"
+                                    className="radio"
+                                    name="featuredhome"
+                                    onClick={this.featured}
+                                    value="true"
+                                  />
+                                  <label>
+                                     Home
+                                  </label>
+                                </div>
+                        </div>
+                        <div className="radioBtn">
+                                <div className="radioContent">
+                                  <input
+                                    type="checkbox"
+                                    className="radio"
+                                    name="featuredoffering"
+                                    onChange={this.featured}
+                                    value="true"
+                                  />
+                                  <label >
+                                     Offering
+                                  </label>
+                                </div>
+                        </div>
+                        <div className="radioBtn">
+                                <div className="radioContent">
+                                  <input
+                                    type="checkbox"
+                                    className="radio"
+                                    name="featuredtrw"
+                                    onClick={this.featured}
+                                    value="true"
+                                  />
+                                  <label>
+                                    T.R.W
+                                  </label>
+                                </div>
+                        </div>
                       </div>
                       <div className="form-group tags-field row m-0 ">
                         <label className="col-lg-2 p-0">Select Theme</label>
