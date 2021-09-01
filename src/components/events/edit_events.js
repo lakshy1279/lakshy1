@@ -166,7 +166,10 @@ class AddEvent extends React.Component {
             speaker:res.data.speaker,
             organisation:res.data.organisation,
             language:res.data.language,
-            image:res.data.image
+            image:res.data.image,
+            featuredhome:res.data.featuredhome,
+            featuredoffering:res.data.offering,
+            featuredtrw:res.data.trw
         });
     })
     axios
@@ -272,7 +275,7 @@ class AddEvent extends React.Component {
             // https://lakshy12.herokuapp.com/
             axios
                 .put(
-                    `http://localhost:5000/blog/update_event/${_id}`,
+                    `https://lakshy12.herokuapp.com/blog/update_event/${_id}`,
                     formdata
                 )
                 .then((res) => {
@@ -552,6 +555,7 @@ class AddEvent extends React.Component {
                                     name="featuredhome"
                                     onClick={this.featured}
                                     value="true"
+                                    checked={this.state.featuredhome}
                                   />
                                   <label>
                                      Home
@@ -566,6 +570,7 @@ class AddEvent extends React.Component {
                                     name="featuredoffering"
                                     onChange={this.featured}
                                     value="true"
+                                    checked={this.state.featuredoffering}
                                   />
                                   <label >
                                      Offering
@@ -580,6 +585,7 @@ class AddEvent extends React.Component {
                                     name="featuredtrw"
                                     onClick={this.featured}
                                     value="true"
+                                    checked={this.state.featuredtrw}
                                   />
                                   <label>
                                     T.R.W

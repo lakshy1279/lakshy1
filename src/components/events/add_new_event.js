@@ -247,7 +247,7 @@ class AddEvent extends React.Component {
       formdata.append("featuredtrw",this.state.featuredtrw);
       formdata.append("featuredhome",this.state.featuredhome);
       axios
-        .post("http://localhost:5000/blog/AddEvent", formdata)
+        .post("https://lakshy12.herokuapp.com/blog/AddEvent", formdata)
         .then((response)=> {
           // handle success
           this.props.history.push("/upcomming_events");
