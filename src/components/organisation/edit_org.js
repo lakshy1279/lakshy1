@@ -28,6 +28,7 @@ class EditOrg extends React.Component {
     this.onChange = this.onChange.bind(this);
     this.onFileChange = this.onFileChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.removeFacilitator=this.removeFacilitator.bind(this);
     this.validator = new SimpleReactValidator({
       className: "text-danger",
       validators: {
@@ -199,6 +200,13 @@ class EditOrg extends React.Component {
       formdata.append("logo", this.state.logo);
       formdata.append("profile",this.state.profile);
       formdata.append("url",this.state.url);
+      if(this.state.removefacilitator!=null)
+      {
+        for(let i=0;i<this.state.removefacilitator.length;i++)
+        {
+          formdata.append("removefacilitator",this.state.removefacilitator[i]);
+        }
+      }
       if(this.state.facilitator!=null)
       {
       for(let i=0;i<this.state.facilitator.length;i++)
@@ -225,7 +233,16 @@ class EditOrg extends React.Component {
       this.forceUpdate();
     }
   }
-
+ removeFacilitator(facilitator)
+ {
+   let index=this.state.facilitator.indexOf(facilitator);
+   console.log(index);
+   this.state.facilitator.splice(index,1);
+   let fac=this.state.facilitator;
+   this.setState({
+      facilitator:fac
+   })
+ }
   render() {
     return (
       <div>
@@ -318,6 +335,7 @@ class EditOrg extends React.Component {
                           onClick={this.focusInput.bind(this)}
                           className=" col-lg-2"
                           style={{ marginLeft: "1rem" }}
+                          type="button"
                         >
                           Add More +
                         </button>
@@ -340,9 +358,16 @@ class EditOrg extends React.Component {
                           <label className="col-lg-2 p-0">
                             Added Facilitator
                           </label>
-                          <ul>
+                          <ul className="col-lg-8 p-0">
                             {this.state.facilitator!=null&&this.state.facilitator.map((items) => {
-                              return <li>{items}</li>;
+                              return(<div style={{display:"flex", justifyContent:"space-between"}}><li>{items}</li> <button
+                              onClick={this.removeFacilitator.bind(this,items)}
+                              type="button"
+                              style={{cursor:"pointer"}}
+                             >
+                            Remove
+                          </button></div>
+                              );
                             })}
                           </ul>
                         </div>
