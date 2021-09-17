@@ -23,7 +23,7 @@ class AddEvent extends React.Component {
       category: "",
       eventCategories: [],
       eventTypes: [],
-      type: "",
+      type: [],
       FromDate: "",
       EndDate: "",
       eventby: "",
@@ -56,6 +56,7 @@ class AddEvent extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.onChange = this.onChange.bind(this);
     this.featured=this.featured.bind(this);
+    this.onTypeChange=this.onTypeChange.bind(this);
     this.onFileChange = this.onFileChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.validator = new SimpleReactValidator({
@@ -210,7 +211,26 @@ class AddEvent extends React.Component {
       [event.target.name]: event.target.value,
     });
   }
-
+ onTypeChange(event)
+ {
+  if(event.target.checked==false)
+  {
+    let index=this.state.type.indexOf(event.target.value);
+    if(index>-1)
+    {
+      const temp=this.state.type.splice(index,1);
+      this.setState({
+        type:temp
+      })
+    }
+  }
+  else
+  {
+    this.setState({
+     type:[...this.state.type,event.target.value]
+    })
+  }
+ }
   handleThemeChange(newTheme) {
     if (newTheme === "core") newTheme = null;
     this.setState({ theme: newTheme });
@@ -236,9 +256,12 @@ class AddEvent extends React.Component {
       for (let i = 0; i < this.state.language.length; i++) {
         formdata.append("language", this.state.language[i]);
       }
+      for(let i=0;i<this.state.type.length;i++)
+      {
+        formdata.append("type",this.state.type[i]);
+      }
       formdata.append("title", this.state.title);
       formdata.append("category", this.state.category);
-      formdata.append("type", this.state.type);
       formdata.append("description", this.state.description);
       formdata.append("file", this.state.image);
       formdata.append("fromdate", this.state.FromDate);
@@ -563,7 +586,7 @@ class AddEvent extends React.Component {
                         </div>
                       </div>
                       <div className="form-group tags-field row m-0 ">
-                        <label className="col-lg-2 p-0">Select Theme</label>
+                        <label className="col-lg-2 p-0">Select Event Type</label>
                         <div className="radioBtn">
                           {this.state.eventTypes &&
                             this.state.eventTypes.map((data, index) => {
@@ -574,7 +597,7 @@ class AddEvent extends React.Component {
                                     className="radio"
                                     id={data._id}
                                     name="type"
-                                    onChange={this.onChange}
+                                    onChange={this.onTypeChange}
                                     value={data.event_type}
                                   />
                                   <label htmlFor={data._id}>
